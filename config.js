@@ -28,3 +28,16 @@ let count = 0;
 
 let moveCount = 0;
 let moveStorage = [];
+
+
+
+
+
+//from script.js
+
+//store turn value
+let toggle = 3;
+
+//store player selection
+let selection = null;
+let selected_letter = ""

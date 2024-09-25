@@ -1,3 +1,7 @@
+import getBoard from getBoard
+import whoTurn from whoTurn
+import minimax from minimax
+
 function InitiateAI(){
     
     //get main board
@@ -28,9 +32,3 @@ function InitiateAI(){
     white_pieces = [];
 }
 InitiateAI()
-
-
-
-
-
-
