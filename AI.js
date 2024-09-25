@@ -5,6 +5,7 @@ import moveBestPiece from './getBestMove.js';
 import uploadImages from './uploadImages.js';
 import paintTiles from './paintTiles.js';
 import config from './config.js';
+console.log('AI script')
 
 function InitiateAI(){
     

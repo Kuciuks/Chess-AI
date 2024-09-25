@@ -1,5 +1,6 @@
 //currenly the game can be player [human vs human] and [human vs AI]
 //controller for the human player
+console.log('Human script')
 document.querySelectorAll(".tile").forEach(tile => {
     
     //player movemenet script
