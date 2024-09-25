@@ -3,5 +3,11 @@
 function moveBestPiece(from, to){
     document.getElementById(to).innerText = document.getElementById(from).innerText;
     document.getElementById(from).innerText = "";
-    chess_board = getBoard();
+    let chess_board = getBoard();
+
+    return{
+        chess_board
+    }
 }
+
+export default moveBestPiece

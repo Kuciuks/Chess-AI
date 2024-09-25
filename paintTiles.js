@@ -4,8 +4,8 @@ function paintTiles(){
         
         //Get tiles position(row,col)
         let arr = Array.from(tile.id);
-        row = arr.shift();
-        col = arr.pop();
+        let row = arr.shift();
+        let col = arr.pop();
 
         if(row % 2 !== 0){
             if(col % 2 !== 0){
@@ -25,3 +25,5 @@ function paintTiles(){
         }
     })
 }
+
+export default paintTiles

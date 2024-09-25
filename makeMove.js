@@ -1,3 +1,7 @@
+import uploadImages from './uploadImages.js'
+import paintTiles from './paintTiles.js'
+import getBoard from './getBoard.js';
+
 
 //make move from - to, returns an altered board
 function makeMove(to, from){
@@ -9,9 +13,11 @@ function makeMove(to, from){
 
         document.getElementById(from).innerText = "";
 
-        boardCopy = getBoard(); 
-        upload_Images()
+        let boardCopy = getBoard(); 
+        uploadImages()
         paintTiles()
         return boardCopy;
     }
 }
+
+export default makeMove

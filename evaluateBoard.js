@@ -1,4 +1,3 @@
-
 //evaluates the board for AI player and return the score;
 function evaluateBoard(chess_board){
     //store piece values
@@ -117,3 +116,5 @@ function evaluateBoard(chess_board){
     })
     return score;
 }
+
+export default evaluateBoard

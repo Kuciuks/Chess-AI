@@ -1,9 +1,3 @@
-
-
-
-
-
-
 //scrap code for random moves
 function randomMove(pieceObj){
     //capture random piece
@@ -17,5 +11,9 @@ function randomMove(pieceObj){
     let random_move = moveArr[Math.floor(Math.random() * moveArr.length)];
     
     let newMove = {"From": random_piece.From, "To": random_move}
-    return newMove;
+    return {
+        //when using this function figure out what you need to return from it
+    };
 }
+
+export default randomMove

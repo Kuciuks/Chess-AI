@@ -3,7 +3,6 @@ function checkValid(tile,player){
     //console.log(tile);
     valid = []
 
-
     //console.log(tile," POSSIBLE MOVES FOR ",player)
     switch(player){
         case true:
@@ -29,7 +28,7 @@ function checkValid(tile,player){
                 }
             })
             return valid;
-
     }
-            
 }
+
+export default checkValid

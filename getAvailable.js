@@ -1,6 +1,6 @@
 //search through all of the black pieces and find possible moves, add them to array and before returning the array run through checkValid function to remove all illegal moves
 function availableMoves(pieces,player){
-    all_piece_moves = []
+    let all_piece_moves = []
     
     //if(player == true){
     ///    pieces.forEach(tile => {
@@ -980,3 +980,5 @@ function availableMoves(pieces,player){
     })
     return all_piece_moves;
 }
+
+export default availableMoves

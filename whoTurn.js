@@ -1,4 +1,3 @@
-
 //checks who turn, return true of black turn, false if white
 function whoTurn(toggle){
     
@@ -20,3 +19,5 @@ function whoTurn(toggle){
     }
 
 }
+
+export default whoTurn

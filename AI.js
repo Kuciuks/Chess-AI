@@ -1,7 +1,7 @@
 import getBoard from './getBoard.js';
 import whoTurn from './whoTurn.js';
 import minimax from './minimax.js';
-import moveBestPiece from './moveBestPiece.js';
+import moveBestPiece from './getBestMove.js';
 import uploadImages from './uploadImages.js';
 import paintTiles from './paintTiles.js';
 import config from './config.js';
@@ -11,6 +11,7 @@ function InitiateAI(){
     //get main board
     chess_board = getBoard();
 
+    console.log(chess_board,'board')
     //store a copy of the main board
     checking_board = getBoard();
 

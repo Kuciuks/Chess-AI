@@ -1,4 +1,3 @@
-
 //gets board
 function getBoard(){
     let new_board = []
@@ -9,3 +8,5 @@ function getBoard(){
     })
     return new_board;
 }
+
+export default getBoard

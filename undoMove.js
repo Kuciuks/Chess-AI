@@ -1,27 +1,31 @@
+import getBoard from "./getBoard";
+import config from "./config";
 
 //undoes move from to - from, returns board minues previous move
 function undoMove(player){
 
-    if(player == true){
+    if(player){
 
-        document.getElementById(pieceNameMemAI[pieceNameMemAI.length-1].FROM).innerText = pieceNameMemAI[pieceNameMemAI.length-1].fromNAME;
+        document.getElementById(pieceNameMemAI[config.pieceNameMemAI.length-1].FROM).innerText = pieceNameMemAI[config.pieceNameMemAI.length-1].fromNAME;
 
-        document.getElementById(pieceNameMemAI[pieceNameMemAI.length-1].TO).innerText = pieceNameMemAI[pieceNameMemAI.length-1].toNAME;
-        pieceNameMemAI.pop(pieceNameMemAI[pieceNameMemAI.length-1])
-        boardCopy = getBoard()
+        document.getElementById(pieceNameMemAI[config.pieceNameMemAI.length-1].TO).innerText = pieceNameMemAI[config.pieceNameMemAI.length-1].toNAME;
+        config.pieceNameMemAI.pop(pieceNameMemAI[config.pieceNameMemAI.length-1])
+        let boardCopy = getBoard()
         upload_Images()
         paintTiles()
         return boardCopy;
     }
-    if(player == false){
+    if(!player){
 
-        document.getElementById(pieceNameMemHU[pieceNameMemHU.length-1].FROM).innerText = pieceNameMemHU[pieceNameMemHU.length-1].fromNAME;
+        document.getElementById(pieceNameMemHU[config.pieceNameMemHU.length-1].FROM).innerText = pieceNameMemHU[config.pieceNameMemHU.length-1].fromNAME;
         
-        document.getElementById(pieceNameMemHU[pieceNameMemHU.length-1].TO).innerText = pieceNameMemHU[pieceNameMemHU.length-1].toNAME;
-        pieceNameMemHU.pop(pieceNameMemHU[pieceNameMemHU.length-1])
-        boardCopy = getBoard()
+        document.getElementById(pieceNameMemHU[config.pieceNameMemHU.length-1].TO).innerText = pieceNameMemHU[config.pieceNameMemHU.length-1].toNAME;
+        config.pieceNameMemHU.pop(pieceNameMemHU[config.pieceNameMemHU.length-1])
+        let boardCopy = getBoard()
         upload_Images()
         paintTiles()
         return boardCopy;
     }
 }
+
+export default undoMove

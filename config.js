@@ -1,43 +1,56 @@
-//store pieces WHITE/BLACK
-let black_pieces = [];
-let white_pieces = [];
+function config() {
+    // Store pieces WHITE/BLACK
+    let black_pieces = [];
+    let white_pieces = [];
 
-//store all possible moves
-let all_piece_moves = [];
+    // Store all possible moves
+    let all_piece_moves = [];
 
-//store chess board
-let chess_board = []
+    // Store chess board
+    let chess_board = [];
 
-//control depth, ply
-let depth = 3
+    // Control depth, ply
+    let depth = 3;
 
-//store alpha beta initial values
-let alpha = -Infinity;
-let beta = Infinity;
+    // Store alpha beta initial values
+    let alpha = -Infinity;
+    let beta = Infinity;
 
+    let checkedBoardCount = 0;
 
-let checkedBoardCount = 0;
+    let pieceNameMemAI = [];
+    let pieceNameMemHU = [];
+    let count = 0;
 
+    let moveCount = 0;
+    let moveStorage = [];
 
-let pieceNameMemAI = [];
-let pieceNameMemHU = [];
-let count = 0;
+    // Store turn value
+    let toggle = 3;
 
+    // Store player selection
+    let selection = null;
+    let selected_letter = "";
 
+    // Return an object containing the properties
+    return {
+        black_pieces,
+        white_pieces,
+        all_piece_moves,
+        chess_board,
+        depth,
+        alpha,
+        beta,
+        checkedBoardCount,
+        pieceNameMemAI,
+        pieceNameMemHU,
+        count,
+        moveCount,
+        moveStorage,
+        toggle,
+        selection,
+        selected_letter
+    };
+}
 
-
-let moveCount = 0;
-let moveStorage = [];
-
-
-
-
-
-//from script.js
-
-//store turn value
-let toggle = 3;
-
-//store player selection
-let selection = null;
-let selected_letter = ""
+export default config;
