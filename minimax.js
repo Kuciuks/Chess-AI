@@ -4,9 +4,11 @@ import getAvailable from './getAvailable.js'
 import undoMove from './undoMove.js'
 import makeMove from './makeMove.js'
 import { getBlackPiece, getWhitePiece } from './getPieces.js'
+const configInstance = config.getInstance()
 
 //minimax returns best score and best move for black pieces
 function minimax(depth,board, maximizingPlayer, alpha, beta){
+    // console.log(depth,board, maximizingPlayer, alpha, beta)
     //return a score if depth == 0
     if(depth == 0){
         //board = chess_board;
@@ -17,7 +19,7 @@ function minimax(depth,board, maximizingPlayer, alpha, beta){
     //if AI turn
     if(maximizingPlayer){
 
-        config.black_pieces = []
+        let black_pieces = []
         //console.log("BLACK SWITCH")
 
         //declare the best score, move
@@ -25,7 +27,7 @@ function minimax(depth,board, maximizingPlayer, alpha, beta){
         let bestMove = null;
 
         //store available moves 
-        config.black_pieces = getBlackPiece(board);
+        black_pieces = getBlackPiece(board);
         
         //find all available moves
         let moves = getAvailable(black_pieces,false);
@@ -46,11 +48,11 @@ function minimax(depth,board, maximizingPlayer, alpha, beta){
                     //count++;
                     //console.log(count, " MOVE COUNT");  
                     //store current tile inner text
-                    tiletxt = document.getElementById(moves[i].To[j]).innerText;
+                    let tiletxt = document.getElementById(moves[i].To[j]).innerText;
                     //console.log(tiletxt, " TILE TXT")
                     
                     console.log(moves,"_________ BLACK MOVES")
-                    config.pieceNameMemAI.push({ "FROM": moves[i].From, "fromNAME": document.getElementById(moves[i].From).innerText, "TO": moves[i].To[j], "toNAME": document.getElementById(moves[i].To[j]).innerText, "PLAYER": maximizingPlayer});
+                    configInstance.pieceNameMemAI.push({ "FROM": moves[i].From, "fromNAME": document.getElementById(moves[i].From).innerText, "TO": moves[i].To[j], "toNAME": document.getElementById(moves[i].To[j]).innerText, "PLAYER": maximizingPlayer});
 
                     //declare board copy, move the object to each location  
                     let board = makeMove(moves[i].To[j], moves[i].From);
@@ -67,6 +69,7 @@ function minimax(depth,board, maximizingPlayer, alpha, beta){
                     if(score > bestScore){
                         bestScore = score;
                         bestMove = {"from": moves[i].From, "to": moves[i].To[j]}
+                        console.log(bestMove,' BEST MOVE LOG')
                         black_pieces = [];
                         alpha = bestScore;
                     }
@@ -77,22 +80,25 @@ function minimax(depth,board, maximizingPlayer, alpha, beta){
 
                 }
             }
-            catch{} 
+            catch(err) {
+                console.error(err.message)
+            } 
         }
+        // console.log(bestMove,bestScore)
         return [bestMove, bestScore]
         
     }
     //if player turn
     else {
 
-        white_pieces = []
+        let white_pieces = []
         //console.log("WHITE SWITCH")
 
         //declare the best score
         let bestScore = Infinity;
 
         //store available moves moves
-        config.white_pieces = getWhitePiece(board) 
+        white_pieces = getWhitePiece(board) 
 
         // uses the altered board and get all pieces for white
         
@@ -112,10 +118,10 @@ function minimax(depth,board, maximizingPlayer, alpha, beta){
                     //console.log("Moving ", document.getElementById(moves[i].From).innerText, " from ", document.getElementById(moves[i].From).id, " to ", document.getElementById(moves[i].To[j]).id);
                     
                     //store current tile inner text
-                    tiletxt2 = document.getElementById(moves[i].To[j]).innerText;
+                    let tiletxt2 = document.getElementById(moves[i].To[j]).innerText;
 
                     console.log(moves,"_________ WHITE MOVES")
-                    config.pieceNameMemHU.push({ "FROM": moves[i].From, "fromNAME": document.getElementById(moves[i].From).innerText, "TO": moves[i].To[j], "toNAME": document.getElementById(moves[i].To[j]).innerText, "PLAYER": maximizingPlayer});
+                    configInstance.pieceNameMemHU.push({ "FROM": moves[i].From, "fromNAME": document.getElementById(moves[i].From).innerText, "TO": moves[i].To[j], "toNAME": document.getElementById(moves[i].To[j]).innerText, "PLAYER": maximizingPlayer});
 
                     //declare board copy, move the object to each location
                     board = makeMove(moves[i].To[j], moves[i].From);

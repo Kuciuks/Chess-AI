@@ -1,7 +1,7 @@
 //returns the valid move board, if a move is illegal then highlights it red
 function checkValid(tile,player){
     //console.log(tile);
-    valid = []
+    let valid = []
 
     //console.log(tile," POSSIBLE MOVES FOR ",player)
     switch(player){

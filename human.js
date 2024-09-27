@@ -1,3 +1,15 @@
+import config from "./config.js"
+import getBoard from "./getBoard.js"
+import evaluateBoard from "./evaluateBoard.js"
+import paintTiles from "./paintTiles.js"
+import whoTurn from "./whoTurn.js"
+import uploadImages from "./uploadImages.js"
+import initiateAI from './AI.js'
+
+const configInstance = config.getInstance()
+
+
+
 //currenly the game can be player [human vs human] and [human vs AI]
 //controller for the human player
 console.log('Human script')
@@ -13,27 +25,28 @@ document.querySelectorAll(".tile").forEach(tile => {
         
 
         //if selection is empty and tile text is full 
-        if(!selection && tile.innerText !== ""){
+        if(!configInstance.selection && tile.innerText !== ""){
             let chess_board = getBoard()
             let a = evaluateBoard(chess_board)
             console.log(a,"Starting score")
-            selected_letter = (Array.from(tile.innerText)).shift()
+            configInstance.selected_letter = (Array.from(tile.innerText)).shift()
 
             //update bg color
             tile.style.backgroundColor = "orange";
 
             //update selection
-            selection = tile;
+            configInstance.selection = tile;
 
             //store selection id txt
-            id = selection.id;
-            txt = selection.innerText;
+            let id = configInstance.selection.id;
+            console.log(id,' - id value')
+            let txt = configInstance.selection.innerText;
 
-            lastId = (Array.from(id)).pop();
-            firstId = (Array.from(id)).shift();
+            let lastId = (Array.from(id)).pop();
+            let firstId = (Array.from(id)).shift();
 
             //check if human turn, if is, show available moves
-            if(whoTurn(toggle) == false){
+            if(whoTurn(configInstance.toggle) == false){
                 showMoves("W")
             }
 
@@ -1209,7 +1222,7 @@ document.querySelectorAll(".tile").forEach(tile => {
                 //check for illegal moves ad highlight them
                 document.querySelectorAll(".tile").forEach(tile => {
 
-                    W_B = (Array.from(tile.innerText)).shift();
+                    let W_B = (Array.from(tile.innerText)).shift();
                     if(tile.style.backgroundColor == "green" && W_B == color){
                         tile.style.backgroundColor = "red";
                         console.log("paint red")
@@ -1219,13 +1232,13 @@ document.querySelectorAll(".tile").forEach(tile => {
         }
 
         //If selected is the same tile, unselect
-        else if(selection === tile){
+        else if(configInstance.selection === tile){
 
             //reset tile colors
             paintTiles();
 
             //remove selection;
-            selection = null;
+            configInstance.selection = null;
 
         }
 
@@ -1234,54 +1247,54 @@ document.querySelectorAll(".tile").forEach(tile => {
         if(tile.style.backgroundColor == "green" && tile.innerText == ""){
             
             //remove old tile txt
-            document.getElementById(id).innerText = "";
+            document.getElementById(configInstance.selection.id).innerText = "";
 
             //set green tile txt to selected txt
-            tile.innerText = txt;
+            tile.innerText = configInstance.selection.innerText;
                                                      
             //update images
-            upload_Images();
+            uploadImages();
 
             //remove selected item
-            selection = null;
+            configInstance.selection = null;
 
             //update tile coloring
             paintTiles();
-            toggle++
+            configInstance.toggle++
 
             //Initiate AI move
-            InitiateAI()
+            initiateAI()
         }
 
         //check if clicked on green with text
         else if (tile.style.backgroundColor == "green" && tile.innerText !== ""){
             
             //get tiles first letter
-            green_letter = (Array.from(tile.innerText)).shift();
+            let green_letter = (Array.from(tile.innerText)).shift();
             
             //check if valid
-            if(green_letter !== selected_letter){
+            if(green_letter !== configInstance.selected_letter){
                 //remove old tile txt
-                document.getElementById(id).innerText = "";
+                document.getElementById(configInstance.selection.id).innerText = "";
 
                 //set green tile txt to selected txt
-                tile.innerText = txt;
+                tile.innerText = configInstance.selection.innerText;
                                      
                 //update images
-                upload_Images();
+                uploadImages();
 
                 //remove selected item
-                selection = null;
+                configInstance.selection = null;
 
                 //update tile coloring
                 paintTiles();
-                toggle++;
+                configInstance.toggle++;
 
                 //Initiate AI move
-                InitiateAI()
+                initiateAI()
                 
             }
-            if(green_letter == selected_letter){
+            if(green_letter == configInstance.selected_letter){
                 console.log("ILLEGAL")
                 
             }

@@ -1,3 +1,5 @@
+import checkValid from './checkValidity.js'
+
 //search through all of the black pieces and find possible moves, add them to array and before returning the array run through checkValid function to remove all illegal moves
 function availableMoves(pieces,player){
     let all_piece_moves = []

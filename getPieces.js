@@ -1,21 +1,24 @@
+import config from "./config.js";
+const configInstance = config.getInstance()
+
+
+
 //gets white pieces from the board
 export function getWhitePiece(board){
     for(let i = 0; i < board.length; i++){
         if(document.getElementById(board[i]).innerText[0] == "W"){
-            white_pieces.push(board[i]);
-    
+            configInstance.white_pieces.push(board[i]);
         }
     }
-    return white_pieces
+    return configInstance.white_pieces
 }
 
 //gets black pieces from the board
 export function getBlackPiece(board){
     for(let i = 0; i < board.length; i++){
         if(document.getElementById(board[i]).innerText[0] == "B"){
-            black_pieces.push(board[i]);
-    
+            configInstance.black_pieces.push(board[i]);
         }
     }
-    return black_pieces
+    return configInstance.black_pieces
 }
