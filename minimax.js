@@ -1,9 +1,9 @@
 import evaluateBoard from './evaluateBoard.js'
 import config from './config.js'
-import getPiece from './getPieces.js'
 import getAvailable from './getAvailable.js'
 import undoMove from './undoMove.js'
 import makeMove from './makeMove.js'
+import { getBlackPiece, getWhitePiece } from './getPieces.js'
 
 //minimax returns best score and best move for black pieces
 function minimax(depth,board, maximizingPlayer, alpha, beta){
@@ -25,7 +25,7 @@ function minimax(depth,board, maximizingPlayer, alpha, beta){
         let bestMove = null;
 
         //store available moves 
-        config.black_pieces = getPiece.getBlackPiece(board);
+        config.black_pieces = getBlackPiece(board);
         
         //find all available moves
         let moves = getAvailable.availableMoves(black_pieces,false);
@@ -92,7 +92,7 @@ function minimax(depth,board, maximizingPlayer, alpha, beta){
         let bestScore = Infinity;
 
         //store available moves moves
-        config.white_pieces = getPiece.getWhitePiece(board) 
+        config.white_pieces = getWhitePiece(board) 
 
         // uses the altered board and get all pieces for white
         
