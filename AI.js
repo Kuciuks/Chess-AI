@@ -8,24 +8,24 @@ import config from './config.js';
 console.log('AI script')
 
 //get main board
-chess_board = getBoard();
+let chess_board = getBoard();
 
 console.log(chess_board,'board')
 //store a copy of the main board
-checking_board = getBoard();
+let checking_board = getBoard();
 
 //get player
-let currentPLayer = whoTurn(toggle);
+let currentPLayer = whoTurn(config.toggle);
 
 //if player turn Black then activate minimax
 if(currentPLayer == true){
-    let [value1, value2] = minimax(config.depth, checking_board, currentPLayer,alpha, beta)
+    let [value1, value2] = minimax(config.depth, checking_board, currentPLayer,config.alpha, config.beta)
     //console.log("Minimax Value : ", value2, " Best move : ", value1);
     moveBestPiece(value1.from, value1.to);
     //console.log("Total checked boards: ", checkedBoardCount)
     config.checkedBoardCount = 0;
     //console.log(pieceNameMemAI,"ALL MOVE PIECE NAMES")
-    toggle++;
+    config.toggle +=1;
 }
 
 //upload images, repaint tiles, reset values

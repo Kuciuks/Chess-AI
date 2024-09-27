@@ -28,7 +28,7 @@ function minimax(depth,board, maximizingPlayer, alpha, beta){
         config.black_pieces = getBlackPiece(board);
         
         //find all available moves
-        let moves = getAvailable.availableMoves(black_pieces,false);
+        let moves = getAvailable(black_pieces,false);
         //console.log(black_pieces,"__________ BLACK PIECES")
         //console.log("black moves", moves)
 
@@ -96,7 +96,7 @@ function minimax(depth,board, maximizingPlayer, alpha, beta){
 
         // uses the altered board and get all pieces for white
         
-        let moves = getAvailable.availableMoves(white_pieces,true);
+        let moves = getAvailable(white_pieces,true);
 
         //console.log(white_pieces,"__________ WHITE PIECES")
         //console.log("white moves", moves)
