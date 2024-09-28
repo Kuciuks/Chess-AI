@@ -13,7 +13,7 @@ console.log('AI script')
 
 
 function initiateAI(){
-    //get main boarda
+    //get main board
     let chess_board = getBoard();
 
     console.log(chess_board,'board')
