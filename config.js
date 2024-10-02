@@ -7,7 +7,7 @@ const config = (function() {
             white_pieces: [],
             all_piece_moves: [],
             chess_board: [],
-            depth: 3,
+            depth: 1,
             alpha: -Infinity,
             beta: Infinity,
             checkedBoardCount: 0,

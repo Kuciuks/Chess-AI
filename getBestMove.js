@@ -1,3 +1,4 @@
+import getBoard from "./getBoard.js";
 
 //makes a move from - to, with the best move from minimax
 function moveBestPiece(from, to){

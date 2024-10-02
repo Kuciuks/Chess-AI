@@ -17,7 +17,7 @@ document.querySelectorAll(".tile").forEach(tile => {
     
     //player movemenet script
     tile.addEventListener("click", event => {
-        
+        console.log('Human move')
         //Get tiles position(row,col)
         let arr = (Array.from(tile.id))
         let row = eval(arr.shift());
@@ -39,7 +39,7 @@ document.querySelectorAll(".tile").forEach(tile => {
 
             //store selection id txt
             let id = configInstance.selection.id;
-            console.log(id,' - id value')
+            console.log(id,' - current(moving from) tile id value')
             let txt = configInstance.selection.innerText;
 
             let lastId = (Array.from(id)).pop();

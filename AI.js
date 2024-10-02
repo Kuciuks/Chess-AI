@@ -9,14 +9,14 @@ const configInstance = config.getInstance()
 
 
 
-console.log('AI script')
+console.log('AI script - program start')
 
 
 function initiateAI(){
     //get main board
     let chess_board = getBoard();
 
-    console.log(chess_board,'board')
+    // console.log(chess_board,'board')
     //store a copy of the main board
     let checking_board = getBoard();
 
@@ -27,7 +27,8 @@ function initiateAI(){
     if(currentPLayer == true){
         let [value1, value2] = minimax(configInstance.depth, checking_board, currentPLayer,configInstance.alpha, configInstance.beta)
         //console.log("Minimax Value : ", value2, " Best move : ", value1);
-        console.log(value1.from, value1.to)
+        // console.log(value1.from, value1.to)
+        console.log(value1,'---------------------------')
         moveBestPiece(value1.from, value1.to);
         //console.log("Total checked boards: ", checkedBoardCount)
         configInstance.checkedBoardCount = 0;

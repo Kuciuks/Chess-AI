@@ -53,7 +53,8 @@ function minimax(depth,board, maximizingPlayer, alpha, beta){
                     
                     console.log(moves,"_________ BLACK MOVES")
                     configInstance.pieceNameMemAI.push({ "FROM": moves[i].From, "fromNAME": document.getElementById(moves[i].From).innerText, "TO": moves[i].To[j], "toNAME": document.getElementById(moves[i].To[j]).innerText, "PLAYER": maximizingPlayer});
-
+                    console.log(configInstance.pieceNameMemAI,'_________________-')
+                    
                     //declare board copy, move the object to each location  
                     let board = makeMove(moves[i].To[j], moves[i].From);
                     
@@ -70,10 +71,10 @@ function minimax(depth,board, maximizingPlayer, alpha, beta){
                         bestScore = score;
                         bestMove = {"from": moves[i].From, "to": moves[i].To[j]}
                         console.log(bestMove,' BEST MOVE LOG')
-                        black_pieces = [];
+                        configInstance.black_pieces = [];
                         alpha = bestScore;
                     }
-                    checkedBoardCount++;
+                    configInstance.checkedBoardCount++;
                     //declare undone board
                     board = undoMove(maximizingPlayer)
                     
@@ -82,9 +83,10 @@ function minimax(depth,board, maximizingPlayer, alpha, beta){
             }
             catch(err) {
                 console.error(err.message)
+                console.error(err.stack)
             } 
         }
-        // console.log(bestMove,bestScore)
+        console.log(bestMove,bestScore,' _____BEST MOVE _____')
         return [bestMove, bestScore]
         
     }

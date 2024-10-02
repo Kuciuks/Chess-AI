@@ -9,10 +9,10 @@ function undoMove(player){
 
     if(player){
 
-        document.getElementById(pieceNameMemAI[configInstance.pieceNameMemAI.length-1].FROM).innerText = pieceNameMemAI[configInstance.pieceNameMemAI.length-1].fromNAME;
+        document.getElementById(configInstance.pieceNameMemAI[configInstance.pieceNameMemAI.length-1].FROM).innerText = configInstance.pieceNameMemAI[configInstance.pieceNameMemAI.length-1].fromNAME;
 
-        document.getElementById(pieceNameMemAI[configInstance.pieceNameMemAI.length-1].TO).innerText = pieceNameMemAI[configInstance.pieceNameMemAI.length-1].toNAME;
-        configInstance.pieceNameMemAI.pop(pieceNameMemAI[configInstance.pieceNameMemAI.length-1])
+        document.getElementById(configInstance.pieceNameMemAI[configInstance.pieceNameMemAI.length-1].TO).innerText = configInstance.pieceNameMemAI[configInstance.pieceNameMemAI.length-1].toNAME;
+        configInstance.pieceNameMemAI.pop(configInstance.pieceNameMemAI[configInstance.pieceNameMemAI.length-1])
         let boardCopy = getBoard()
         uploadImages()
         paintTiles()
@@ -20,10 +20,10 @@ function undoMove(player){
     }
     if(!player){
 
-        document.getElementById(pieceNameMemHU[configInstance.pieceNameMemHU.length-1].FROM).innerText = pieceNameMemHU[configInstance.pieceNameMemHU.length-1].fromNAME;
+        document.getElementById(configInstance.pieceNameMemHU[configInstance.pieceNameMemHU.length-1].FROM).innerText = configInstance.pieceNameMemHU[configInstance.pieceNameMemHU.length-1].fromNAME;
         
-        document.getElementById(pieceNameMemHU[configInstance.pieceNameMemHU.length-1].TO).innerText = pieceNameMemHU[configInstance.pieceNameMemHU.length-1].toNAME;
-        configInstance.pieceNameMemHU.pop(pieceNameMemHU[configInstance.pieceNameMemHU.length-1])
+        document.getElementById(configInstance.pieceNameMemHU[configInstance.pieceNameMemHU.length-1].TO).innerText = configInstance.pieceNameMemHU[configInstance.pieceNameMemHU.length-1].toNAME;
+        configInstance.pieceNameMemHU.pop(configInstance.pieceNameMemHU[configInstance.pieceNameMemHU.length-1])
         let boardCopy = getBoard()
         uploadImages()
         paintTiles()

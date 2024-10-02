@@ -8,7 +8,7 @@ function makeMove(to, from){
     if(to !== null){
         //moveStorage.push({to,from});
         //moveCount++;
-
+        console.log('Make a move')
         document.getElementById(to).innerText = document.getElementById(from).innerText;
 
         document.getElementById(from).innerText = "";

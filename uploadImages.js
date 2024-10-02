@@ -6,7 +6,7 @@ function uploadImages(){
             tile.style.cursor = "pointer";
         }
         else{
-            console.log('Tile text is empty')
+            // console.log('Tile text is empty')
         }
     })
 }
