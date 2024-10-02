@@ -41,7 +41,7 @@ document.querySelectorAll(".tile").forEach(tile => {
             let id = configInstance.selection.id;
             console.log(id,' - current(moving from) tile id value')
             let txt = configInstance.selection.innerText;
-
+            console.log(configInstance.selection.innerText,'tile')
             let lastId = (Array.from(id)).pop();
             let firstId = (Array.from(id)).shift();
 
@@ -1233,7 +1233,7 @@ document.querySelectorAll(".tile").forEach(tile => {
 
         //If selected is the same tile, unselect
         else if(configInstance.selection === tile){
-
+            console.log('pressed on the same tile')
             //reset tile colors
             paintTiles();
 
@@ -1246,12 +1246,13 @@ document.querySelectorAll(".tile").forEach(tile => {
         //check if clicked on green without text
         if(tile.style.backgroundColor == "green" && tile.innerText == ""){
             
+            console.log(configInstance.selection,'-------------------------------')
             //remove old tile txt
             document.getElementById(configInstance.selection.id).innerText = "";
 
             //set green tile txt to selected txt
             tile.innerText = configInstance.selection.innerText;
-                                                     
+            console.log(tile.innerText,'WHITE TILE TEXT')                     
             //update images
             uploadImages();
 
