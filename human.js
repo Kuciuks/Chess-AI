@@ -4,7 +4,7 @@ import evaluateBoard from "./evaluateBoard.js"
 import paintTiles from "./paintTiles.js"
 import whoTurn from "./whoTurn.js"
 import uploadImages from "./uploadImages.js"
-import initiateAI from './AI.js'
+import initiateAI from './Initiate.js'
 
 const configInstance = config.getInstance()
 
@@ -36,14 +36,14 @@ document.querySelectorAll(".tile").forEach(tile => {
 
             //update selection
             configInstance.selection = tile;
-
+            console.log(`[${tile}] SELECTED TILE`)
             //store selection id txt
             let id = configInstance.selection.id;
-            console.log(id,' - id value')
             let txt = configInstance.selection.innerText;
-
-            let lastId = (Array.from(id)).pop();
-            let firstId = (Array.from(id)).shift();
+            console.log(id,txt,' - id value')
+                                                                                       //
+            let lastId = Array.from(id).pop();                                       //EXCHANGE FOR "DEQUE" FOR MORE EFFICIENCY
+            let firstId = Array.from(id).shift();                                    //
 
             //check if human turn, if is, show available moves
             if(whoTurn(configInstance.toggle) == false){
@@ -166,10 +166,10 @@ document.querySelectorAll(".tile").forEach(tile => {
                     case `${color}-Rook`:
 
                         
-                        ahead = 8 - lastId;
-                        behind = lastId - 1;
-                        below = 8 - firstId;
-                        up = firstId - 1;
+                        let ahead = 8 - lastId;
+                        let behind = lastId - 1;
+                        let below = 8 - firstId;
+                        let up = firstId - 1;
                         if(color == "W"){
 
                             console.log(lastId);
@@ -181,8 +181,9 @@ document.querySelectorAll(".tile").forEach(tile => {
                             console.log(below ," - below")
 
                             try{
-                                for (i = 1; i <= ahead; i++){
-                                    arr1 = (Array.from(document.getElementById(`${row}-${col+i}`).innerText)).shift()
+                                for (let i = 1; i <= ahead; i++){
+                                    let arr1 = (Array.from(document.getElementById(`${row}-${col+i}`).innerText)).shift()
+                                    console.log(arr1,'------------------------------------------------------------------')
                                     if(arr1 == null){
                                         document.getElementById(`${row}-${col+i}`).style.backgroundColor = "green";
                                     }
@@ -194,8 +195,8 @@ document.querySelectorAll(".tile").forEach(tile => {
     
     
     
-                                for (j = 1; j <= behind; j++){
-                                    arr2 = (Array.from(document.getElementById(`${row}-${col-j}`).innerText)).shift()
+                                for (let j = 1; j <= behind; j++){
+                                    let arr2 = (Array.from(document.getElementById(`${row}-${col-j}`).innerText)).shift()
                                     if(arr2 == null){
                                         document.getElementById(`${row}-${col-j}`).style.backgroundColor = "green";
                                     }
@@ -207,8 +208,8 @@ document.querySelectorAll(".tile").forEach(tile => {
     
     
     
-                                for (k = 1; k <= below; k++){
-                                    arr3 = (Array.from(document.getElementById(`${row+k}-${col}`).innerText)).shift()
+                                for (let k = 1; k <= below; k++){
+                                    let arr3 = (Array.from(document.getElementById(`${row+k}-${col}`).innerText)).shift()
                                     console.log(arr3)
                                     if(arr3 == null){
                                         document.getElementById(`${row+k}-${col}`).style.backgroundColor = "green";
@@ -221,8 +222,8 @@ document.querySelectorAll(".tile").forEach(tile => {
                         
     
     
-                                for (l = 1; l <= up; l++){
-                                    arr4 = (Array.from(document.getElementById(`${row-l}-${col}`).innerText)).shift()
+                                for (let l = 1; l <= up; l++){
+                                    let arr4 = (Array.from(document.getElementById(`${row-l}-${col}`).innerText)).shift()
                                     if(arr4 == null){
                                         document.getElementById(`${row-l}-${col}`).style.backgroundColor = "green";
                                     }
@@ -232,7 +233,9 @@ document.querySelectorAll(".tile").forEach(tile => {
                                     }
                                 }
                             }
-                            catch{}
+                            catch(err){
+                                console.log(err)
+                            }
                         }
 
                             
@@ -248,8 +251,8 @@ document.querySelectorAll(".tile").forEach(tile => {
 
 
                             
-                            for (i = 1; i <= ahead; i++){
-                                arr1 = (Array.from(document.getElementById(`${row}-${col+i}`).innerText)).shift()
+                            for (let i = 1; i <= ahead; i++){
+                                let arr1 = (Array.from(document.getElementById(`${row}-${col+i}`).innerText)).shift()
                                 if(arr1 == null){
                                     document.getElementById(`${row}-${col+i}`).style.backgroundColor = "green";
                                 }
@@ -261,8 +264,8 @@ document.querySelectorAll(".tile").forEach(tile => {
 
 
 
-                            for (j = 1; j <= behind; j++){
-                                arr2 = (Array.from(document.getElementById(`${row}-${col-j}`).innerText)).shift()
+                            for (let j = 1; j <= behind; j++){
+                                let arr2 = (Array.from(document.getElementById(`${row}-${col-j}`).innerText)).shift()
                                 if(arr2 == null){
                                     document.getElementById(`${row}-${col-j}`).style.backgroundColor = "green";
                                 }
@@ -274,8 +277,8 @@ document.querySelectorAll(".tile").forEach(tile => {
 
 
 
-                            for (k = 1; k <= below; k++){
-                                arr3 = (Array.from(document.getElementById(`${row+k}-${col}`).innerText)).shift()
+                            for (let k = 1; k <= below; k++){
+                                let arr3 = (Array.from(document.getElementById(`${row+k}-${col}`).innerText)).shift()
                                 if(arr3 == null){
                                     document.getElementById(`${row+k}-${col}`).style.backgroundColor = "green";
                                 }
@@ -287,8 +290,8 @@ document.querySelectorAll(".tile").forEach(tile => {
                     
 
 
-                            for (l = 1; l <= up; l++){
-                                arr4 = (Array.from(document.getElementById(`${row-l}-${col}`).innerText)).shift()
+                            for (let l = 1; l <= up; l++){
+                                let arr4 = (Array.from(document.getElementById(`${row-l}-${col}`).innerText)).shift()
                                 if(arr4 == null){
                                     document.getElementById(`${row-l}-${col}`).style.backgroundColor = "green";
                                 }
@@ -303,13 +306,12 @@ document.querySelectorAll(".tile").forEach(tile => {
                     case(`${color}-Bishop`):
                         if(color == "W"){
 
-                            for(i = 1; i < 9; i++){
-
+                            for(let i = 1; i < 9; i++){
                                 try{
 
-                                    msg = "";
+                                    let msg = "";
 
-                                    arr1 = (Array.from(document.getElementById(`${row-i}-${col-i}`).innerText)).shift();
+                                    let arr1 = (Array.from(document.getElementById(`${row-i}-${col-i}`).innerText)).shift();
                                     if(arr1 == null){
                                         
                                         document.getElementById(`${row-i}-${col-i}`).style.backgroundColor = "green"; // UP L
@@ -322,20 +324,20 @@ document.querySelectorAll(".tile").forEach(tile => {
                                 }
                                 catch(err){
 
-                                    msg = "Input is" + err;
+                                    let msg = "Input is" + err;
                                     console.log(msg);
                                 }
 
                             }
 
 
-                            for(j = 1; j < 9; j++){
+                            for(let j = 1; j < 9; j++){
 
                                 try{
 
-                                    msg = "";
+                                    let msg = "";
 
-                                    arr2 = (Array.from(document.getElementById(`${row-j}-${col+j}`).innerText)).shift();
+                                    let arr2 = (Array.from(document.getElementById(`${row-j}-${col+j}`).innerText)).shift();
                                     if(arr2 == null){
                                         
                                         document.getElementById(`${row-j}-${col+j}`).style.backgroundColor = "green"; // UP r
@@ -348,20 +350,20 @@ document.querySelectorAll(".tile").forEach(tile => {
                                 }
                                 catch(err){
 
-                                    msg = "Input is" + err;
+                                    let msg = "Input is" + err;
                                     console.log(msg);
                                 }
 
                             }
 
 
-                            for(k = 1; k < 9; k++){
+                            for(let k = 1; k < 9; k++){
 
                                 try{
 
-                                    msg = "";
+                                    let msg = "";
 
-                                    arr3 = (Array.from(document.getElementById(`${row+k}-${col-k}`).innerText)).shift();
+                                    let arr3 = (Array.from(document.getElementById(`${row+k}-${col-k}`).innerText)).shift();
                                     if(arr3 == null){
                                         
                                         document.getElementById(`${row+k}-${col-k}`).style.backgroundColor = "green";  
@@ -374,19 +376,19 @@ document.querySelectorAll(".tile").forEach(tile => {
                                 }
                                 catch(err){
 
-                                    msg = "Input is" + err;
+                                    let msg = "Input is" + err;
                                     console.log(msg);
                                 }
 
                             }
 
-                            for(l = 1; l < 9; l++){
+                            for(let l = 1; l < 9; l++){
 
                                 try{
 
-                                    msg = "";
+                                    let msg = "";
 
-                                    arr4 = (Array.from(document.getElementById(`${row+l}-${col+l}`).innerText)).shift();
+                                    let arr4 = (Array.from(document.getElementById(`${row+l}-${col+l}`).innerText)).shift();
                                     if(arr4 == null){
                                         
                                         document.getElementById(`${row+l}-${col+l}`).style.backgroundColor = "green";  
@@ -399,7 +401,7 @@ document.querySelectorAll(".tile").forEach(tile => {
                                 }
                                 catch(err){
 
-                                    msg = "Input is" + err;
+                                    let msg = "Input is" + err;
                                     console.log(msg);
                                 }
 
@@ -410,13 +412,13 @@ document.querySelectorAll(".tile").forEach(tile => {
 
 
                         if(color == "B"){
-                            for(i = 1; i < 9; i++){
+                            for(let i = 1; i < 9; i++){
 
                                 try{
 
-                                    msg = "";
+                                    let msg = "";
 
-                                    arr1 = (Array.from(document.getElementById(`${row-i}-${col-i}`).innerText)).shift();
+                                    let arr1 = (Array.from(document.getElementById(`${row-i}-${col-i}`).innerText)).shift();
                                     if(arr1 == null){
                                         
                                         document.getElementById(`${row-i}-${col-i}`).style.backgroundColor = "green"; // UP L
@@ -429,20 +431,20 @@ document.querySelectorAll(".tile").forEach(tile => {
                                 }
                                 catch(err){
 
-                                    msg = "Input is" + err;
+                                    let msg = "Input is" + err;
                                     console.log(msg);
                                 }
 
                             }
 
 
-                            for(j = 1; j < 9; j++){
+                            for(let j = 1; j < 9; j++){
 
                                 try{
 
-                                    msg = "";
+                                    let msg = "";
 
-                                    arr2 = (Array.from(document.getElementById(`${row-j}-${col+j}`).innerText)).shift();
+                                    let arr2 = (Array.from(document.getElementById(`${row-j}-${col+j}`).innerText)).shift();
                                     if(arr2 == null){
                                         
                                         document.getElementById(`${row-j}-${col+j}`).style.backgroundColor = "green"; // UP r
@@ -455,20 +457,20 @@ document.querySelectorAll(".tile").forEach(tile => {
                                 }
                                 catch(err){
 
-                                    msg = "Input is" + err;
+                                    let msg = "Input is" + err;
                                     console.log(msg);
                                 }
 
                             }
 
 
-                            for(k = 1; k < 9; k++){
+                            for(let k = 1; k < 9; k++){
 
                                 try{
 
-                                    msg = "";
+                                    let msg = "";
 
-                                    arr3 = (Array.from(document.getElementById(`${row+k}-${col-k}`).innerText)).shift();
+                                    let arr3 = (Array.from(document.getElementById(`${row+k}-${col-k}`).innerText)).shift();
                                     if(arr3 == null){
                                         
                                         document.getElementById(`${row+k}-${col-k}`).style.backgroundColor = "green";  
@@ -481,7 +483,7 @@ document.querySelectorAll(".tile").forEach(tile => {
                                 }
                                 catch(err){
 
-                                    msg = "Input is" + err;
+                                    let msg = "Input is" + err;
                                     console.log(msg);
                                 }
 
@@ -491,9 +493,9 @@ document.querySelectorAll(".tile").forEach(tile => {
 
                                 try{
 
-                                    msg = "";
+                                    let msg = "";
 
-                                    arr4 = (Array.from(document.getElementById(`${row+l}-${col+l}`).innerText)).shift();
+                                    let arr4 = (Array.from(document.getElementById(`${row+l}-${col+l}`).innerText)).shift();
                                     if(arr4 == null){
                                         
                                         document.getElementById(`${row+l}-${col+l}`).style.backgroundColor = "green";  
@@ -506,7 +508,7 @@ document.querySelectorAll(".tile").forEach(tile => {
                                 }
                                 catch(err){
 
-                                    msg = "Input is" + err;
+                                    let msg = "Input is" + err;
                                     console.log(msg);
                                 }
 
@@ -1246,12 +1248,14 @@ document.querySelectorAll(".tile").forEach(tile => {
         //check if clicked on green without text
         if(tile.style.backgroundColor == "green" && tile.innerText == ""){
             
+            console.log(document.getElementById(configInstance.selection.id).innerText)
+
+            tile.innerText = configInstance.selection.innerText;
+
             //remove old tile txt
             document.getElementById(configInstance.selection.id).innerText = "";
-
             //set green tile txt to selected txt
-            tile.innerText = configInstance.selection.innerText;
-                                                     
+            console.log(tile.innerText)                        
             //update images
             uploadImages();
 
@@ -1276,7 +1280,7 @@ document.querySelectorAll(".tile").forEach(tile => {
             if(green_letter !== configInstance.selected_letter){
                 //remove old tile txt
                 document.getElementById(configInstance.selection.id).innerText = "";
-
+                console.log(green_letter,configInstance.selection)
                 //set green tile txt to selected txt
                 tile.innerText = configInstance.selection.innerText;
                                      

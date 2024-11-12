@@ -173,13 +173,13 @@ function availableMoves(pieces,player){
             case "B-Rook":
 
 
-                ahead = 8 - col;
-                behind = col - 1;
-                below = 8 - row;
-                up = row - 1;
+                let ahead_0 = 8 - col;
+                let behind_0 = col - 1;
+                let below_0 = 8 - row;
+                let up_0 = row - 1;
 
                 
-                for (i = 1; i <= ahead; i++){
+                for (let i = 1; i <= ahead_0; i++){
                     if(document.getElementById(`${row}-${col+i}`) == null){
                         break;
                     }
@@ -190,7 +190,7 @@ function availableMoves(pieces,player){
                     }
                 }
             
-                for (j = 1; j <= behind; j++){
+                for (let j = 1; j <= behind_0; j++){
                     if(document.getElementById(`${row}-${col-j}`) == null){
                         break;
                     }
@@ -200,7 +200,7 @@ function availableMoves(pieces,player){
                     }
                 }
             
-                for (k = 1; k <= below; k++){
+                for (let k = 1; k <= below_0; k++){
                     if(document.getElementById(`${row+k}-${col}`) == null){
                         break;
                     }
@@ -210,7 +210,7 @@ function availableMoves(pieces,player){
                     }
                 }
             
-                for (l = 1; l <= up; l++){
+                for (let l = 1; l <= up_0; l++){
                     if(document.getElementById(`${row-l}-${col}`) == null){
                         break;
                     }
@@ -225,13 +225,13 @@ function availableMoves(pieces,player){
             case "W-Rook":
 
 
-                ahead = 8 - col;
-                behind = col - 1;
-                below = 8 - row;
-                up = row - 1;
+                let ahead_1 = 8 - col;
+                let behind_1 = col - 1;
+                let below_1 = 8 - row;
+                let up_1 = row - 1;
 
                 
-                for (i = 1; i <= ahead; i++){
+                for (let i = 1; i <= ahead_1; i++){
                     if(document.getElementById(`${row}-${col+i}`) == null){
                         break;
                     }
@@ -242,7 +242,7 @@ function availableMoves(pieces,player){
                     }
                 }
             
-                for (j = 1; j <= behind; j++){
+                for (let j = 1; j <= behind_1; j++){
                     if(document.getElementById(`${row}-${col-j}`) == null){
                         break;
                     }
@@ -252,7 +252,7 @@ function availableMoves(pieces,player){
                     }
                 }
             
-                for (k = 1; k <= below; k++){
+                for (let k = 1; k <= below_1; k++){
                     if(document.getElementById(`${row+k}-${col}`) == null){
                         break;
                     }
@@ -262,7 +262,7 @@ function availableMoves(pieces,player){
                     }
                 }
             
-                for (l = 1; l <= up; l++){
+                for (let l = 1; l <= up_1; l++){
                     if(document.getElementById(`${row-l}-${col}`) == null){
                         break;
                     }
@@ -275,14 +275,17 @@ function availableMoves(pieces,player){
             break;
 
             case "B-Bishop":
-                for(i = 1; i < 9; i++){
+                for(let i = 1; i < 9; i++){
 
                     try{
 
                         msg = "";
-                        if(document.getElementById(`${row-i}-${col-i}`).innerText == "" || document.getElementById(`${row-i}-${col-i}`).innerText[0] == "W"){
-                            store_possible_tile_moves.push(document.getElementById(`${row-i}-${col-i}`).id);
-                            
+                        if(document.getElementById(`${row-i}-${col-i}`).innerText == ""){
+
+                            if (document.getElementById(`${row-i}-${col-i}`).innerText[0] == "W"){
+                                store_possible_tile_moves.push(document.getElementById(`${row-i}-${col-i}`).id);
+                                i = 9
+                            }
                         }
                         if(document.getElementById(`${row-i}-${col-i}`).innerText[0] == "B"){
                             i=9
@@ -297,12 +300,14 @@ function availableMoves(pieces,player){
                 }
 
 
-                for(j = 1; j < 9; j++){
+                for(let j = 1; j < 9; j++){
 
                     try{
-                        if(document.getElementById(`${row-j}-${col+j}`).innerText == "" || document.getElementById(`${row-j}-${col+j}`).innerText[0] == "W"){
-                            store_possible_tile_moves.push(document.getElementById(`${row-j}-${col+j}`).id);
-                            
+                        if(document.getElementById(`${row-j}-${col+j}`).innerText == ""){
+                            if (document.getElementById(`${row-j}-${col+j}`).innerText[0] == "W"){
+                                store_possible_tile_moves.push(document.getElementById(`${row-j}-${col+j}`).id);
+                                j = 9
+                            }   
                         }
                         msg = "";
                         if(document.getElementById(`${row-j}-${col+j}`).innerText[0] == "B"){
@@ -317,12 +322,14 @@ function availableMoves(pieces,player){
                 }
 
 
-                for(k = 1; k < 9; k++){
+                for(let k = 1; k < 9; k++){
 
                     try{
-                        if(document.getElementById(`${row+k}-${col-k}`).innerText == "" || document.getElementById(`${row+k}-${col-k}`).innerText[0] == "W"){
-                            store_possible_tile_moves.push(document.getElementById(`${row+k}-${col-k}`).id);
-                            
+                        if(document.getElementById(`${row+k}-${col-k}`).innerText == ""){
+                            if(document.getElementById(`${row+k}-${col-k}`).innerText[0] == "W"){
+                                store_possible_tile_moves.push(document.getElementById(`${row+k}-${col-k}`).id);
+                                k = 9
+                            }
                         }
                         msg = "";
                         if(document.getElementById(`${row+k}-${col-k}`).innerText[0] == "B"){
@@ -336,12 +343,14 @@ function availableMoves(pieces,player){
 
                 }
 
-                for(l = 1; l < 9; l++){
+                for(let l = 1; l < 9; l++){
 
                     try{
-                        if(document.getElementById(`${row+l}-${col+l}`).innerText == "" || document.getElementById(`${row+l}-${col+l}`).innerText[0] == "W"){
-                            store_possible_tile_moves.push(document.getElementById(`${row+l}-${col+l}`).id);
-                            
+                        if(document.getElementById(`${row+l}-${col+l}`).innerText == ""){ 
+                            if(document.getElementById(`${row+l}-${col+l}`).innerText[0] == "W"){
+                                store_possible_tile_moves.push(document.getElementById(`${row+l}-${col+l}`).id);
+                                l = 9
+                            }
                         }
                         msg = "";
                         if(document.getElementById(`${row+l}-${col+l}`).innerText[0] == "B"){
@@ -362,7 +371,7 @@ function availableMoves(pieces,player){
             break;
         
             case "W-Bishop":
-                for(i = 1; i < 9; i++){
+                for(let i = 1; i < 9; i++){
 
                     try{
 
@@ -384,7 +393,7 @@ function availableMoves(pieces,player){
                 }
 
 
-                for(j = 1; j < 9; j++){
+                for(let j = 1; j < 9; j++){
 
                     try{
                         if(document.getElementById(`${row-j}-${col+j}`).innerText == "" || document.getElementById(`${row-j}-${col+j}`).innerText[0] == "B"){
@@ -404,7 +413,7 @@ function availableMoves(pieces,player){
                 }
 
 
-                for(k = 1; k < 9; k++){
+                for(let k = 1; k < 9; k++){
 
                     try{
                         if(document.getElementById(`${row+k}-${col-k}`).innerText == "" || document.getElementById(`${row+k}-${col-k}`).innerText[0] == "B"){
@@ -423,7 +432,7 @@ function availableMoves(pieces,player){
 
                 }
 
-                for(l = 1; l < 9; l++){
+                for(let l = 1; l < 9; l++){
 
                     try{
                         if(document.getElementById(`${row+l}-${col+l}`).innerText == "" || document.getElementById(`${row+l}-${col+l}`).innerText[0] == "B"){
@@ -448,13 +457,13 @@ function availableMoves(pieces,player){
             break;
 
             case "B-Queen":
-                ahead = 8 - col;
-                behind = col - 1;
-                below = 8 - row;
-                up = row - 1;
+                let ahead_2 = 8 - col;
+                let behind_2 = col - 1;
+                let below_2 = 8 - row;
+                let up_2 = row - 1;
 
 
-                for (i = 1; i <= ahead; i++){
+                for (let i = 1; i <= ahead_2; i++){
                     if(document.getElementById(`${row}-${col+i}`) == null){
                         break;
                     }
@@ -465,7 +474,7 @@ function availableMoves(pieces,player){
                     }
                 }
             
-                for (j = 1; j <= behind; j++){
+                for (let j = 1; j <= behind_2; j++){
                     if(document.getElementById(`${row}-${col-j}`) == null){
                         break;
                     }
@@ -475,7 +484,7 @@ function availableMoves(pieces,player){
                     }
                 }
             
-                for (k = 1; k <= below; k++){
+                for (let k = 1; k <= below_2; k++){
                     if(document.getElementById(`${row+k}-${col}`) == null){
                         break;
                     }
@@ -485,7 +494,7 @@ function availableMoves(pieces,player){
                     }
                 }
             
-                for (l = 1; l <= up; l++){
+                for (let l = 1; l <= up_2; l++){
                     if(document.getElementById(`${row-l}-${col}`) == null){
                         break;
                     }
@@ -495,7 +504,7 @@ function availableMoves(pieces,player){
                     }
                 }
             
-                for(i = 1; i < 9; i++){
+                for(let i = 1; i < 9; i++){
 
                     try{
 
@@ -516,7 +525,7 @@ function availableMoves(pieces,player){
                 }
 
 
-                for(j = 1; j < 9; j++){
+                for(let j = 1; j < 9; j++){
 
                     try{
                         if(document.getElementById(`${row-j}-${col+j}`).innerText[0] == "B"){
@@ -536,7 +545,7 @@ function availableMoves(pieces,player){
                 }
 
 
-                for(k = 1; k < 9; k++){
+                for(let k = 1; k < 9; k++){
 
                     try{
                         if(document.getElementById(`${row+k}-${col-k}`).innerText[0] == "B"){
@@ -555,7 +564,7 @@ function availableMoves(pieces,player){
 
                 }
 
-                for(l = 1; l < 9; l++){
+                for(let l = 1; l < 9; l++){
 
                     try{
                         if(document.getElementById(`${row+l}-${col+l}`).innerText[0] == "B"){
@@ -575,13 +584,13 @@ function availableMoves(pieces,player){
             break;
         
             case "W-Queen":
-                ahead = 8 - col;
-                behind = col - 1;
-                below = 8 - row;
-                up = row - 1;
+                let ahead_3 = 8 - col;
+                let behind_3 = col - 1;
+                let below_3 = 8 - row;
+                let up_3 = row - 1;
 
 
-                for (i = 1; i <= ahead; i++){
+                for (let i = 1; i <= ahead_3; i++){
                     if(document.getElementById(`${row}-${col+i}`) == null){
                         break;
                     }
@@ -592,7 +601,7 @@ function availableMoves(pieces,player){
                     }
                 }
             
-                for (j = 1; j <= behind; j++){
+                for (let j = 1; j <= behind_3; j++){
                     if(document.getElementById(`${row}-${col-j}`) == null){
                         break;
                     }
@@ -602,7 +611,7 @@ function availableMoves(pieces,player){
                     }
                 }
             
-                for (k = 1; k <= below; k++){
+                for (let k = 1; k <= below_3; k++){
                     if(document.getElementById(`${row+k}-${col}`) == null){
                         break;
                     }
@@ -612,7 +621,7 @@ function availableMoves(pieces,player){
                     }
                 }
             
-                for (l = 1; l <= up; l++){
+                for (let l = 1; l <= up_3; l++){
                     if(document.getElementById(`${row-l}-${col}`) == null){
                         break;
                     }
@@ -622,7 +631,7 @@ function availableMoves(pieces,player){
                     }
                 }
             
-                for(i = 1; i < 9; i++){
+                for(let i = 1; i < 9; i++){
 
                     try{
 
@@ -643,7 +652,7 @@ function availableMoves(pieces,player){
                 }
 
 
-                for(j = 1; j < 9; j++){
+                for(let j = 1; j < 9; j++){
 
                     try{
                         if(document.getElementById(`${row-j}-${col+j}`).innerText[0] == "B"){
@@ -663,7 +672,7 @@ function availableMoves(pieces,player){
                 }
 
 
-                for(k = 1; k < 9; k++){
+                for(let k = 1; k < 9; k++){
 
                     try{
                         if(document.getElementById(`${row+k}-${col-k}`).innerText[0] == "B"){
@@ -682,7 +691,7 @@ function availableMoves(pieces,player){
 
                 }
 
-                for(l = 1; l < 9; l++){
+                for(let l = 1; l < 9; l++){
 
                     try{
                         if(document.getElementById(`${row+l}-${col+l}`).innerText[0] == "B"){
@@ -702,13 +711,13 @@ function availableMoves(pieces,player){
             break;
 
             case "B-King":
-                ahead = 1;
-                behind = 1;
-                below = 1;
-                up = 1;
+                let ahead_4 = 1;
+                let behind_4 = 1;
+                let below_4 = 1;
+                let up_4 = 1;
 
 
-                for (i = 1; i <= ahead; i++){
+                for (let i = 1; i <= ahead_4; i++){
                     if(document.getElementById(`${row}-${col+i}`) == null || document.getElementById(`${row}-${col+i}`).innerText[0] == "B"){
                         break
                     }
@@ -721,7 +730,7 @@ function availableMoves(pieces,player){
 
 
 
-                for (j = 1; j <= behind; j++){
+                for (let j = 1; j <= behind_4; j++){
                     if(document.getElementById(`${row}-${col-j}`) == null || document.getElementById(`${row}-${col-j}`).innerText[0] == "B"){
                         break
                     }
@@ -733,7 +742,7 @@ function availableMoves(pieces,player){
 
 
 
-                for (k = 1; k <= below; k++){
+                for (let k = 1; k <= below_4; k++){
 
                     if(document.getElementById(`${row+k}-${col}`) == null || document.getElementById(`${row+k}-${col}`).innerText[0] == "B"){
                         break
@@ -746,7 +755,7 @@ function availableMoves(pieces,player){
         
 
 
-                for (l = 1; l <= up; l++){
+                for (let l = 1; l <= up_4; l++){
 
                     if(document.getElementById(`${row-l}-${col}`) == null || document.getElementById(`${row-l}-${col}`).innerText[0] == "B"){
                         break
@@ -757,7 +766,7 @@ function availableMoves(pieces,player){
                     }
                 }
             
-                for(i = 1; i < 2; i++){
+                for(let i = 1; i < 2; i++){
 
                     try{
 
@@ -778,7 +787,7 @@ function availableMoves(pieces,player){
                 }
 
 
-                for(j = 1; j < 2; j++){
+                for(let j = 1; j < 2; j++){
 
                     try{
                         if(document.getElementById(`${row-j}-${col+j}`).innerText[0] == "B"){
@@ -797,7 +806,7 @@ function availableMoves(pieces,player){
                 }
 
 
-                for(k = 1; k < 2; k++){
+                for(let k = 1; k < 2; k++){
 
                     try{
                         if(document.getElementById(`${row+k}-${col-k}`).innerText[0] == "B"){
@@ -815,7 +824,7 @@ function availableMoves(pieces,player){
 
                 }
 
-                for(l = 1; l < 2; l++){
+                for(let l = 1; l < 2; l++){
 
                     try{
                         if(document.getElementById(`${row+l}-${col+l}`).innerText[0] == "B"){
@@ -835,13 +844,13 @@ function availableMoves(pieces,player){
             break;
         
             case "W-King":
-                ahead = 1;
-                behind = 1;
-                below = 1;
-                up = 1;
+                let ahead_5 = 1;
+                let behind_5 = 1;
+                let below_5 = 1;
+                let up_5 = 1;
 
 
-                for (i = 1; i <= ahead; i++){
+                for (let i = 1; i <= ahead_5; i++){
                     if(document.getElementById(`${row}-${col+i}`) == null || document.getElementById(`${row}-${col+i}`).innerText[0] == "B"){
                         break
                     }
@@ -854,7 +863,7 @@ function availableMoves(pieces,player){
 
 
 
-                for (j = 1; j <= behind; j++){
+                for (let j = 1; j <= behind_5; j++){
                     if(document.getElementById(`${row}-${col-j}`) == null || document.getElementById(`${row}-${col-j}`).innerText[0] == "B"){
                         break
                     }
@@ -866,7 +875,7 @@ function availableMoves(pieces,player){
 
 
 
-                for (k = 1; k <= below; k++){
+                for (let k = 1; k <= below_5; k++){
 
                     if(document.getElementById(`${row+k}-${col}`) == null || document.getElementById(`${row+k}-${col}`).innerText[0] == "B"){
                         break
@@ -879,7 +888,7 @@ function availableMoves(pieces,player){
         
 
 
-                for (l = 1; l <= up; l++){
+                for (let l = 1; l <= up_5; l++){
 
                     if(document.getElementById(`${row-l}-${col}`) == null || document.getElementById(`${row-l}-${col}`).innerText[0] == "B"){
                         break
@@ -890,7 +899,7 @@ function availableMoves(pieces,player){
                     }
                 }
             
-                for(i = 1; i < 2; i++){
+                for(let i = 1; i < 2; i++){
 
                     try{
 
@@ -911,7 +920,7 @@ function availableMoves(pieces,player){
                 }
 
 
-                for(j = 1; j < 2; j++){
+                for(let j = 1; j < 2; j++){
 
                     try{
                         if(document.getElementById(`${row-j}-${col+j}`).innerText[0] == "B"){
@@ -930,7 +939,7 @@ function availableMoves(pieces,player){
                 }
 
 
-                for(k = 1; k < 2; k++){
+                for(let k = 1; k < 2; k++){
 
                     try{
                         if(document.getElementById(`${row+k}-${col-k}`).innerText[0] == "B"){
@@ -948,7 +957,7 @@ function availableMoves(pieces,player){
 
                 }
 
-                for(l = 1; l < 2; l++){
+                for(let l = 1; l < 2; l++){
 
                     try{
                         if(document.getElementById(`${row+l}-${col+l}`).innerText[0] == "B"){

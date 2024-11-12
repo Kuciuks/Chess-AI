@@ -7,7 +7,7 @@ const config = (function() {
             white_pieces: [],
             all_piece_moves: [],
             chess_board: [],
-            depth: 3,
+            depth: 1,
             alpha: -Infinity,
             beta: Infinity,
             checkedBoardCount: 0,
@@ -16,7 +16,7 @@ const config = (function() {
             count: 0,
             moveCount: 0,
             moveStorage: [],
-            toggle: 3,
+            toggle: 1,
             selection: null,
             selected_letter: ""
         };

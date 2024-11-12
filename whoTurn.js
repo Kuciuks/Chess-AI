@@ -6,7 +6,7 @@ function whoTurn(toggle){
 
         //update text
         document.getElementById("h").innerText = "whites turn";
-        console.log("whites turn");
+        console.log("\n*\n[***********WHITE TURN***********]\n*\n");
 
         return false;
     }
@@ -14,6 +14,7 @@ function whoTurn(toggle){
 
         //update text
         document.getElementById("h").innerText = "blacks turn";
+        console.log("\n*\n[***********BLACK TURN***********]\n*\n");
         return true;
         
     }

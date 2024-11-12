@@ -7,18 +7,17 @@ import { getBlackPiece, getWhitePiece } from './getPieces.js'
 const configInstance = config.getInstance()
 
 //minimax returns best score and best move for black pieces
-function minimax(depth,board, maximizingPlayer, alpha, beta){
+function minimax(depth,board, maximizingPlayer){
     // console.log(depth,board, maximizingPlayer, alpha, beta)
     //return a score if depth == 0
     if(depth == 0){
         //board = chess_board;
-        console.log("_______________________________")
         return evaluateBoard(board)
     }
 
     //if AI turn
     if(maximizingPlayer){
-
+        console.log()
         let black_pieces = []
         //console.log("BLACK SWITCH")
 
@@ -36,14 +35,16 @@ function minimax(depth,board, maximizingPlayer, alpha, beta){
 
         //go through object list
         for(let i = 0; i < moves.length; i++){
+            console.log('\n---> [AI MOVES]',moves, moves.length)
+            console.log(`\n     [MOVING ${moves}]\n*\n`)
             //console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@   Piece count:  ",i,)
             
 
             //take object and measure how many moves can it make
             
-            try{
                 //take object and measure how many moves can it make
                 for(let j =0; j < moves[i].To.length; j++){
+
                     //console.log("Moving ", document.getElementById(moves[i].From).innerText, " from ", document.getElementById(moves[i].From).id, " to ", document.getElementById(moves[i].To[j]).id);
                     //count++;
                     //console.log(count, " MOVE COUNT");  
@@ -51,14 +52,13 @@ function minimax(depth,board, maximizingPlayer, alpha, beta){
                     let tiletxt = document.getElementById(moves[i].To[j]).innerText;
                     //console.log(tiletxt, " TILE TXT")
                     
-                    console.log(moves,"_________ BLACK MOVES")
                     configInstance.pieceNameMemAI.push({ "FROM": moves[i].From, "fromNAME": document.getElementById(moves[i].From).innerText, "TO": moves[i].To[j], "toNAME": document.getElementById(moves[i].To[j]).innerText, "PLAYER": maximizingPlayer});
 
                     //declare board copy, move the object to each location  
                     let board = makeMove(moves[i].To[j], moves[i].From);
                     
                     //get a score for the board
-                    let score = minimax(depth - 1, board, false,alpha,beta);
+                    let score = minimax(depth - 1, board, false);
                     
                     //console.log("Move: ", moves[i].From, moves[i].To[j], " and resulting score: ", score, " B");
                     //print score for black piece
@@ -69,20 +69,15 @@ function minimax(depth,board, maximizingPlayer, alpha, beta){
                     if(score > bestScore){
                         bestScore = score;
                         bestMove = {"from": moves[i].From, "to": moves[i].To[j]}
-                        console.log(bestMove,' BEST MOVE LOG')
+                        // console.log(bestMove,' BEST MOVE LOG')
                         black_pieces = [];
-                        alpha = bestScore;
                     }
-                    checkedBoardCount++;
+                    configInstance.checkedBoardCount++;
                     //declare undone board
                     board = undoMove(maximizingPlayer)
                     
 
-                }
             }
-            catch(err) {
-                console.error(err.message)
-            } 
         }
         // console.log(bestMove,bestScore)
         return [bestMove, bestScore]
@@ -128,7 +123,7 @@ function minimax(depth,board, maximizingPlayer, alpha, beta){
                     //black_pieces=[]
                     
                     //get a score for the board
-                    let score = minimax(depth - 1, board, true,alpha,beta);
+                    let score = minimax(depth - 1, board, true);
 
                     //console.log(moves);
                     //let evaldScore = score[1];
@@ -144,7 +139,6 @@ function minimax(depth,board, maximizingPlayer, alpha, beta){
                     //check if score is greater than bestScore
                     if(score < bestScore){
                         bestScore = score;
-                        beta = bestScore;
                     }
                     //declare undone board
                     board = undoMove(maximizingPlayer)
