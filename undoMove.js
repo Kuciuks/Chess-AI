@@ -26,6 +26,8 @@ function undoMove(player){
         
         document.getElementById(configInstance.pieceNameMemHU[configInstance.pieceNameMemHU.length-1].TO).innerText = configInstance.pieceNameMemHU[configInstance.pieceNameMemHU.length-1].toNAME;
         configInstance.pieceNameMemHU.pop(configInstance.pieceNameMemHU[configInstance.pieceNameMemHU.length-1])
+        document.getElementById(configInstance.pieceNameMemHU[configInstance.pieceNameMemHU.length-1].TO).innerText = configInstance.pieceNameMemHU[configInstance.pieceNameMemHU.length-1].toNAME;
+        configInstance.pieceNameMemHU.pop(configInstance.pieceNameMemHU[configInstance.pieceNameMemHU.length-1])
         let boardCopy = getBoard()
         uploadImages()
         paintTiles()

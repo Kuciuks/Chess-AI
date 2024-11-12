@@ -17,7 +17,7 @@ document.querySelectorAll(".tile").forEach(tile => {
     
     //player movemenet script
     tile.addEventListener("click", event => {
-        
+        console.log('Human move')
         //Get tiles position(row,col)
         let arr = (Array.from(tile.id))
         let row = eval(arr.shift());
@@ -1235,7 +1235,7 @@ document.querySelectorAll(".tile").forEach(tile => {
 
         //If selected is the same tile, unselect
         else if(configInstance.selection === tile){
-
+            console.log('pressed on the same tile')
             //reset tile colors
             paintTiles();
 

@@ -53,7 +53,8 @@ function minimax(depth,board, maximizingPlayer){
                     //console.log(tiletxt, " TILE TXT")
                     
                     configInstance.pieceNameMemAI.push({ "FROM": moves[i].From, "fromNAME": document.getElementById(moves[i].From).innerText, "TO": moves[i].To[j], "toNAME": document.getElementById(moves[i].To[j]).innerText, "PLAYER": maximizingPlayer});
-
+                    console.log(configInstance.pieceNameMemAI,'_________________-')
+                    
                     //declare board copy, move the object to each location  
                     let board = makeMove(moves[i].To[j], moves[i].From);
                     
@@ -73,13 +74,14 @@ function minimax(depth,board, maximizingPlayer){
                         black_pieces = [];
                     }
                     configInstance.checkedBoardCount++;
+                    configInstance.checkedBoardCount++;
                     //declare undone board
                     board = undoMove(maximizingPlayer)
                     
 
             }
         }
-        // console.log(bestMove,bestScore)
+        console.log(bestMove,bestScore,' _____BEST MOVE _____')
         return [bestMove, bestScore]
         
     }

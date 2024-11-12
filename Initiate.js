@@ -17,6 +17,7 @@ function initiateAI(){
     let chess_board = getBoard();
 
     // console.log(chess_board,'board')
+    // console.log(chess_board,'board')
     //store a copy of the main board
     let checking_board = getBoard();
 
