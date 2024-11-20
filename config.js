@@ -7,7 +7,7 @@ const config = (function() {
             white_pieces: [],
             all_piece_moves: [],
             chess_board: [],
-            depth: 1,
+            depth: 2,
             alpha: -Infinity,
             beta: Infinity,
             checkedBoardCount: 0,
@@ -27,6 +27,7 @@ const config = (function() {
             if (!instance) {
                 instance = createInstance();
             }
+            console.log('[config CALL]')
             return instance;
         }
     };

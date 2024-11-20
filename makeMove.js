@@ -7,11 +7,13 @@ const configInstance = config.getInstance()
 
 //make move from - to, returns an altered board
 function makeMove(to, from){
+    console.log('[makeMove CALL]')
     if(to !== null){
+        // console.log(`--------> MAKE MOVE --------> ${to, from}`)
         configInstance.moveStorage.push({to,from});
         configInstance.moveCount++;
-        console.log('Make a move')
-        console.log(document.getElementById(from).innerText,'=======================')
+        // console.log('Make a move')
+        // console.log(document.getElementById(from).innerText,'=======================')
         document.getElementById(to).innerText = document.getElementById(from).innerText;
 
         document.getElementById(from).innerText = "";

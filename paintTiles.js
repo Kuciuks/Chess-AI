@@ -1,5 +1,6 @@
 //paints tiles (grey white)
 function paintTiles(){
+    console.log('[paintTiles CALL]')
     document.querySelectorAll(".tile").forEach(tile =>{
         
         //Get tiles position(row,col)

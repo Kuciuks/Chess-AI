@@ -2,7 +2,7 @@
 function checkValid(tile,player){
     //console.log(tile);
     let valid = []
-
+    console.log('[checkValid CALL]')
     //console.log(tile," POSSIBLE MOVES FOR ",player)
     switch(player){
         case true:

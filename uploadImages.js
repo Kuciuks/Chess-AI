@@ -1,5 +1,6 @@
 //uploads images to tiles based on inner text
 function uploadImages(){
+    console.log('[uploadImages CALL]')
     document.querySelectorAll(".tile").forEach(tile => {
         if (tile.innerText != ""){
             tile.innerHTML=`${tile.innerText} <img class="pic" src="Assets/${tile.innerText}.png">`;
