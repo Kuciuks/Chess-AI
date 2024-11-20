@@ -4,7 +4,7 @@ import checkValid from './checkValidity.js'
 function availableMoves(pieces,player){
     let all_piece_moves = []
 
-    console.log('[availableMoves CALL]')
+    // console.log('[availableMoves CALL]')
     
     //if(player == true){
     ///    pieces.forEach(tile => {

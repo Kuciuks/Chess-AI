@@ -14,7 +14,7 @@ const configInstance = config.getInstance()
 //controller for the human player
 // console.log('Human script')
 function human(){
-    console.log('[Human script]')
+    // console.log('[Human script]')
 
     //capture all tiles and add an event listener to all
     document.querySelectorAll(".tile").forEach(tile => {

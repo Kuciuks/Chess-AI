@@ -1,6 +1,6 @@
 //checks who turn, return true of black turn, false if white
 function whoTurn(toggle){
-    console.log('[whoTurn CALL]')
+    // console.log('[whoTurn CALL]')
 
     //Using a global variable's instance to store turn controling value
     //The value is an (int) is it's cases are:

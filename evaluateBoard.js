@@ -1,6 +1,6 @@
 //evaluates the board for AI player and return the score;
 function evaluateBoard(chess_board){
-console.log('[evaluateBoards]')
+// console.log('[evaluateBoards]')
 
     //store piece values
     const values = {
@@ -15,10 +15,10 @@ console.log('[evaluateBoards]')
     //store mapped out positional values
     const pawnScore= [
         0  ,0  ,0   ,0   ,0   ,0   ,0  ,0,
-        10, 10, 10, 10, 0, 0, 10, 10,
-        5, 5, 5, 5, 50, 0, 0, 5,
-        0, 0, 0, 0, 0, 0, 0, 0,
-        -5, -5, -5, -5, -5, -10, 0, -5,
+        10, 10, 10, 10, 10, 10, 10, 10,
+        5, 5, 5, 5, 50, 5, 5, 5,
+        0, 0, 0, 0, 50, 0, 0, 0,
+        -5, -5, -5, 500, -5, -10, 0, -5,
         -10, -10, -10, -10, 0, 0, -10, -10,
         -15, -15, -15, -15, -15, -15, -15, -15,
         0  ,0  ,0   ,0   ,0   ,0   ,0  ,0

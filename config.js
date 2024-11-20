@@ -7,7 +7,7 @@ const config = (function() {
             white_pieces: [],
             all_piece_moves: [],
             chess_board: [],
-            depth: 2,
+            depth: 1,
             alpha: -Infinity,
             beta: Infinity,
             checkedBoardCount: 0,
@@ -18,7 +18,9 @@ const config = (function() {
             moveStorage: [],
             toggle: 1,
             selection: null,
-            selected_letter: ""
+            selected_letter: "",
+            white_move_set: new Set(),
+            blacks_move_set: new Set()
         };
     }
 
@@ -27,7 +29,7 @@ const config = (function() {
             if (!instance) {
                 instance = createInstance();
             }
-            console.log('[config CALL]')
+            // console.log('[config CALL]')
             return instance;
         }
     };

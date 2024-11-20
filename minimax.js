@@ -8,19 +8,14 @@ const configInstance = config.getInstance()
 
 //minimax returns best score and best move for black pieces
 function minimax(depth,board, maximizingPlayer){
-    console.log('[minimax CALL]')
-    // console.log(depth,board, maximizingPlayer, alpha, beta)
-    //return a score if depth == 0
+
     if(depth == 0){
-        //board = chess_board;
         return evaluateBoard(board)
     }
 
     //if AI turn
     if(maximizingPlayer){
-        // console.log()
         let black_pieces = []
-        // console.log("BLACK SWITCH")
 
         //declare the best score, move
         let bestScore = -Infinity;
@@ -31,23 +26,16 @@ function minimax(depth,board, maximizingPlayer){
         
         //find all available moves
         let moves = getAvailable(black_pieces,false);
-        // console.log(black_pieces,"__________ BLACK PIECES")
-        // console.log("black moves", moves)
 
         //go through object list
         for(let i = 0; i < moves.length; i++){
-            // console.log('\n---> [AI MOVES]',moves, moves.length)
-            // console.log(`\n     [MOVING ${moves}]\n*\n`)
-            // console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@   Piece count:  ",i,)
             
-
             //take object and measure how many moves can it make
             
                 //take object and measure how many moves can it make
-                for(let j =0; j < moves[i].To.length; j++){
-
-                    // console.log("Moving ", document.getElementById(moves[i].From).innerText, " from ", document.getElementById(moves[i].From).id, " to ", document.getElementById(moves[i].To[j]).id);
-                    //count++;
+                for(let j = 0; j < moves[i].To.length; j++){
+    
+                    // count++;
                     // console.log(count, " MOVE COUNT");  
                     //store current tile inner text
                     let tiletxt = document.getElementById(moves[i].To[j]).innerText;
@@ -82,7 +70,7 @@ function minimax(depth,board, maximizingPlayer){
 
             }
         }
-        // console.log(bestMove,bestScore,' _____BEST MOVE _____')
+        console.log(bestMove,bestScore,' _____BEST MOVE _____')
         return [bestMove, bestScore]
         
     }
@@ -101,7 +89,6 @@ function minimax(depth,board, maximizingPlayer){
         // uses the altered board and get all pieces for white
         
         let moves = getAvailable(white_pieces,true);
-        console.log(moves)
         // console.log(white_pieces,"__________ WHITE PIECES")
         // console.log("white moves", moves)
 
@@ -111,7 +98,8 @@ function minimax(depth,board, maximizingPlayer){
 
             //take object and measure how many moves it can make
             //try{
-                    
+                // console.log(moves)
+
                 for(let j =0; j < moves[i].To.length; j++){
                     // console.log("Moving ", document.getElementById(moves[i].From).innerText, " from ", document.getElementById(moves[i].From).id, " to ", document.getElementById(moves[i].To[j]).id);
                     

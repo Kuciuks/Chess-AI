@@ -7,7 +7,7 @@ const configInstance = config.getInstance()
 
 //make move from - to, returns an altered board
 function makeMove(to, from){
-    console.log('[makeMove CALL]')
+    // console.log('[makeMove CALL]')
     if(to !== null){
         // console.log(`--------> MAKE MOVE --------> ${to, from}`)
         configInstance.moveStorage.push({to,from});
@@ -19,6 +19,8 @@ function makeMove(to, from){
         document.getElementById(from).innerText = "";
 
         let boardCopy = getBoard(); 
+        configInstance.white_move_set.add(boardCopy)
+        console.log(configInstance.white_move_set)
         uploadImages()
         paintTiles()
         return boardCopy;

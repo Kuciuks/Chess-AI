@@ -10,7 +10,7 @@ const configInstance = config.getInstance()
 
 
 
-console.log('[Initiate script]')
+// console.log('[Initiate script]')
 
 //initiates the game process
 function initiateAI(){
@@ -23,7 +23,7 @@ function initiateAI(){
 
         //capture which player's turn it is (WHITE / BLACK)
         let currentPLayer = whoTurn(configInstance.toggle);
-        console.log(currentPLayer)
+        // console.log(currentPLayer)
 
         //if the captured player is BLACK then activate the AI process
         if(currentPLayer == true){

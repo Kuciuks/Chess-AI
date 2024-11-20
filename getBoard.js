@@ -1,5 +1,5 @@
 function getBoard(){
-    console.log('[getBoard CALL]')
+    // console.log('[getBoard CALL]')
 
         // Declare the new_board variable to capture latest board tiles
         // Which include information on tile: 

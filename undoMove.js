@@ -6,7 +6,7 @@ const configInstance = config.getInstance()
 
 //undoes move from to - from, returns board minues previous move
 function undoMove(player){
-    console.log('[undoMove CALL]')
+    // console.log('[undoMove CALL]')
     if(player){
         // console.log('[UNDO MOVE AI]')
         document.getElementById(configInstance.pieceNameMemAI[configInstance.pieceNameMemAI.length-1].FROM).innerText = configInstance.pieceNameMemAI[configInstance.pieceNameMemAI.length-1].fromNAME;
