@@ -25,7 +25,7 @@
 //     })
 //     return new_board;
 // }
-// export default getBoard
+export default getBoard
 
 
 function getBoard() {

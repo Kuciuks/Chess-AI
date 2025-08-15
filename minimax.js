@@ -9,9 +9,9 @@ const configInstance = config.getInstance()
 //minimax returns best score and best move for black pieces
 function minimax(depth,board, maximizingPlayer){
 
-    if(depth == 0){
-        return evaluateBoard(board)
-    }
+    // if(depth == 0){
+    //     return evaluateBoard(board)
+    // }
 
     //if AI turn
     if(maximizingPlayer){

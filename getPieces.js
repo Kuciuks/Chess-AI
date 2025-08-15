@@ -15,8 +15,8 @@ export function getWhitePiece(board){
 }
 
 //gets black pieces from the board
-export function getBlackPiece(board){
-    // console.log('[getBlackPiece CALL]')
+function getBlackPiece(board){
+    console.log(board, board.length, " BOARD LENGTH")
     for(let i = 0; i < board.length; i++){
         if(document.getElementById(board[i]).innerText[0] == "B"){
             configInstance.black_pieces.push(board[i]);
@@ -24,3 +24,4 @@ export function getBlackPiece(board){
     }
     return configInstance.black_pieces
 }
+getBlackPiece(configInstance.chess_board);

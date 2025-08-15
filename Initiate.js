@@ -15,21 +15,18 @@ const configInstance = config.getInstance()
 //initiates the game process
 function initiateAI(){
     try{
-        //capture the board tile information
-        let chess_board = getBoard();
 
-        //store a copy of the main board
-        let checking_board = chess_board;
+        //store a copy of the main board before making the move
+        let before_move_board = configInstance.chess_board;
 
         //capture which player's turn it is (WHITE / BLACK)
         let currentPLayer = whoTurn(configInstance.toggle);
-        // console.log(currentPLayer)
 
         //if the captured player is BLACK then activate the AI process
         if(currentPLayer == true){
 
             //acivate minimax and capture returned values
-            let [value1, value2] = minimax(configInstance.depth, checking_board, currentPLayer)
+            let [value1, value2] = minimax(configInstance.depth, before_move_board, currentPLayer)
 
             //using returned minimax values take a step
             moveBestPiece(value1.from, value1.to);
