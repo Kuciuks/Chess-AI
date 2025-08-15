@@ -1,10 +1,18 @@
 import evaluateBoard from './evaluateBoard.js'
-import config from './config.js'
-import getAvailable from './getAvailable.js'
-import undoMove from './undoMove.js'
-import makeMove from './makeMove.js'
-import { getBlackPiece, getWhitePiece } from './getPieces.js'
+import config, {getColoredPieces} from './config.js'
+// import getAvailable from './getAvailable.js'
+// import undoMove from './undoMove.js'
+// import makeMove from './makeMove.js'
+// import { getBlackPiece, getWhitePiece } from './getPieces.js'
 const configInstance = config.getInstance()
+
+
+/////testing capture of pieces in different teams 
+const black_pieces = getColoredPieces(configInstance.chess_board).black_pieces;
+
+// black_pieces.map(piece => {
+//     console.log(piece.tile_index, " BLACK PIECE")
+// })
 
 //minimax returns best score and best move for black pieces
 function minimax(depth,board, maximizingPlayer){
@@ -15,61 +23,58 @@ function minimax(depth,board, maximizingPlayer){
 
     //if AI turn
     if(maximizingPlayer){
-        let black_pieces = []
 
         //declare the best score, move
         let bestScore = -Infinity;
         let bestMove = null;
 
-        //store available moves 
-        black_pieces = getBlackPiece(board);
-        
-        //find all available moves
-        let moves = getAvailable(black_pieces,false);
+        //get all black pieces for current board
+        const black_pieces = getColoredPieces(configInstance.chess_board).black_pieces;
 
-        //go through object list
-        for(let i = 0; i < moves.length; i++){
+        //go through black pieces
+        black_pieces.map(piece => {
+
+            //make moves for each piece and return the best move based on best score
             
-            //take object and measure how many moves can it make
+            // //take object and measure how many moves can it make
             
-                //take object and measure how many moves can it make
-                for(let j = 0; j < moves[i].To.length; j++){
+            //     //take object and measure how many moves can it make
+            //     for(let j = 0; j < moves[i].To.length; j++){
     
-                    // count++;
-                    // console.log(count, " MOVE COUNT");  
-                    //store current tile inner text
-                    let tiletxt = document.getElementById(moves[i].To[j]).innerText;
-                    // console.log(tiletxt, " TILE TXT")
+            //         // count++;
+            //         // console.log(count, " MOVE COUNT");  
+            //         //store current tile inner text
+            //         let tiletxt = document.getElementById(moves[i].To[j]).innerText;
+            //         // console.log(tiletxt, " TILE TXT")
                     
-                    configInstance.pieceNameMemAI.push({ "FROM": moves[i].From, "fromNAME": document.getElementById(moves[i].From).innerText, "TO": moves[i].To[j], "toNAME": document.getElementById(moves[i].To[j]).innerText, "PLAYER": maximizingPlayer});
-                    // console.log(configInstance.pieceNameMemAI,'_________________-')
+            //         configInstance.pieceNameMemAI.push({ "FROM": moves[i].From, "fromNAME": document.getElementById(moves[i].From).innerText, "TO": moves[i].To[j], "toNAME": document.getElementById(moves[i].To[j]).innerText, "PLAYER": maximizingPlayer});
+            //         // console.log(configInstance.pieceNameMemAI,'_________________-')
                     
-                    //declare board copy, move the object to each location  
-                    let board = makeMove(moves[i].To[j], moves[i].From);
+            //         //declare board copy, move the object to each location  
+            //         let board = makeMove(moves[i].To[j], moves[i].From);
                     
-                    //get a score for the board
-                    let score = minimax(depth - 1, board, false);
+            //         //get a score for the board
+            //         let score = minimax(depth - 1, board, false);
                     
-                    // console.log("Move: ", moves[i].From, moves[i].To[j], " and resulting score: ", score, " B");
-                    //print score for black piece
-                    // console.log("Score for black piece: ",score)
+            //         // console.log("Move: ", moves[i].From, moves[i].To[j], " and resulting score: ", score, " B");
+            //         //print score for black piece
+            //         // console.log("Score for black piece: ",score)
 
-                    // console.log(score,"---- Black Score")
-                    //check if score is greater than bestScore
-                    if(score > bestScore){
-                        bestScore = score;
-                        bestMove = {"from": moves[i].From, "to": moves[i].To[j]}
-                        // console.log(bestMove,' BEST MOVE LOG')
-                        black_pieces = [];
-                    }
-                    configInstance.checkedBoardCount++;
-                    configInstance.checkedBoardCount++;
-                    //declare undone board
-                    board = undoMove(maximizingPlayer)
+            //         // console.log(score,"---- Black Score")
+            //         //check if score is greater than bestScore
+            //         if(score > bestScore){
+            //             bestScore = score;
+            //             bestMove = {"from": moves[i].From, "to": moves[i].To[j]}
+            //             // console.log(bestMove,' BEST MOVE LOG')
+            //             black_pieces = [];
+            //         }
+            //         configInstance.checkedBoardCount++;
+            //         configInstance.checkedBoardCount++;
+            //         //declare undone board
+            //         board = undoMove(maximizingPlayer)
                     
 
-            }
-        }
+        })
         console.log(bestMove,bestScore,' _____BEST MOVE _____')
         return [bestMove, bestScore]
         
