@@ -6,30 +6,69 @@ class Piece{
         this.color = color
         this.tile_index = tile_index
     }
-    //method to get available moves for the pawn
-    getAvailableMoves(chess_board, tile_index) {
-        
+
+    checkMoveValidity(chess_board, moves){
+        let valid_moves = []
+        console.log(moves, " MOVES IN CHECK MOVE VALIDITY")
+
+        moves.forEach(move => {
+            if (move in chess_board && chess_board[move].color !== this.color) {
+                console.log(chess_board[move-1], " VALID MOVE",move)
+            }
+        })
+        return valid_moves
+    
     }
+        
+
 }
 
 //declaring the child classes that extend the base class Piece (capturing base class properties)
 class Pawn extends Piece{
+        //method to get available moves for the pawn
+        getAvailableMoves(chess_board) {
+            console.log(this.tile_index, "__________ ",this.name)
 
+            const tile_index = this.tile_index
+
+            const move_ahead = tile_index - 8
+            const move_diag_left = tile_index - 9
+            const move_diag_right = tile_index - 7
+            const move_two_ahead = tile_index - 16
+
+            let valid_moves = this.checkMoveValidity(chess_board, [move_ahead, move_diag_left, move_diag_right, move_two_ahead])
+            // console.log(valid_moves)
+        }
     }
 class Rook extends Piece{
-
+        //method to get available moves for the pawn
+        getAvailableMoves(chess_board, piece) {
+            
+        }
     }
 class Knight extends Piece{
-
+        //method to get available moves for the pawn
+        getAvailableMoves(chess_board, piece) {
+            
+        }
     }
 class Bishop extends Piece{
-
+        //method to get available moves for the pawn
+        getAvailableMoves(chess_board, piece) {
+            
+        }
     }
 class Queen extends Piece{
-
+        //method to get available moves for the pawn
+        getAvailableMoves(chess_board, piece) {
+            
+        }
     }
 class King extends Piece{
-
+        //method to get available moves for the pawn
+        getAvailableMoves(chess_board, piece) {
+            
+        }
     }
 
 
@@ -114,7 +153,6 @@ export function getColoredPieces(chess_board){
             }
         }
     })
-    console.log(black_pieces)
     return { black_pieces, white_pieces }
 }
 

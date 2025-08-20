@@ -20,13 +20,13 @@ function initiateAI(){
         let before_move_board = configInstance.chess_board;
 
         //capture which player's turn it is (WHITE / BLACK)
-        let currentPLayer = whoTurn(configInstance.toggle);
+        // let currentPLayer = whoTurn(configInstance.toggle);
 
         //if the captured player is BLACK then activate the AI process
-        if(currentPLayer == true){
+        if(true == true){
 
             //acivate minimax and capture returned values
-            let [value1, value2] = minimax(configInstance.depth, before_move_board, currentPLayer)
+            let [value1, value2] = minimax(configInstance.depth, before_move_board, true)
 
             //using returned minimax values take a step
             moveBestPiece(value1.from, value1.to);
