@@ -30,11 +30,14 @@ function minimax(depth,board, maximizingPlayer){
 
         //get all black pieces for current board
         const black_pieces = getColoredPieces(configInstance.chess_board).black_pieces;
-
         //go through black pieces
         black_pieces.map(piece => {
 
             //make moves for each piece and return the best move based on best score
+            
+
+
+
             
             // //take object and measure how many moves can it make
             
