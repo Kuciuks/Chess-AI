@@ -44,13 +44,26 @@ class Pawn extends Piece{
             console.log(chess_board.length, " CHESS BOARD LENGTH")
             const tile_index = this.tile_index
 
-            const move_ahead = tile_index - 10
-            const move_diag_left = tile_index - 11
-            const move_diag_right = tile_index - 9
-            const move_two_ahead = tile_index - 20
+            if (this.color == "Black") {
+                //moves for black pawn
+                const move_ahead = tile_index + 10
+                const move_diag_left = tile_index + 9
+                const move_diag_right = tile_index + 11
+                const move_two_ahead = tile_index + 20
 
-            let valid_moves = this.checkMoveValidity(chess_board, [move_ahead, move_diag_left, move_diag_right, move_two_ahead])
-            // console.log(valid_moves)
+                let valid_moves = this.checkMoveValidity(chess_board, [move_ahead, move_diag_left, move_diag_right, move_two_ahead])
+                // console.log(valid_moves)
+            }
+            else if (this.color == "White") {
+                //moves for white pawn
+                const move_ahead = tile_index - 10
+                const move_diag_left = tile_index - 11
+                const move_diag_right = tile_index - 9
+                const move_two_ahead = tile_index - 20
+
+                let valid_moves = this.checkMoveValidity(chess_board, [move_ahead, move_diag_left, move_diag_right, move_two_ahead])
+                // console.log(valid_moves)
+            }
         }
     }
 class Rook extends Piece{
