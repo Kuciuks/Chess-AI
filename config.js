@@ -7,13 +7,14 @@ class Piece{
         this.tile_index = tile_index
     }
 
+    //method for checking move validity
+    //iputs the chess board and an array of moves
     checkMoveValidity(chess_board, moves){
         let valid_moves = []
-        console.log(moves, " MOVES IN CHECK MOVE VALIDITY")
-
+        console.log(moves, " MOVES")
         moves.forEach(move => {
-            if (move in chess_board && chess_board[move].color !== this.color) {
-                console.log(chess_board[move-1], " VALID MOVE",move)
+            if (chess_board[move]?.name !== "Border" && chess_board[move]?.color !== this.color) {
+                console.log(chess_board[move], " VALID MOVE")
             }
         })
         return valid_moves
@@ -28,13 +29,13 @@ class Pawn extends Piece{
         //method to get available moves for the pawn
         getAvailableMoves(chess_board) {
             console.log(this.tile_index, "__________ ",this.name)
-
+            console.log(chess_board.length, " CHESS BOARD LENGTH")
             const tile_index = this.tile_index
 
-            const move_ahead = tile_index - 8
-            const move_diag_left = tile_index - 9
-            const move_diag_right = tile_index - 7
-            const move_two_ahead = tile_index - 16
+            const move_ahead = tile_index - 10
+            const move_diag_left = tile_index - 11
+            const move_diag_right = tile_index - 9
+            const move_two_ahead = tile_index - 20
 
             let valid_moves = this.checkMoveValidity(chess_board, [move_ahead, move_diag_left, move_diag_right, move_two_ahead])
             // console.log(valid_moves)
@@ -71,70 +72,88 @@ class King extends Piece{
         }
     }
 
-
+class Border {
+    constructor(name){
+        this.name = name
+    }
+}
 
 //initializing the pieces with their respective classes and colors (WHITE PIECES)
-const pawn_w_1 = new Pawn('Pawn',100, 'White', 9)
-const pawn_w_2 = new Pawn('Pawn',100, 'White', 10)
-const pawn_w_3 = new Pawn('Pawn',100, 'White', 11)
-const pawn_w_4 = new Pawn('Pawn',100, 'White', 12)
-const pawn_w_5 = new Pawn('Pawn',100, 'White', 13)
-const pawn_w_6 = new Pawn('Pawn',100, 'White', 14)
-const pawn_w_7 = new Pawn('Pawn',100, 'White', 15)
-const pawn_w_8 = new Pawn('Pawn',100, 'White', 16)
+const pawn_w_1 = new Pawn('Pawn',100, 'White', 21)
+const pawn_w_2 = new Pawn('Pawn',100, 'White', 22)
+const pawn_w_3 = new Pawn('Pawn',100, 'White', 23)
+const pawn_w_4 = new Pawn('Pawn',100, 'White', 25)
+const pawn_w_5 = new Pawn('Pawn',100, 'White', 26)
+const pawn_w_6 = new Pawn('Pawn',100, 'White', 27)
+const pawn_w_7 = new Pawn('Pawn',100, 'White', 28)
+const pawn_w_8 = new Pawn('Pawn',100, 'White', 29)
 
-const rook_w_1 = new Rook('Rook',500, 'White', 1)
-const rook_w_2 = new Rook('Rook',500, 'White', 8)
+const rook_w_1 = new Rook('Rook',500, 'White', 11)
+const rook_w_2 = new Rook('Rook',500, 'White', 28)
 
-const knight_w_1 = new Knight('Knight',300, 'White', 2)
-const knight_w_2 = new Knight('Knight',300, 'White', 7)
+const knight_w_1 = new Knight('Knight',300, 'White', 12)
+const knight_w_2 = new Knight('Knight',300, 'White', 17)
 
-const bishop_w_1 = new Bishop('Bishop',300, 'White', 3)
-const bishop_w_2 = new Bishop('Bishop',300, 'White', 6)
+const bishop_w_1 = new Bishop('Bishop',300, 'White', 13)
+const bishop_w_2 = new Bishop('Bishop',300, 'White', 16)
 
-const queen_w = new Queen('Queen',900, 'White', 4)
-const king_w = new King('King',10000, 'White', 5)
+const queen_w = new Queen('Queen',900, 'White', 14)
+const king_w = new King('King',10000, 'White', 15)
 
 
 
 //initializing the pieces with their respective classes and colors (BLACK PIECES)
-const pawn_b_1 = new Pawn('Pawn',100, 'Black', 49)
-const pawn_b_2 = new Pawn('Pawn',100, 'Black', 50)
-const pawn_b_3 = new Pawn('Pawn',100, 'Black', 51)
-const pawn_b_4 = new Pawn('Pawn',100, 'Black', 52)
-const pawn_b_5 = new Pawn('Pawn',100, 'Black', 53)
-const pawn_b_6 = new Pawn('Pawn',100, 'Black', 54)
-const pawn_b_7 = new Pawn('Pawn',100, 'Black', 55)
-const pawn_b_8 = new Pawn('Pawn',100, 'Black', 56)
+const pawn_b_1 = new Pawn('Pawn',100, 'Black', 71)
+const pawn_b_2 = new Pawn('Pawn',100, 'Black', 72)
+const pawn_b_3 = new Pawn('Pawn',100, 'Black', 73)
+const pawn_b_4 = new Pawn('Pawn',100, 'Black', 74)
+const pawn_b_5 = new Pawn('Pawn',100, 'Black', 75)
+const pawn_b_6 = new Pawn('Pawn',100, 'Black', 76)
+const pawn_b_7 = new Pawn('Pawn',100, 'Black', 77)
+const pawn_b_8 = new Pawn('Pawn',100, 'Black', 78)
 
-const rook_b_1 = new Rook('Rook',500, 'Black', 57)
-const rook_b_2 = new Rook('Rook',500, 'Black', 64)
+const rook_b_1 = new Rook('Rook',500, 'Black', 81)
+const rook_b_2 = new Rook('Rook',500, 'Black', 88)
 
-const knight_b_1 = new Knight('Knight',300, 'Black', 58)
-const knight_b_2 = new Knight('Knight',300, 'Black', 63)
+const knight_b_1 = new Knight('Knight',300, 'Black', 82)
+const knight_b_2 = new Knight('Knight',300, 'Black', 87)
 
-const bishop_b_1 = new Bishop('Bishop',300, 'Black', 59)
-const bishop_b_2 = new Bishop('Bishop',300, 'Black', 62)
+const bishop_b_1 = new Bishop('Bishop',300, 'Black', 83)
+const bishop_b_2 = new Bishop('Bishop',300, 'Black', 86)
 
-const queen_b = new Queen('Queen',900, 'Black', 60)
-const king_b = new King('King',10000, 'Black', 61)
+const queen_b = new Queen('Queen',900, 'Black', 84)
+const king_b = new King('King',10000, 'Black', 85)
 
 
+const border = new Border('Border')
 
 
 //storing starting chess board state with initialized pieces, list of items from 1 to 64
 const chess_board = [
-   [rook_w_1, 1], [knight_w_1, 2], [bishop_w_1, 3], [queen_w, 4],[king_w,5], [bishop_w_2, 6], [knight_w_2, 7],[rook_w_2, 8],
-   [pawn_w_1, 9],[pawn_w_2, 10],[pawn_w_3, 11],[pawn_w_4, 12],[pawn_w_5, 13],[pawn_w_6, 14],[pawn_w_7, 15],[pawn_w_8, 16],
-    [null, 17], [null, 18], [null, 19], [null, 20], [null, 21], [null, 22], [null, 23], [null, 24],
-    [null, 25], [null, 26], [null, 27], [null, 28], [null, 29], [null, 30], [null, 31], [null, 32],
-    [null, 33], [null, 34], [null, 35], [null, 36], [null, 37], [null, 38], [null, 39], [null, 40],
-    [null, 41], [null, 42], [null, 43], [null, 44], [null, 45], [null, 46], [null, 47], [null, 48],
-   [pawn_b_1, 49],[pawn_b_2, 50],[pawn_b_3, 51],[pawn_b_4, 52],[pawn_b_5, 53],[pawn_b_6, 54],[pawn_b_7, 55],[pawn_b_8, 56],
-   [rook_b_1, 57], [knight_b_1, 58], [bishop_b_1, 59], [queen_b, 60],[king_b, 61], [bishop_b_2, 62], [knight_b_2, 63],[rook_b_2, 64]
+    border,  border,    border,     border,    border,   border,    border,     border,    border,   border,
+    border, rook_w_1, knight_w_1, bishop_w_1, queen_w,   king_w,  bishop_w_2, knight_w_2,  rook_w_2, border,
+    border, pawn_w_1,  pawn_w_2,   pawn_w_3,  pawn_w_4, pawn_w_5,  pawn_w_6,   pawn_w_7,   pawn_w_8, border,
+    border,   null,      null,       null,      null,     null,      null,       null,       null,   border,
+    border,   null,      null,       null,      null,     null,      null,       null,       null,   border,
+    border,   null,      null,       null,      null,     null,      null,       null,       null,   border,
+    border,   null,      null,       null,      null,     null,      null,       null,       null,   border,
+    border, pawn_b_1,  pawn_b_2,   pawn_b_3,  pawn_b_4, pawn_b_5,  pawn_b_6,   pawn_b_7,   pawn_b_8, border,
+    border, rook_b_1, knight_b_1, bishop_b_1, queen_b,   king_b,  bishop_b_2, knight_b_2,  rook_b_2, border,
+    border,  border,    border,     border,    border,   border,    border,     border,     border,  border
 ]
 
-
+// const chess_board = [
+//     [border],   [border],         [border],          [border],      [border],        [border],       [border],       [border],         [border],    [border],
+//     [border], [rook_w_1, 1],   [knight_w_1, 2],  [bishop_w_1, 3], [queen_w, 4],     [king_w,5],  [bishop_w_2, 6], [knight_w_2, 7],   [rook_w_2, 8], [border],
+//     [border], [pawn_w_1, 9],   [pawn_w_2, 10],   [pawn_w_3, 11],  [pawn_w_4, 12], [pawn_w_5, 13], [pawn_w_6, 14],  [pawn_w_7, 15],  [pawn_w_8, 16], [border],
+//     [border],   [null, 17],      [null, 18],       [null, 19],      [null, 20],     [null, 21],     [null, 22],      [null, 23],      [null, 24],   [border],
+//     [border],   [null, 25],      [null, 26],       [null, 27],      [null, 28],     [null, 29],     [null, 30],      [null, 31],      [null, 32],   [border],
+//     [border],   [null, 33],      [null, 34],       [null, 35],      [null, 36],     [null, 37],     [null, 38],      [null, 39],      [null, 40],   [border],
+//     [border],   [null, 41],      [null, 42],       [null, 43],      [null, 44],     [null, 45],     [null, 46],      [null, 47],      [null, 48],   [border],
+//     [border], [pawn_b_1, 49],  [pawn_b_2, 50],   [pawn_b_3, 51],  [pawn_b_4, 52], [pawn_b_5, 53], [pawn_b_6, 54],   [pawn_b_7, 55], [pawn_b_8, 56], [border],
+//     [border], [rook_b_1, 57], [knight_b_1, 58], [bishop_b_1, 59], [queen_b, 60],   [king_b, 61], [bishop_b_2, 62], [knight_b_2, 63],[rook_b_2, 64], [border],
+//     [border],    [border],       [border],           [border],       [border],       [border],       [border],           [border],      [border],   [border]
+// ]
 
 export function getColoredPieces(chess_board){
 
@@ -143,13 +162,13 @@ export function getColoredPieces(chess_board){
     //mapping through the board to separate pieces based on color
     chess_board.map(piece =>{
         //asign tile number to the piece on which the piece is located
-        if (piece[0] != null){
+        if (piece != null){
 
-            if (piece[0].color == "Black") { 
-                black_pieces.push(piece[0])
+            if (piece.color == "Black") { 
+                black_pieces.push(piece)
             }
-            else if (piece[0].color == "White") {
-                white_pieces.push(piece[0])
+            else if (piece.color == "White") {
+                white_pieces.push(piece)
             }
         }
     })
