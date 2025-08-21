@@ -17,7 +17,7 @@ class Piece{
         if (this.color == "Black") {
             moves.forEach(move => {
                 if (chess_board[move]?.name !== "Border" && chess_board[move]?.color !== this.color) {
-                    console.log(chess_board[move], " VALID MOVE")
+                    console.log(chess_board[move], " VALID MOVE", move)
                 }
             })
         }
@@ -25,7 +25,7 @@ class Piece{
         else if (this.color == "White") {
             moves.forEach(move => {
                 if (chess_board[move]?.name !== "Border" && chess_board[move]?.color !== this.color) {
-                    console.log(chess_board[move], " VALID MOVE")
+                    console.log(chess_board[move], " VALID MOVE", move)
                 }
             })
         }
@@ -40,11 +40,10 @@ class Piece{
 class Pawn extends Piece{
         //method to get available moves for the pawn
         getAvailableMoves(chess_board) {
-            console.log(this.tile_index, "__________ ",this.name)
-            console.log(chess_board.length, " CHESS BOARD LENGTH")
+            console.log(this.tile_index, "__________ ",this.name, this.color)
             const tile_index = this.tile_index
 
-            if (this.color == "Black") {
+            if (this.color == "White") {
                 //moves for black pawn
                 const move_ahead = tile_index + 10
                 const move_diag_left = tile_index + 9
@@ -54,7 +53,7 @@ class Pawn extends Piece{
                 let valid_moves = this.checkMoveValidity(chess_board, [move_ahead, move_diag_left, move_diag_right, move_two_ahead])
                 // console.log(valid_moves)
             }
-            else if (this.color == "White") {
+            else if (this.color == "Black") {
                 //moves for white pawn
                 const move_ahead = tile_index - 10
                 const move_diag_left = tile_index - 11
