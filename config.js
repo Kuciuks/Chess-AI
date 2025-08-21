@@ -12,13 +12,25 @@ class Piece{
     checkMoveValidity(chess_board, moves){
         let valid_moves = []
         console.log(moves, " MOVES")
-        moves.forEach(move => {
-            if (chess_board[move]?.name !== "Border" && chess_board[move]?.color !== this.color) {
-                console.log(chess_board[move], " VALID MOVE")
-            }
-        })
+
+        //if checking for black piece moves
+        if (this.color == "Black") {
+            moves.forEach(move => {
+                if (chess_board[move]?.name !== "Border" && chess_board[move]?.color !== this.color) {
+                    console.log(chess_board[move], " VALID MOVE")
+                }
+            })
+        }
+        //if checking for white piece moves
+        else if (this.color == "White") {
+            moves.forEach(move => {
+                if (chess_board[move]?.name !== "Border" && chess_board[move]?.color !== this.color) {
+                    console.log(chess_board[move], " VALID MOVE")
+                }
+            })
+        }
+
         return valid_moves
-    
     }
         
 
