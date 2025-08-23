@@ -16,31 +16,41 @@ class Piece{
         //if checking for black piece moves
         if (this.color == "Black") {
             moves.forEach(move => {
+                //check if the move is not a border and not occupied by same color piece
                 if (chess_board[move]?.name !== "Border" && chess_board[move]?.color !== this.color) {
-                    console.log(chess_board[move], " VALID MOVE", move)
+                    // console.log(chess_board[move], " VALID MOVE", move)
+                    valid_moves.push(move)
                 }
             })
         }
         //if checking for white piece moves
         else if (this.color == "White") {
             moves.forEach(move => {
-                if (chess_board[move]?.name !== "Border" && chess_board[move]?.color !== this.color) {
-                    console.log(chess_board[move], " VALID MOVE", move)
+                //check if the move is not a border and not occupied by same color piece
+            if (chess_board[move]?.name !== "Border" && chess_board[move]?.color !== this.color) {
+                    // console.log(chess_board[move], " VALID MOVE", move)
+                    valid_moves.push(move)
                 }
             })
         }
-
         return valid_moves
     }
         
 
 }
 
+
+
+
 //declaring the child classes that extend the base class Piece (capturing base class properties)
 class Pawn extends Piece{
+        constructor(name, value, color, tile_index, special_move){
+            super(name, value, color, tile_index)
+            this.special_move = special_move
+        }
         //method to get available moves for the pawn
         getAvailableMoves(chess_board) {
-            console.log(this.tile_index, "__________ ",this.name, this.color)
+            console.log('\\\n',this.tile_index, "__________ ",this.name, this.color)
             const tile_index = this.tile_index
 
             if (this.color == "White") {
@@ -48,7 +58,7 @@ class Pawn extends Piece{
                 const move_ahead = tile_index + 10
                 const move_diag_left = tile_index + 9
                 const move_diag_right = tile_index + 11
-                const move_two_ahead = tile_index + 20
+                const move_two_ahead = this.special_move ? tile_index + 20 : tile_index
 
                 let valid_moves = this.checkMoveValidity(chess_board, [move_ahead, move_diag_left, move_diag_right, move_two_ahead])
                 // console.log(valid_moves)
@@ -58,7 +68,7 @@ class Pawn extends Piece{
                 const move_ahead = tile_index - 10
                 const move_diag_left = tile_index - 11
                 const move_diag_right = tile_index - 9
-                const move_two_ahead = tile_index - 20
+                const move_two_ahead = this.special_move ? tile_index - 20 : tile_index
 
                 let valid_moves = this.checkMoveValidity(chess_board, [move_ahead, move_diag_left, move_diag_right, move_two_ahead])
                 // console.log(valid_moves)
@@ -103,14 +113,14 @@ class Border {
 }
 
 //initializing the pieces with their respective classes and colors (WHITE PIECES)
-const pawn_w_1 = new Pawn('Pawn',100, 'White', 21)
-const pawn_w_2 = new Pawn('Pawn',100, 'White', 22)
-const pawn_w_3 = new Pawn('Pawn',100, 'White', 23)
-const pawn_w_4 = new Pawn('Pawn',100, 'White', 25)
-const pawn_w_5 = new Pawn('Pawn',100, 'White', 26)
-const pawn_w_6 = new Pawn('Pawn',100, 'White', 27)
-const pawn_w_7 = new Pawn('Pawn',100, 'White', 28)
-const pawn_w_8 = new Pawn('Pawn',100, 'White', 29)
+const pawn_w_1 = new Pawn('Pawn',100, 'White', 21, true)
+const pawn_w_2 = new Pawn('Pawn',100, 'White', 22, true)
+const pawn_w_3 = new Pawn('Pawn',100, 'White', 23, true)
+const pawn_w_4 = new Pawn('Pawn',100, 'White', 25, true)
+const pawn_w_5 = new Pawn('Pawn',100, 'White', 26, true)
+const pawn_w_6 = new Pawn('Pawn',100, 'White', 27, true)
+const pawn_w_7 = new Pawn('Pawn',100, 'White', 28, true)
+const pawn_w_8 = new Pawn('Pawn',100, 'White', 29, true)
 
 const rook_w_1 = new Rook('Rook',500, 'White', 11)
 const rook_w_2 = new Rook('Rook',500, 'White', 28)
@@ -127,14 +137,14 @@ const king_w = new King('King',10000, 'White', 15)
 
 
 //initializing the pieces with their respective classes and colors (BLACK PIECES)
-const pawn_b_1 = new Pawn('Pawn',100, 'Black', 35)
-const pawn_b_2 = new Pawn('Pawn',100, 'Black', 72)
-const pawn_b_3 = new Pawn('Pawn',100, 'Black', 73)
-const pawn_b_4 = new Pawn('Pawn',100, 'Black', 74)
-const pawn_b_5 = new Pawn('Pawn',100, 'Black', 75)
-const pawn_b_6 = new Pawn('Pawn',100, 'Black', 76)
-const pawn_b_7 = new Pawn('Pawn',100, 'Black', 77)
-const pawn_b_8 = new Pawn('Pawn',100, 'Black', 78)
+const pawn_b_1 = new Pawn('Pawn',100, 'Black', 35, false)
+const pawn_b_2 = new Pawn('Pawn',100, 'Black', 72, true)
+const pawn_b_3 = new Pawn('Pawn',100, 'Black', 73, true)
+const pawn_b_4 = new Pawn('Pawn',100, 'Black', 74, true)
+const pawn_b_5 = new Pawn('Pawn',100, 'Black', 75, true)
+const pawn_b_6 = new Pawn('Pawn',100, 'Black', 76, true)
+const pawn_b_7 = new Pawn('Pawn',100, 'Black', 77, true)
+const pawn_b_8 = new Pawn('Pawn',100, 'Black', 78, true)
 
 const rook_b_1 = new Rook('Rook',500, 'Black', 81)
 const rook_b_2 = new Rook('Rook',500, 'Black', 88)
