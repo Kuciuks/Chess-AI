@@ -127,7 +127,7 @@ const king_w = new King('King',10000, 'White', 15)
 
 
 //initializing the pieces with their respective classes and colors (BLACK PIECES)
-const pawn_b_1 = new Pawn('Pawn',100, 'Black', 71)
+const pawn_b_1 = new Pawn('Pawn',100, 'Black', 35)
 const pawn_b_2 = new Pawn('Pawn',100, 'Black', 72)
 const pawn_b_3 = new Pawn('Pawn',100, 'Black', 73)
 const pawn_b_4 = new Pawn('Pawn',100, 'Black', 74)
@@ -157,11 +157,11 @@ const chess_board = [
     border,  border,    border,     border,    border,   border,    border,     border,    border,   border,
     border, rook_w_1, knight_w_1, bishop_w_1, queen_w,   king_w,  bishop_w_2, knight_w_2,  rook_w_2, border,
     border, pawn_w_1,  pawn_w_2,   pawn_w_3,  pawn_w_4, pawn_w_5,  pawn_w_6,   pawn_w_7,   pawn_w_8, border,
+    border,   null,      null,       null,      null,     null,      pawn_b_1,       null,       null,   border,
     border,   null,      null,       null,      null,     null,      null,       null,       null,   border,
     border,   null,      null,       null,      null,     null,      null,       null,       null,   border,
     border,   null,      null,       null,      null,     null,      null,       null,       null,   border,
-    border,   null,      null,       null,      null,     null,      null,       null,       null,   border,
-    border, pawn_b_1,  pawn_b_2,   pawn_b_3,  pawn_b_4, pawn_b_5,  pawn_b_6,   pawn_b_7,   pawn_b_8, border,
+    border, null,  pawn_b_2,   pawn_b_3,  pawn_b_4, pawn_b_5,  pawn_b_6,   pawn_b_7,   pawn_b_8, border,
     border, rook_b_1, knight_b_1, bishop_b_1, queen_b,   king_b,  bishop_b_2, knight_b_2,  rook_b_2, border,
     border,  border,    border,     border,    border,   border,    border,     border,     border,  border
 ]
@@ -186,7 +186,7 @@ export function getColoredPieces(chess_board){
     //mapping through the board to separate pieces based on color
     chess_board.map(piece =>{
         //asign tile number to the piece on which the piece is located
-        if (piece != null){
+        if (piece != null && piece != border) {
 
             if (piece.color == "Black") { 
                 black_pieces.push(piece)
