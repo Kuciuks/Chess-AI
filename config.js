@@ -209,7 +209,7 @@ export function makeMove(piece, move,chess_board){
     let old_index = piece.tile_index
     let score = piece.pawnScore[move]
     if (chess_board[move] != null) {
-        score += chess_board[move].value
+        score += chess_board[move]?.value
     }
     //get score value from a piece score matrix for a specific tile index
     

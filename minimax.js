@@ -30,11 +30,14 @@ function minimax(depth,chess_board, maximizingPlayer){
 
             //make the moves for each piece and return the best move based on best score
             const move_results = piece_moves.map(move =>{
-                console.log('--- Making move ---',piece.tile_index, move)
+                // console.log('--- Making move ---',piece.tile_index, move)
                 const score = makeMove(piece, move, chess_board)
-                console.log('--- Move score ---', score)
+                // console.log('--- Move score ---', score)
+                return {move, score}
             })
+            console.log(move_results, ' MOVE RESULTS')
         })
+
 
         // black_pieces.map(piece => {
 
