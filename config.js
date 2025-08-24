@@ -17,7 +17,7 @@ class Piece{
         if (this.color == "Black") {
             moves.forEach(move => {
                 //check if the move is not a border and not occupied by same color piece
-                if (chess_board[move]?.name !== "Border" && chess_board[move]?.color !== this.color) {
+                if (move != undefined && chess_board[move]?.name !== "Border" && chess_board[move]?.color !== this.color) {
                     // console.log(chess_board[move], " VALID MOVE", move)
                     valid_moves.push(move)
                 }
@@ -27,7 +27,7 @@ class Piece{
         else if (this.color == "White") {
             moves.forEach(move => {
                 //check if the move is not a border and not occupied by same color piece
-            if (chess_board[move]?.name !== "Border" && chess_board[move]?.color !== this.color) {
+            if (move != undefined && chess_board[move]?.name !== "Border" && chess_board[move]?.color !== this.color) {
                     // console.log(chess_board[move], " VALID MOVE", move)
                     valid_moves.push(move)
                 }
@@ -55,22 +55,22 @@ class Pawn extends Piece{
 
             if (this.color == "White") {
                 //moves for black pawn
-                const move_ahead = tile_index + 10
+                const move_down = tile_index + 10
                 const move_diag_left = tile_index + 9
                 const move_diag_right = tile_index + 11
-                const move_two_ahead = this.special_move ? tile_index + 20 : tile_index
+                const move_two_ahead = this.special_move ? tile_index + 20 : undefined
 
-                let valid_moves = this.checkMoveValidity(chess_board, [move_ahead, move_diag_left, move_diag_right, move_two_ahead])
+                let valid_moves = this.checkMoveValidity(chess_board, [move_down, move_diag_left, move_diag_right, move_two_ahead])
                 // console.log(valid_moves)
             }
             else if (this.color == "Black") {
                 //moves for white pawn
-                const move_ahead = tile_index - 10
+                const move_up = tile_index - 10
                 const move_diag_left = tile_index - 11
                 const move_diag_right = tile_index - 9
-                const move_two_ahead = this.special_move ? tile_index - 20 : tile_index
+                const move_two_ahead = this.special_move ? tile_index - 20 : undefined
 
-                let valid_moves = this.checkMoveValidity(chess_board, [move_ahead, move_diag_left, move_diag_right, move_two_ahead])
+                let valid_moves = this.checkMoveValidity(chess_board, [move_up, move_diag_left, move_diag_right, move_two_ahead])
                 // console.log(valid_moves)
             }
         }
@@ -137,7 +137,7 @@ const king_w = new King('King',10000, 'White', 15)
 
 
 //initializing the pieces with their respective classes and colors (BLACK PIECES)
-const pawn_b_1 = new Pawn('Pawn',100, 'Black', 35, false)
+const pawn_b_1 = new Pawn('Pawn',100, 'Black', 35, true)
 const pawn_b_2 = new Pawn('Pawn',100, 'Black', 72, true)
 const pawn_b_3 = new Pawn('Pawn',100, 'Black', 73, true)
 const pawn_b_4 = new Pawn('Pawn',100, 'Black', 74, true)
