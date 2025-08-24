@@ -207,15 +207,14 @@ const chess_board = [
 
 export function makeMove(piece, move,chess_board){
     let old_index = piece.tile_index
-    let new_index = move
-
-    //set old tile to null where the piece moved form
-    chess_board[old_index] = null
-
+    let score = piece.pawnScore[move]
+    if (chess_board[move] != null) {
+        score += chess_board[move].value
+    }
     //get score value from a piece score matrix for a specific tile index
-    let score = piece.pawnScore[new_index]
+    
 
-    // console.log(`Piece ${piece.name, piece.color} moved from ${old_index} to ${new_index} with score changing from ${piece.pawnScore[old_index]} to ${score}, scoreboard:`,piece.pawnScore)
+    console.log(`Piece ${piece.name, piece.color} moved from ${old_index} to ${move} with score changing from ${piece.pawnScore[old_index]} to ${score}`)
 
     return score
 }
