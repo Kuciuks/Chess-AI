@@ -1,5 +1,5 @@
 import evaluateBoard from './evaluateBoard.js'
-import config, {getColoredPieces} from './config.js'
+import config, {getColoredPieces, makeMove} from './config.js'
 // import getAvailable from './getAvailable.js'
 // import undoMove from './undoMove.js'
 // import makeMove from './makeMove.js'
@@ -22,9 +22,17 @@ function minimax(depth,chess_board, maximizingPlayer){
 
         //get all black pieces for current board
         const black_pieces = getColoredPieces(chess_board).black_pieces;
-        //go through black pieces
+        // console.log(black_pieces,"__________ BLACK PIECES")
+        // go through black pieces
         black_pieces.map(piece => {
-            piece.getAvailableMoves(chess_board);
+            const piece_moves = piece.getAvailableMoves(chess_board);
+            console.log(piece, piece_moves, ' PIECE AND MOVES _____')
+
+            //make the moves for each piece and return the best move based on best score
+            const move_results = piece_moves.map(move =>{
+                console.log('--- Making move ---',piece.tile_index, move)
+                const score = makeMove(piece, move, chess_board)
+            })
         })
 
         // black_pieces.map(piece => {
