@@ -13,8 +13,6 @@ class Piece{
         let valid_moves = []
         // console.log(moves, " MOVES")
 
-        //if checking for black piece moves
-        if (this.color == "Black") {
             moves.forEach(move => {
                 //check if the move is not a border and not occupied by same color piece
                 if (move != undefined && chess_board[move]?.name !== "Border" && chess_board[move]?.color !== this.color) {
@@ -22,21 +20,9 @@ class Piece{
                     valid_moves.push(move)
                 }
             })
-        }
-        //if checking for white piece moves
-        else if (this.color == "White") {
-            moves.forEach(move => {
-                //check if the move is not a border and not occupied by same color piece
-            if (move != undefined && chess_board[move]?.name !== "Border" && chess_board[move]?.color !== this.color) {
-                    // console.log(chess_board[move], " VALID MOVE", move)
-                    valid_moves.push(move)
-                }
-            })
-        }
+
         return valid_moves
     }
-        
-
 }
 
 
@@ -70,7 +56,7 @@ class Pawn extends Piece{
                 const move_down = tile_index + 10
                 const move_diag_left = tile_index + 9
                 const move_diag_right = tile_index + 11
-                const move_two_ahead = this.special_move ? tile_index + 20 : undefined
+                const move_two_ahead = this.special_move && chess_board[move_down] == null ? tile_index + 20 : undefined
 
                 let valid_moves = this.checkMoveValidity(chess_board, [move_down, move_diag_left, move_diag_right, move_two_ahead])
                 // console.log(valid_moves)
@@ -81,7 +67,7 @@ class Pawn extends Piece{
                 const move_up = tile_index - 10
                 const move_diag_left = tile_index - 11
                 const move_diag_right = tile_index - 9
-                const move_two_ahead = this.special_move ? tile_index - 20 : undefined
+                const move_two_ahead =  this.special_move && chess_board[move_up] == null ? tile_index - 20 : undefined
 
                 let valid_moves = this.checkMoveValidity(chess_board, [move_up, move_diag_left, move_diag_right, move_two_ahead])
                 // console.log(valid_moves)
@@ -206,17 +192,17 @@ const chess_board = [
 
 
 export function makeMove(piece, move,chess_board){
-    let old_index = piece.tile_index
-    let score = piece.pawnScore[move]
-    if (chess_board[move] != null) {
-        score += chess_board[move]?.value
-    }
-    //get score value from a piece score matrix for a specific tile index
+    // let old_index = piece.tile_index
+    // let score = piece.pawnScore[move]
+    // if (chess_board[move] != null) {
+    //     score += chess_board[move]?.value
+    // }
+    // //get score value from a piece score matrix for a specific tile index
     
 
-    console.log(`Piece ${piece.name, piece.color} moved from ${old_index} to ${move} with score changing from ${piece.pawnScore[old_index]} to ${score}`)
+    // console.log(`Piece ${piece.name, piece.color} moved from ${old_index} to ${move} with score changing from ${piece.pawnScore[old_index]} to ${score}`)
 
-    return score
+    // return score
 }
 
 // export function undoMove(piece, move,chess_board){
