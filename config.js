@@ -35,16 +35,16 @@ class Pawn extends Piece{
             super(name, value, color, tile_index)
             this.special_move = special_move
             this.pawnScore= [
-                null  ,null  ,null   ,null   ,null   ,null   ,null  ,null,
-                null,0  ,0  ,0   ,0   ,0   ,0   ,0  ,0,null,
-                null,10, 10, 10, 10, 10, 10, 10, 10,null,
-                null,5, 5, 5, 5, 50, 5, 5, 5,null,
-                null,0, 0, 0, 0, 50, 0, 0, 0,null,
-                null,-5, -5, -5, 500, -5, -10, 0, -5,null,
-                null,-10, -10, -10, -10, 0, 0, -10, -10,null,
-                null,-15, -15, -15, -15, -15, -15, -15, -15,null,
-                null,0  ,0  ,0   ,0   ,0   ,0   ,0  ,0,null,
-                null  ,null  ,null   ,null   ,null   ,null   ,null  ,null
+                null, null, null, null, null, null, null, null, null, null,
+                null, 0, 0, 0, 0, 0, 0, 0, 0, null,
+                null, 10, 10, 10, 10, 10, 10, 10, 10, null,
+                null, 5, 5, 5, 5, 50, 5, 5, 5, null,
+                null, 0, 0, 0, 0, 50, 0, 0, 0, null,
+                null, -5, -5, -5, 500, -5, -10, 0, -5, null,
+                null, -10, -10, -10, -10, 0, 0, -10, -10, null,
+                null, -15, -15, -15, -15, -15, -15, -15, -15, null,
+                null, 0, 0, 0, 0, 0, 0, 0, 0, null,
+                null, null, null, null, null, null, null, null, null, null
             ]
         }
         //method to get available moves for the pawn
