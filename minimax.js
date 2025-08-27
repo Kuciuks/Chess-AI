@@ -1,5 +1,4 @@
-import evaluateBoard from './evaluateBoard.js'
-import config, {getColoredPieces, makeMove} from './config.js'
+import config, {getColoredPieces, evaluateBoard} from './config.js'
 // import getAvailable from './getAvailable.js'
 // import undoMove from './undoMove.js'
 // import makeMove from './makeMove.js'
@@ -24,19 +23,25 @@ function minimax(depth,chess_board, maximizingPlayer){
         const black_pieces = getColoredPieces(chess_board).black_pieces;
         // console.log(black_pieces,"__________ BLACK PIECES")
         // go through black pieces
-        black_pieces.map(piece => {
+        const black_pieces_moves_complete = black_pieces.map(piece => {
             const piece_moves = piece.getAvailableMoves(chess_board);
-            console.log(piece, piece_moves, ' PIECE AND MOVES _____')
+            // console.log(piece, piece_moves, ' PIECE AND MOVES _____')
 
             //make the moves for each piece and return the best move based on best score
             const move_results = piece_moves.map(move =>{
                 // console.log('--- Making move ---',piece.tile_index, move)
-                const score = makeMove(piece, move, chess_board)
+                const score = evaluateBoard(piece, move, chess_board)
                 // console.log('--- Move score ---', score)
+
+                piece.moves.push({move, score})
+
+
                 return {move, score}
             })
-            console.log(move_results, ' MOVE RESULTS')
+            // console.log(move_results, ' MOVE RESULTS')
+            return piece
         })
+        console.log(black_pieces_moves_complete, ' BLACK PIECES MOVES COMPLETE')
 
 
         // black_pieces.map(piece => {

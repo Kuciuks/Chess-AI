@@ -5,6 +5,7 @@ class Piece{
         this.value = value
         this.color = color
         this.tile_index = tile_index
+        this.moves = []
     }
 
     //method for checking move validity
@@ -172,9 +173,12 @@ const chess_board = [
     border,   null,      null,       null,      null,     null,      null,       null,       null,   border,
     border,   null,      null,       null,      null,     null,      null,       null,       null,   border,
     border, null,  pawn_b_2,   pawn_b_3,  pawn_b_4, pawn_b_5,  pawn_b_6,   pawn_b_7,   pawn_b_8, border,
-    border, rook_b_1, knight_b_1, bishop_b_1, queen_b,   king_b,  bishop_b_2, knight_b_2,  rook_b_2, border,
+    border, border, border, border, border,   border,  border, border,  border, border,
     border,  border,    border,     border,    border,   border,    border,     border,     border,  border
 ]
+
+    // border, rook_b_1, knight_b_1, bishop_b_1, queen_b,   king_b,  bishop_b_2, knight_b_2,  rook_b_2, border,
+    // border,  border,    border,     border,    border,   border,    border,     border,     border,  border
 
 // const chess_board = [
 //     [border],   [border],         [border],          [border],      [border],        [border],       [border],       [border],         [border],    [border],
@@ -191,18 +195,19 @@ const chess_board = [
 
 
 
-export function makeMove(piece, move,chess_board){
-    // let old_index = piece.tile_index
-    // let score = piece.pawnScore[move]
-    // if (chess_board[move] != null) {
-    //     score += chess_board[move]?.value
-    // }
-    // //get score value from a piece score matrix for a specific tile index
+export function evaluateBoard(piece, move,chess_board){
+    let score = piece.pawnScore[move]
+
+    if (chess_board[move] != null) {
+        score += chess_board[move]?.value
+    }
+    //get score value from a piece score matrix for a specific tile index
     
 
-    // console.log(`Piece ${piece.name, piece.color} moved from ${old_index} to ${move} with score changing from ${piece.pawnScore[old_index]} to ${score}`)
+    let old_index = piece.tile_index
+    console.log(`Piece ${piece.name, piece.color} moved from ${old_index} to ${move} with score changing from ${piece.pawnScore[old_index]} to ${score}`)
 
-    // return score
+    return score
 }
 
 // export function undoMove(piece, move,chess_board){
@@ -228,7 +233,7 @@ export function getColoredPieces(chess_board){
     let black_pieces = []
     let white_pieces = []
     //mapping through the board to separate pieces based on color
-    chess_board.map(piece =>{
+    chess_board.forEach(piece =>{
         //asign tile number to the piece on which the piece is located
         if (piece != null && piece != border) {
 
