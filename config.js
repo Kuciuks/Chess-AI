@@ -19,14 +19,14 @@ class Pawn extends Piece{
             this.special_move = special_move
             this.pawnScore= [
                 null, null, null, null, null, null, null, null, null, null,
-                null, 0, 0, 0, 0, 0, 0, 0, 0, null,
-                null, 10, 10, 10, 10, 10, 10, 10, 10, null,
-                null, 5, 5, 5, 5, 50, 5, 5, 5, null,
-                null, 0, 0, 0, 0, 50, 0, 0, 0, null,
-                null, -5, -5, -5, 500, -5, -10, 0, -5, null,
-                null, -10, -10, -10, -10, 0, 0, -10, -10, null,
-                null, -15, -15, -15, -15, -15, -15, -15, -15, null,
-                null, 0, 0, 0, 0, 0, 0, 0, 0, null,
+                null,    0,   0,   0,   0,   0,   0,   0,   0, null,
+                null,   10,  10,  10,  10,  10,  10,  10,  10, null,
+                null,    5,   5,   5,   5,  50,   5,   5,   5, null,
+                null,    0,   0,   0,   0,  50,   0,   0,   0, null,
+                null,   -5,  -5,  -5, 500,  -5, -10,   0,  -5, null,
+                null,  -10, -10, -10, -10,   0,   0, -10, -10, null,
+                null,  -15, -15, -15, -15, -15, -15, -15, -15, null,
+                null,    0,   0,   0,   0,   0,   0,   0,   0, null,
                 null, null, null, null, null, null, null, null, null, null
             ]
         }
@@ -86,17 +86,16 @@ class Rook extends Piece{
             // this.special_move = special_move
             this.pawnScore= [
                 null, null, null, null, null, null, null, null, null, null,
-                null, -20, -15, -10, -10, -10, -10, -15, -20, null,
-                null, -15, -5, 0, 0, 0, 0, -5, -15, null,
-                null, -10, 0, 5, 5, 5, 5, 0, -10, null,
-                null, -10, 0, 5, 10, 10, 5, 0, -10, null,
-                null, -10, 0, 5, 10, 10, 5, 0, -10, null,
-                null, -10, 0, 5, 5, 5, 5, 0, -10, null,
-                null, -15, -5, 0, 0, 0, 0, -5, -15, null,
-                null, -20, -15, -10, -10, -10, -10, -15, -20, null,
+                null, -10,  -5,  -5,  -5,  -5,  -5,  -5, -10, null,
+                null,   5,  10,  10,  10,  10,  10,  10,   5, null,
+                null,  -5,   0,   0,   0,   0,   0,   0,  -5, null,
+                null,  -5,   0,   0,   0,   0,   0,   0,  -5, null,
+                null,  -5,   0,   0,   0,   0,   0,   0,  -5, null,
+                null,  -5,   0,   0,   0,   0,   0,   0,  -5, null,
+                null,  -5,   0,   0,   0,   0,   0,   0,  -5, null,
+                null,   0,   0,   0,   5,   5,   0,   0,   0, null,
                 null, null, null, null, null, null, null, null, null, null
             ]
-            this.valid_moves = []
         }
 
         checkMoveValidity(chess_board, moves){
@@ -187,24 +186,85 @@ class Rook extends Piece{
         }
     }
 class Knight extends Piece{
+        constructor(name, value, color, tile_index){
+            super(name, value, color, tile_index)
+            this.pawnScore= [
+                null, null, null, null, null, null, null, null, null, null,
+                null,  -20, -15, -10, -10, -10, -10, -15, -20, null,
+                null,  -15,  -5,   0,   0,   0,   0,  -5, -15, null,
+                null,  -10,   0,   5,   5,   5,   5,   0, -10, null,
+                null,  -10,   0,   5,  10,  10,   5,   0, -10, null,
+                null,  -10,   0,   5,  10,  10,   5,   0, -10, null,
+                null,  -10,   0,   5,   5,   5,   5,   0, -10, null,
+                null,  -15,  -5,   0,   0,   0,   0,  -5, -15, null,
+                null,  -20, -15, -10, -10, -10, -10, -15, -20, null,
+                null, null, null, null, null, null, null, null, null, null
+            ]
+        }
         //method to get available moves for the pawn
         getAvailableMoves(chess_board, piece) {
             
         }
     }
 class Bishop extends Piece{
+        constructor(name, value, color, tile_index){
+            super(name, value, color, tile_index)
+            this.pawnScore= [
+                null, null, null, null, null, null, null, null, null, null,
+                null,  -10,  -5,  -5,  -5,  -5,  -5,  -5, -10, null,
+                null,   -5,   0,   0,   0,   0,   0,   0,  -5, null,
+                null,   -5,   0,   5,   5,   5,   5,   0,  -5, null,
+                null,   -5,   5,   5,  10,  10,   5,   5,  -5, null,
+                null,   -5,   0,  10,  10,  10,  10,   0,  -5, null,
+                null,   -5,  10,  10,  10,  10,  10,  10,  -5, null,
+                null,   -5,   5,   0,   0,   0,   0,   5,  -5, null,
+                null,  -10,  -5,  -5,  -5,  -5,  -5,  -5, -10, null,
+                null, null, null, null, null, null, null, null, null, null
+            ]
+        }
         //method to get available moves for the pawn
         getAvailableMoves(chess_board, piece) {
             
         }
     }
 class Queen extends Piece{
+        constructor(name, value, color, tile_index){
+            super(name, value, color, tile_index)
+            this.pawnScore= [
+                null, null, null, null, null, null, null, null, null, null,
+                null,  -20, -10, -10,  -5,  -5, -10, -10, -20, null,
+                null,  -10,   0,   0,   0,   0,   0,   0, -10, null,
+                null,  -10,   0,   5,   5,   5,   5,   0, -10, null,
+                null,   -5,   0,   5,   5,   5,   5,   0,  -5, null,
+                null,    0,   0,   5,   5,   5,   5,   0,  -5, null,
+                null,  -10,   5,   5,   5,   5,   5,   0, -10, null,
+                null,  -10,   0,   5,   0,   0,   0,   0, -10, null,
+                null,  -20, -10, -10,  -5,  -5, -10, -10, -20, null,
+                null, null, null, null, null, null, null, null, null, null
+            ]
+        }
         //method to get available moves for the pawn
         getAvailableMoves(chess_board, piece) {
             
         }
     }
 class King extends Piece{
+        constructor(name, value, color, tile_index){ //add special_move later on
+            super(name, value, color, tile_index)
+            // this.special_move = special_move
+            this.pawnScore= [
+                null, null, null, null, null, null, null, null, null, null,
+                null,   20,  30,  10,   0,   0,  10,  30,  20, null,
+                null,   20,  20,   0,   0,   0,   0,  20,  20, null,
+                null,  -10, -20, -20, -20, -20, -20, -20, -10, null,
+                null,  -20, -30, -30, -40, -40, -30, -30, -20, null,
+                null,  -30, -40, -40, -50, -50, -40, -40, -30, null,
+                null,  -30, -40, -40, -50, -50, -40, -40, -30, null,
+                null,  -30, -40, -40, -50, -50, -40, -40, -30, null,
+                null,  -30, -40, -40, -50, -50, -40, -40, -30, null,
+                null, null, null, null, null, null, null, null, null, null
+            ]
+        }
         //method to get available moves for the pawn
         getAvailableMoves(chess_board, piece) {
             
