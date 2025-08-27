@@ -24,12 +24,13 @@ function minimax(depth,chess_board, maximizingPlayer){
         // console.log(black_pieces,"__________ BLACK PIECES")
 
 
-        let all_moves = []
 
+
+        let all_moves = []
         // go through black pieces
         const black_pieces_moves_complete = black_pieces.map(piece => {
             const piece_moves = piece.getAvailableMoves(chess_board);
-            // console.log(piece, piece_moves, ' PIECE AND MOVES _____')
+            console.log(piece.name, piece_moves, ' PIECE AND MOVES _____')
 
             //make the moves for each piece and return the best move based on best score
             const move_results = piece_moves.map(move =>{
@@ -37,8 +38,12 @@ function minimax(depth,chess_board, maximizingPlayer){
                 const score = evaluateBoard(piece, move, chess_board)
                 // console.log('--- Move score ---', score)
 
-                piece.moves.push({move, score})
+                // piece.moves.push({move, score})
 
+                if (score > bestScore){
+                    bestScore = score
+                    bestMove = move
+                }
 
                 return {move, score}
             })
@@ -47,15 +52,16 @@ function minimax(depth,chess_board, maximizingPlayer){
             // console.log(move_results, ' MOVE RESULTS')
             return piece
         })
-        console.log(black_pieces_moves_complete, ' BLACK PIECES MOVES COMPLETE')
-        console.log(all_moves, ' ALL MOVES _____', all_moves.length, black_pieces[1].pawnScore.length)
+        // console.log(black_pieces_moves_complete, ' BLACK PIECES MOVES COMPLETE')
+        // console.log(all_moves, ' ALL MOVES _____', all_moves.length)
 
-        //now we have all black pieces with their possible moves and move scores
-        //now we need to find the move with the highest score
 
-        black_pieces_moves_complete.forEach(piece => {
 
-        })
+
+
+
+
+
 
 
 

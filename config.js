@@ -8,24 +8,7 @@ class Piece{
         this.moves = []
     }
 
-    //method for checking move validity
-    //iputs the chess board and an array of moves
-    checkMoveValidity(chess_board, moves){
-        let valid_moves = []
-        // console.log(moves, " MOVES")
-
-            moves.forEach(move => {
-                //check if the move is not a border and not occupied by same color piece
-                if (move != undefined && chess_board[move]?.name !== "Border" && chess_board[move]?.color !== this.color) {
-                    // console.log(chess_board[move], " VALID MOVE", move)
-                    valid_moves.push(move)
-                }
-            })
-
-        return valid_moves
-    }
 }
-
 
 
 
@@ -47,6 +30,22 @@ class Pawn extends Piece{
                 null, null, null, null, null, null, null, null, null, null
             ]
         }
+
+        checkMoveValidity(chess_board, moves){
+            let valid_moves = []
+            console.log(moves, " MOVES")
+
+            moves.forEach(move => {
+                //check if the move is not a border and not occupied by same color piece
+                if (move != undefined && chess_board[move]?.name !== "Border" && chess_board[move]?.color !== this.color) {
+                    // console.log(chess_board[move], " VALID MOVE", move)
+                    valid_moves.push(move)
+                }
+            })
+            return valid_moves
+        }
+
+
         //method to get available moves for the pawn
         getAvailableMoves(chess_board) {
             // console.log('\\\n',this.tile_index, "__________ ",this.name, this.color)
@@ -65,21 +64,126 @@ class Pawn extends Piece{
             }
             if (this.color == "Black") {
                 //moves for white pawn
-                const move_up = tile_index - 10
+                const move_up = chess_board[tile_index - 10] == null ? tile_index - 10 : undefined
                 const move_diag_left = tile_index - 11
                 const move_diag_right = tile_index - 9
-                const move_two_ahead =  this.special_move && chess_board[move_up] == null ? tile_index - 20 : undefined
+                const move_two_ahead =  this.special_move && chess_board[tile_index - 20] == null ? tile_index - 20 : undefined
 
                 let valid_moves = this.checkMoveValidity(chess_board, [move_up, move_diag_left, move_diag_right, move_two_ahead])
                 // console.log(valid_moves)
                 return valid_moves
             }
         }
+
+
+
+
+
     }
 class Rook extends Piece{
+        constructor(name, value, color, tile_index){ //add special_move later on
+            super(name, value, color, tile_index)
+            // this.special_move = special_move
+            this.pawnScore= [
+                null, null, null, null, null, null, null, null, null, null,
+                null, -20, -15, -10, -10, -10, -10, -15, -20, null,
+                null, -15, -5, 0, 0, 0, 0, -5, -15, null,
+                null, -10, 0, 5, 5, 5, 5, 0, -10, null,
+                null, -10, 0, 5, 10, 10, 5, 0, -10, null,
+                null, -10, 0, 5, 10, 10, 5, 0, -10, null,
+                null, -10, 0, 5, 5, 5, 5, 0, -10, null,
+                null, -15, -5, 0, 0, 0, 0, -5, -15, null,
+                null, -20, -15, -10, -10, -10, -10, -15, -20, null,
+                null, null, null, null, null, null, null, null, null, null
+            ]
+            this.valid_moves = []
+        }
+
+        checkMoveValidity(chess_board, moves){
+            let valid_moves = []
+            console.log(moves, " MOVES", moves.length)
+
+            for (let i = 0; i < moves.length; i++){
+                
+                let move = moves[i]
+
+                console.log(move, " INITIAL MOVE")
+
+                if (chess_board[move] == null || chess_board[move]?.name !== "Border" && chess_board[move]?.color !== this.color) {
+                    // console.log(chess_board[move], " VALID MOVE", move)
+                    valid_moves.push(move)
+                    console.log(i, " I VALUE", move)
+                    switch(i) {
+                        case 0: //up
+                            for (let j = 0; j < 7; j++){
+                                console.log(move, " INITIAL MOVE Up")
+                                move -= 10 
+                                if (chess_board[move] == null || chess_board[move]?.name !== "Border" && chess_board[move]?.color !== this.color && chess_board[move+10]?.color !== 'White') {
+                                    valid_moves.push(move)
+                                } else {
+                                    console.log(move, " BREAK UP _______")
+                                    break
+                                }
+
+                            }
+                            break
+                        case 1: //down
+                            for (let k = 0; k < 7; k++){
+                                console.log(move, " INITIAL MOVE Down")
+                                move += 10 
+                                if (chess_board[move] == null || chess_board[move]?.name !== "Border" && chess_board[move]?.color !== this.color && chess_board[move-10]?.color !== 'White') {
+                                    valid_moves.push(move)
+                                }
+                                else {
+                                    console.log(move, " BREAK DOWN _______")
+                                    break
+                                }
+                            }
+                            break
+                        case 2: //left
+                            for (let l = 0; l < 7; l++){
+                                console.log(move, " INITIAL MOVE Left")
+                                move -= 1 
+                                if (chess_board[move] == null || chess_board[move]?.name !== "Border" && chess_board[move]?.color !== this.color && chess_board[move+1]?.color !== 'White') {
+                                    valid_moves.push(move)
+                                } else {
+                                    console.log(move, " BREAK LEFT _______")
+                                    break
+                                }
+                            }
+                            break
+                        case 3: //right
+                            for (let m = 0; m < 7; m++){
+                                console.log(move, " INITIAL MOVE Right")
+                                move += 1 
+                                if (chess_board[move] == null || chess_board[move]?.name !== "Border" && chess_board[move]?.color !== this.color && chess_board[move-1]?.color !== 'White') {
+                                    valid_moves.push(move)
+                                } else {
+                                    console.log(move, " BREAK RIGHT _______")
+                                    break
+                                }
+                            }
+                            break
+                    }
+
+                }
+            }
+            console.log(valid_moves, " VALID MOVES")
+            return valid_moves
+        }
+
         //method to get available moves for the pawn
-        getAvailableMoves(chess_board, piece) {
-            
+        getAvailableMoves(chess_board) {
+            const tile_index = this.tile_index
+
+            const move_up = tile_index - 10
+            const move_down = tile_index + 10
+            const move_left = tile_index - 1
+            const move_right = tile_index + 1
+
+            let valid_moves = this.checkMoveValidity(chess_board, [move_up, move_down, move_left, move_right])
+
+            return valid_moves
         }
     }
 class Knight extends Piece{
@@ -147,8 +251,8 @@ const pawn_b_6 = new Pawn('Pawn',100, 'Black', 76, true)
 const pawn_b_7 = new Pawn('Pawn',100, 'Black', 77, true)
 const pawn_b_8 = new Pawn('Pawn',100, 'Black', 78, true)
 
-const rook_b_1 = new Rook('Rook',500, 'Black', 81)
-const rook_b_2 = new Rook('Rook',500, 'Black', 88)
+const rook_b_1 = new Rook('Rook',500, 'Black', 45)
+const rook_b_2 = new Rook('Rook',500, 'Black', 78)
 
 const knight_b_1 = new Knight('Knight',300, 'Black', 82)
 const knight_b_2 = new Knight('Knight',300, 'Black', 87)
@@ -168,11 +272,11 @@ const chess_board = [
     border,  border,    border,     border,    border,   border,    border,     border,    border,   border,
     border, rook_w_1, knight_w_1, bishop_w_1, queen_w,   king_w,  bishop_w_2, knight_w_2,  rook_w_2, border,
     border, pawn_w_1,  pawn_w_2,   pawn_w_3,  pawn_w_4, pawn_w_5,  pawn_w_6,   pawn_w_7,   pawn_w_8, border,
-    border,   null,      null,       null,      null,     null,      pawn_b_1,       null,       null,   border,
+    border,   null,      null,       null,      null,     null,      null,       null,       null,   border,
+    border,   null,      null,       null,      null,     rook_b_1,      null,       null,       null,   border,
     border,   null,      null,       null,      null,     null,      null,       null,       null,   border,
     border,   null,      null,       null,      null,     null,      null,       null,       null,   border,
-    border,   null,      null,       null,      null,     null,      null,       null,       null,   border,
-    border, null,  pawn_b_2,   pawn_b_3,  pawn_b_4, pawn_b_5,  pawn_b_6,   pawn_b_7,   pawn_b_8, border,
+    border, border,  border,   border,  border, border,  border,   border,   border, border,
     border, border, border, border, border,   border,  border, border,  border, border,
     border,  border,    border,     border,    border,   border,    border,     border,     border,  border
 ]
@@ -204,8 +308,8 @@ export function evaluateBoard(piece, move,chess_board){
     //get score value from a piece score matrix for a specific tile index
     
 
-    let old_index = piece.tile_index
-    console.log(`Piece ${piece.name, piece.color} moved from ${old_index} to ${move} with score changing from ${piece.pawnScore[old_index]} to ${score}`)
+    // let old_index = piece.tile_index
+    // console.log(`Piece ${piece.name, piece.color} moved from ${old_index} to ${move} with score changing from ${piece.pawnScore[old_index]} to ${score}`)
 
     return score
 }
