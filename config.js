@@ -65,12 +65,12 @@ class Pawn extends Piece{
             if (this.color == "Black") {
                 //moves for white pawn
                 const move_up = chess_board[tile_index - 10] == null ? tile_index - 10 : undefined
-                const move_diag_left = tile_index - 11
-                const move_diag_right = tile_index - 9
+                const move_diag_left = chess_board[tile_index - 11]?.color == 'White' ? tile_index - 11 : undefined
+                const move_diag_right = chess_board[tile_index - 9]?.color == 'White' ? tile_index - 9 : undefined
                 const move_two_ahead =  this.special_move && chess_board[tile_index - 20] == null ? tile_index - 20 : undefined
 
                 let valid_moves = this.checkMoveValidity(chess_board, [move_up, move_diag_left, move_diag_right, move_two_ahead])
-                // console.log(valid_moves)
+                console.log(valid_moves)
                 return valid_moves
             }
         }
@@ -242,9 +242,9 @@ const king_w = new King('King',10000, 'White', 15)
 
 
 //initializing the pieces with their respective classes and colors (BLACK PIECES)
-const pawn_b_1 = new Pawn('Pawn',100, 'Black', 35, true)
-const pawn_b_2 = new Pawn('Pawn',100, 'Black', 72, true)
-const pawn_b_3 = new Pawn('Pawn',100, 'Black', 73, true)
+const pawn_b_1 = new Pawn('Pawn',100, 'Black', 38, true)
+const pawn_b_2 = new Pawn('Pawn',100, 'Black', 48, true)
+const pawn_b_3 = new Pawn('Pawn',100, 'Black', 35, true)
 const pawn_b_4 = new Pawn('Pawn',100, 'Black', 74, true)
 const pawn_b_5 = new Pawn('Pawn',100, 'Black', 75, true)
 const pawn_b_6 = new Pawn('Pawn',100, 'Black', 76, true)
@@ -272,8 +272,8 @@ const chess_board = [
     border,  border,    border,     border,    border,   border,    border,     border,    border,   border,
     border, rook_w_1, knight_w_1, bishop_w_1, queen_w,   king_w,  bishop_w_2, knight_w_2,  rook_w_2, border,
     border, pawn_w_1,  pawn_w_2,   pawn_w_3,  pawn_w_4, pawn_w_5,  pawn_w_6,   pawn_w_7,   pawn_w_8, border,
-    border,   null,      null,       null,      null,     null,      null,       null,       null,   border,
-    border,   null,      null,       null,      null,     rook_b_1,      null,       null,       null,   border,
+    border,   null,      null,       null,      null,     pawn_b_3,      null,       null,       pawn_b_1,   border,
+    border,   null,      null,       null,      null,     rook_b_1,      null,       null,       pawn_b_2,   border,
     border,   null,      null,       null,      null,     null,      null,       null,       null,   border,
     border,   null,      null,       null,      null,     null,      null,       null,       null,   border,
     border, border,  border,   border,  border, border,  border,   border,   border, border,
