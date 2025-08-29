@@ -31,7 +31,7 @@ class moveDirections{
 //up left
 for (let j = 0; j < 7; j++){
     move -= 11 
-    if (chess_board[move] == null || chess_board[move]?.name !== "Border" && chess_board[move]?.color !== this.color && chess_board[move+11]?.color !== 'White') {
+    if (chess_board[move] == null || chess_board[move]?.name !== "Border" && chess_board[move]?.color !== this.color && chess_board[move+11]?.color !== chess_board[move]?.color) { // changed from !== 'White' to !== chess_board[move]?.color so that it checks whether the next move up left is the same color as the previous move's color, this way l dont need to hardcode 'White' or 'Black'
         valid_moves.push(move)
     } else {
         break
@@ -42,7 +42,7 @@ for (let j = 0; j < 7; j++){
 //down left
 for (let k = 0; k < 7; k++){
     move += 9
-    if (chess_board[move] == null || chess_board[move]?.name !== "Border" && chess_board[move]?.color !== this.color && chess_board[move-9]?.color !== 'White') {
+    if (chess_board[move] == null || chess_board[move]?.name !== "Border" && chess_board[move]?.color !== this.color && chess_board[move-9]?.color !== chess_board[move]?.color) {
         valid_moves.push(move)
     }
     else {
@@ -54,7 +54,7 @@ for (let k = 0; k < 7; k++){
 //up right
 for (let l = 0; l < 7; l++){
     move -= 9
-    if (chess_board[move] == null || chess_board[move]?.name !== "Border" && chess_board[move]?.color !== this.color && chess_board[move+9]?.color !== 'White') {
+    if (chess_board[move] == null || chess_board[move]?.name !== "Border" && chess_board[move]?.color !== this.color && chess_board[move+9]?.color !== chess_board[move]?.color) {
         valid_moves.push(move)
     } else {
         break
@@ -64,7 +64,7 @@ for (let l = 0; l < 7; l++){
 //down right
 for (let m = 0; m < 7; m++){
     move += 11
-    if (chess_board[move] == null || chess_board[move]?.name !== "Border" && chess_board[move]?.color !== this.color && chess_board[move-11]?.color !== 'White') {
+    if (chess_board[move] == null || chess_board[move]?.name !== "Border" && chess_board[move]?.color !== this.color && chess_board[move-11]?.color !== chess_board[move]?.color) {
         valid_moves.push(move)
     } else {
         break
@@ -74,7 +74,7 @@ for (let m = 0; m < 7; m++){
 //up
 for (let j = 0; j < 7; j++){
     move -= 10 
-    if (chess_board[move] == null || chess_board[move]?.name !== "Border" && chess_board[move]?.color !== this.color && chess_board[move+10]?.color !== 'White') {
+    if (chess_board[move] == null || chess_board[move]?.name !== "Border" && chess_board[move]?.color !== this.color && chess_board[move+10]?.color !== chess_board[move]?.color) {
         valid_moves.push(move)
     } else {
         break
@@ -85,7 +85,7 @@ for (let j = 0; j < 7; j++){
 //down
 for (let k = 0; k < 7; k++){
     move += 10 
-    if (chess_board[move] == null || chess_board[move]?.name !== "Border" && chess_board[move]?.color !== this.color && chess_board[move-10]?.color !== 'White') {
+    if (chess_board[move] == null || chess_board[move]?.name !== "Border" && chess_board[move]?.color !== this.color && chess_board[move-10]?.color !== chess_board[move]?.color) {
         valid_moves.push(move)
     }
     else {
@@ -96,7 +96,7 @@ for (let k = 0; k < 7; k++){
 //left
 for (let l = 0; l < 7; l++){
     move -= 1 
-    if (chess_board[move] == null || chess_board[move]?.name !== "Border" && chess_board[move]?.color !== this.color && chess_board[move+1]?.color !== 'White') {
+    if (chess_board[move] == null || chess_board[move]?.name !== "Border" && chess_board[move]?.color !== this.color && chess_board[move+1]?.color !== chess_board[move]?.color) {
         valid_moves.push(move)
     } else {
         break
@@ -106,7 +106,7 @@ for (let l = 0; l < 7; l++){
 //right
 for (let m = 0; m < 7; m++){
     move += 1 
-    if (chess_board[move] == null || chess_board[move]?.name !== "Border" && chess_board[move]?.color !== this.color && chess_board[move-1]?.color !== 'White') {
+    if (chess_board[move] == null || chess_board[move]?.name !== "Border" && chess_board[move]?.color !== this.color && chess_board[move-1]?.color !== chess_board[move]?.color) {
         valid_moves.push(move)
     } else {
         break

@@ -117,7 +117,7 @@ class Rook extends Piece{
                             for (let j = 0; j < 7; j++){
                                 console.log(move, " INITIAL MOVE Up")
                                 move -= 10 
-                                if (chess_board[move] == null || chess_board[move]?.name !== "Border" && chess_board[move]?.color !== this.color && chess_board[move+10]?.color !== 'White') {
+                                if (chess_board[move] == null || chess_board[move]?.name !== "Border" && chess_board[move]?.color !== this.color && chess_board[move+10]?.color !== chess_board[move]?.color) {
                                     valid_moves.push(move)
                                 } else {
                                     console.log(move, " BREAK UP _______")
@@ -130,7 +130,7 @@ class Rook extends Piece{
                             for (let k = 0; k < 7; k++){
                                 console.log(move, " INITIAL MOVE Down")
                                 move += 10 
-                                if (chess_board[move] == null || chess_board[move]?.name !== "Border" && chess_board[move]?.color !== this.color && chess_board[move-10]?.color !== 'White') {
+                                if (chess_board[move] == null || chess_board[move]?.name !== "Border" && chess_board[move]?.color !== this.color && chess_board[move-10]?.color !== chess_board[move]?.color) {
                                     valid_moves.push(move)
                                 }
                                 else {
@@ -143,7 +143,7 @@ class Rook extends Piece{
                             for (let l = 0; l < 7; l++){
                                 console.log(move, " INITIAL MOVE Left")
                                 move -= 1 
-                                if (chess_board[move] == null || chess_board[move]?.name !== "Border" && chess_board[move]?.color !== this.color && chess_board[move+1]?.color !== 'White') {
+                                if (chess_board[move] == null || chess_board[move]?.name !== "Border" && chess_board[move]?.color !== this.color && chess_board[move+1]?.color !== chess_board[move]?.color) {
                                     valid_moves.push(move)
                                 } else {
                                     console.log(move, " BREAK LEFT _______")
@@ -155,7 +155,7 @@ class Rook extends Piece{
                             for (let m = 0; m < 7; m++){
                                 console.log(move, " INITIAL MOVE Right")
                                 move += 1 
-                                if (chess_board[move] == null || chess_board[move]?.name !== "Border" && chess_board[move]?.color !== this.color && chess_board[move-1]?.color !== 'White') {
+                                if (chess_board[move] == null || chess_board[move]?.name !== "Border" && chess_board[move]?.color !== this.color && chess_board[move-1]?.color !== chess_board[move]?.color) {
                                     valid_moves.push(move)
                                 } else {
                                     console.log(move, " BREAK RIGHT _______")
@@ -415,7 +415,7 @@ const chess_board = [
     border, rook_w_1, knight_w_1, bishop_w_1, queen_w,   king_w,  bishop_w_2, knight_w_2,  rook_w_2, border,
     border, pawn_w_1,  pawn_w_2,   pawn_w_3,  pawn_w_4, pawn_w_5,  pawn_w_6,   pawn_w_7,   pawn_w_8, border,
     border,   null,      null,       null,      null,     null,      null,       null,       null,   border,
-    border,   null,      null,       null,      null,     bishop_b_1,      null,       null,       null,   border,
+    border,   null,      null,       null,      null,     rook_b_1,      null,       null,       null,   border,
     border,   null,      null,       null,      null,     null,      null,       null,       null,   border,
     border,   null,      null,       null,      null,     null,      null,       null,       null,   border,
     border, border,  border,   border,  border, border,  border,   border,   border, border,
