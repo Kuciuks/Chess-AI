@@ -31,50 +31,72 @@ class Pawn extends Piece{
                 null,    0,   0,   0,   0,   0,   0,   0,   0, null,
                 null, null, null, null, null, null, null, null, null, null
             ]
+            this.moves = this.color == 'Black' ? ['UP', 'UP-LEFT', 'UP-RIGHT'] : ['DOWN', 'DOWN-LEFT', 'DOWN-RIGHT']
         }
 
         checkMoveValidity(chess_board, moves){
             let valid_moves = []
-            console.log(moves, " MOVES")
-
-            moves.forEach(move => {
-                //check if the move is not a border and not occupied by same color piece
-                if (move != undefined && chess_board[move]?.name !== "Border" && chess_board[move]?.color !== this.color) {
-                    // console.log(chess_board[move], " VALID MOVE", move)
-                    valid_moves.push(move)
+            console.log(moves)
+            //going through the possible moves and getting the valid ones
+            this.moves.forEach(move => {
+                switch(move){
+                    case "UP-LEFT":
+                        valid_moves.push({'UP-LEFT':getMoves.moveUpLeft(chess_board, this.tile_index, this.color, this.name)})
+                        break
+                    case "UP-RIGHT":
+                        valid_moves.push({'UP-RIGHT':getMoves.moveUpRight(chess_board, this.tile_index, this.color, this.name)})
+                        break
+                    case "DOWN-LEFT":
+                        valid_moves.push({'DOWN-LEFT':getMoves.moveDownLeft(chess_board, this.tile_index, this.color, this.name)})
+                        break
+                    case "DOWN-RIGHT":
+                        valid_moves.push({'DOWN-RIGHT':getMoves.moveDownRight(chess_board, this.tile_index, this.color, this.name)})
+                        break
+                    case "UP":
+                        valid_moves.push({'UP':getMoves.moveUp(chess_board, this.tile_index, this.color, this.name, this.special_move)})
+                        break
+                    case "DOWN":
+                        valid_moves.push({'DOWN':getMoves.moveDown(chess_board, this.tile_index, this.color, this.name, this.special_move)})
+                        break
+                    case "LEFT":
+                        valid_moves.push({'LEFT':getMoves.moveLeft(chess_board, this.tile_index, this.color, this.name)})
+                        break
+                    case "RIGHT":
+                        valid_moves.push({'RIGHT':getMoves.moveRight(chess_board, this.tile_index, this.color, this.name)})
+                        break
                 }
             })
+            console.log(valid_moves, " VALID MOVES")
             return valid_moves
         }
 
 
         //method to get available moves for the pawn
         getAvailableMoves(chess_board) {
-            // console.log('\\\n',this.tile_index, "__________ ",this.name, this.color)
-            const tile_index = this.tile_index
+            // // console.log('\\\n',this.tile_index, "__________ ",this.name, this.color)
+            // const tile_index = this.tile_index
 
-            if (this.color == "White") {
-                //moves for black pawn
-                const move_up = chess_board[tile_index + 10] == null ? tile_index + 10 : undefined
-                const move_diag_left = chess_board[tile_index + 11]?.color == 'Black' ? tile_index + 11 : undefined
-                const move_diag_right = chess_board[tile_index + 9]?.color == 'Black' ? tile_index + 9 : undefined
-                const move_two_ahead =  this.special_move && chess_board[tile_index + 20] == null ? tile_index + 20 : undefined
+            // if (this.color == "White") {
+            //     //moves for black pawn
+            //     const move_up = chess_board[tile_index + 10] == null ? tile_index + 10 : undefined
+            //     const move_diag_left = chess_board[tile_index + 11]?.color == 'Black' ? tile_index + 11 : undefined
+            //     const move_diag_right = chess_board[tile_index + 9]?.color == 'Black' ? tile_index + 9 : undefined
+            //     const move_two_ahead =  this.special_move && chess_board[tile_index + 20] == null ? tile_index + 20 : undefined
 
-                let valid_moves = this.checkMoveValidity(chess_board, [move_down, move_diag_left, move_diag_right, move_two_ahead])
-                // console.log(valid_moves)
-                return valid_moves
-            }
-            if (this.color == "Black") {
-                //moves for white pawn
-                const move_up = chess_board[tile_index - 10] == null ? tile_index - 10 : undefined
-                const move_diag_left = chess_board[tile_index - 11]?.color == 'White' ? tile_index - 11 : undefined
-                const move_diag_right = chess_board[tile_index - 9]?.color == 'White' ? tile_index - 9 : undefined
-                const move_two_ahead =  this.special_move && chess_board[tile_index - 20] == null ? tile_index - 20 : undefined
+            //     let valid_moves = this.checkMoveValidity(chess_board, [move_down, move_diag_left, move_diag_right, move_two_ahead])
+            //     // console.log(valid_moves)
+            //     return valid_moves
+            // }
+            // if (this.color == "Black") {
+            //     //moves for white pawn
+            //     const move_up = chess_board[tile_index - 10] == null ? tile_index - 10 : undefined
+            //     const move_diag_left = chess_board[tile_index - 11]?.color == 'White' ? tile_index - 11 : undefined
+            //     const move_diag_right = chess_board[tile_index - 9]?.color == 'White' ? tile_index - 9 : undefined
+            //     const move_two_ahead =  this.special_move && chess_board[tile_index - 20] == null ? tile_index - 20 : undefined
 
-                let valid_moves = this.checkMoveValidity(chess_board, [move_up, move_diag_left, move_diag_right, move_two_ahead])
-                console.log(valid_moves)
-                return valid_moves
-            }
+            let valid_moves = this.checkMoveValidity(chess_board, this.moves)
+            console.log(valid_moves)
+            return valid_moves
         }
 
 
@@ -362,7 +384,7 @@ const king_w = new King('King',10000, 'White', 15)
 
 
 //initializing the pieces with their respective classes and colors (BLACK PIECES)
-const pawn_b_1 = new Pawn('Pawn',100, 'Black', 38, true)
+const pawn_b_1 = new Pawn('Pawn',100, 'Black', 25, true)
 const pawn_b_2 = new Pawn('Pawn',100, 'Black', 48, true)
 const pawn_b_3 = new Pawn('Pawn',100, 'Black', 35, true)
 const pawn_b_4 = new Pawn('Pawn',100, 'Black', 74, true)
@@ -380,7 +402,7 @@ const knight_b_2 = new Knight('Knight',300, 'Black', 87)
 const bishop_b_1 = new Bishop('Bishop',300, 'Black', 45)
 const bishop_b_2 = new Bishop('Bishop',300, 'Black', 86)
 
-const queen_b = new Queen('Queen',900, 'Black', 35)
+const queen_b = new Queen('Queen',900, 'Black', 45)
 const king_b = new King('King',10000, 'Black', 65)
 
 
@@ -392,7 +414,7 @@ const chess_board = [
     border,  border,    border,     border,    border,   border,    border,     border,    border,   border,
     border, rook_w_1, knight_w_1, bishop_w_1, queen_w,   king_w,  bishop_w_2, knight_w_2,  rook_w_2, border,
     border, pawn_w_1,  pawn_w_2,   pawn_w_3,  pawn_w_4, pawn_w_5,  pawn_w_6,   pawn_w_7,   pawn_w_8, border,
-    border,   null,      null,       null,      null,     null,      null,       null,       null,   border,
+    border,   null,      null,       null,      null,     pawn_b_1,      null,       null,       null,   border,
     border,   null,      null,       null,      null,     null,      null,       null,       null,   border,
     border,   null,      null,       null,      null,     null,      null,       null,       null,   border,
     border,   null,      null,       null,      null,     king_b,      null,       null,       null,   border,

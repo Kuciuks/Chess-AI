@@ -1,10 +1,10 @@
 
 
-function moveUpLeft (chess_board, tile_index, color, special){ //move = piece tile index; special = king or pawn piece; special = king or pawn piece; special = king or pawn piece
+function moveUpLeft (chess_board, tile_index, color, special_piece){ //move = piece tile index; special_piece = king or pawn piece; special_piece = king or pawn piece; special_piece = king or pawn piece
     const valid_moves = []
     //directional move count - maximum possible moves in one direction = 7, 
     //if the moving piece is King or Pawn then they can only move 1 move in select directions
-    const directional_move_count = special == 'King' || special == 'Pawn' ? 1 : 7
+    const directional_move_count = special_piece == 'King' || special_piece == 'Pawn' ? 1 : 7
 
     //up left
     for (let j = 0; j < directional_move_count; j++){
@@ -18,11 +18,11 @@ function moveUpLeft (chess_board, tile_index, color, special){ //move = piece ti
     return valid_moves
 }
 
-function moveDownLeft (chess_board, tile_index, color, special){ //move = piece tile index; special = king or pawn piece; special = king or pawn piece
+function moveDownLeft (chess_board, tile_index, color, special_piece){ //move = piece tile index; special_piece = king or pawn piece; special_piece = king or pawn piece
     const valid_moves = []
     //directional move count - maximum possible moves in one direction = 7, 
     //if the moving piece is King or Pawn then they can only move 1 move in select directions
-    const directional_move_count = special == 'King' || special == 'Pawn' ? 1 : 7
+    const directional_move_count = special_piece == 'King' || special_piece == 'Pawn' ? 1 : 7
 
     //down left
     for (let k = 0; k < directional_move_count; k++){
@@ -37,11 +37,11 @@ function moveDownLeft (chess_board, tile_index, color, special){ //move = piece 
     return valid_moves
 }
 
-function moveUpRight (chess_board, tile_index, color, special){ //move = piece tile index; special = king or pawn piece
+function moveUpRight (chess_board, tile_index, color, special_piece){ //move = piece tile index; special_piece = king or pawn piece
     const valid_moves = []
     //directional move count - maximum possible moves in one direction = 7, 
     //if the moving piece is King or Pawn then they can only move 1 move in select directions
-    const directional_move_count = special == 'King' || special == 'Pawn' ? 1 : 7
+    const directional_move_count = special_piece == 'King' || special_piece == 'Pawn' ? 1 : 7
 
     //up right
     for (let l = 0; l < directional_move_count; l++){
@@ -55,12 +55,12 @@ function moveUpRight (chess_board, tile_index, color, special){ //move = piece t
     return valid_moves
 }
 
-function moveDownRight (chess_board, tile_index, color, special){ //move = piece tile index; special = king or pawn piece
+function moveDownRight (chess_board, tile_index, color, special_piece){ //move = piece tile index; special_piece = king or pawn piece
     const valid_moves = []
     //directional move count - maximum possible moves in one direction = 7, 
     //if the moving piece is King or Pawn then they can only move 1 move in select directions
-    const directional_move_count = special == 'King' || special == 'Pawn' ? 1 : 7
-
+    const directional_move_count = special_piece == 'King' || special_piece == 'Pawn' ? 1 : 7
+    
     //down right
     for (let m = 0; m < directional_move_count; m++){
         tile_index += 11
@@ -73,12 +73,14 @@ function moveDownRight (chess_board, tile_index, color, special){ //move = piece
     return valid_moves
 }
 
-function moveUp (chess_board, tile_index, color, special){ //move = piece tile index; special = king or pawn piece
+function moveUp (chess_board, tile_index, color, special_piece, special_move){ //move = piece tile index; special_piece = king or pawn piece
     const valid_moves = []
     //directional move count - maximum possible moves in one direction = 7, 
     //if the moving piece is King or Pawn then they can only move 1 move in select directions
-    const directional_move_count = special == 'King' || special == 'Pawn' ? 1 : 7
-
+    //if its a special piece then it checks whether the piece has a special move active, if it does then sets the directional move count to 2
+    //else it means it its a king moving as special move is undefined, so sets to 1, if other pieces move sets to 7
+    const directional_move_count = special_piece == 'King' || special_piece == 'Pawn' ? special_move ? 2: 1 : 7
+    console.log(directional_move_count , special_move, special_piece)
     //up
     for (let j = 0; j < directional_move_count; j++){
         tile_index -= 10 
@@ -91,11 +93,11 @@ function moveUp (chess_board, tile_index, color, special){ //move = piece tile i
     return valid_moves
 }
 
-function moveDown (chess_board, tile_index, color, special){ //move = piece tile index; special = king or pawn piece
+function moveDown (chess_board, tile_index, color, special_piece){ //move = piece tile index; special_piece = king or pawn piece
     const valid_moves = []
     //directional move count - maximum possible moves in one direction = 7, 
     //if the moving piece is King or Pawn then they can only move 1 move in select directions
-    const directional_move_count = special == 'King' || special == 'Pawn' ? 1 : 7
+    const directional_move_count = special_piece == 'King' || special_piece == 'Pawn' ? 1 : 7
 
     //down
     for (let k = 0; k < directional_move_count; k++){
@@ -110,11 +112,11 @@ function moveDown (chess_board, tile_index, color, special){ //move = piece tile
     return valid_moves
 }
 
-function moveLeft (chess_board, tile_index, color, special){ //move = piece tile index; special = king or pawn piece
+function moveLeft (chess_board, tile_index, color, special_piece){ //move = piece tile index; special_piece = king or pawn piece
     const valid_moves = []
     //directional move count - maximum possible moves in one direction = 7, 
     //if the moving piece is King or Pawn then they can only move 1 move in select directions
-    const directional_move_count = special == 'King' || special == 'Pawn' ? 1 : 7
+    const directional_move_count = special_piece == 'King' || special_piece == 'Pawn' ? 1 : 7
 
     //left
     for (let l = 0; l < directional_move_count; l++){
@@ -128,11 +130,11 @@ function moveLeft (chess_board, tile_index, color, special){ //move = piece tile
     return valid_moves
 }
 
-function moveRight (chess_board, tile_index, color, special){ //move = piece tile index; special = king or pawn piece
+function moveRight (chess_board, tile_index, color, special_piece){ //move = piece tile index; special_piece = king or pawn piece
     const valid_moves = []
     //directional move count - maximum possible moves in one direction = 7, 
     //if the moving piece is King or Pawn then they can only move 1 move in select directions
-    const directional_move_count = special == 'King' || special == 'Pawn' ? 1 : 7
+    const directional_move_count = special_piece == 'King' || special_piece == 'Pawn' ? 1 : 7
 
     //right
     for (let m = 0; m < directional_move_count; m++){
