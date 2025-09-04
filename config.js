@@ -129,7 +129,7 @@ class Rook extends Piece{
         //method to get available moves for the pawn
         getAvailableMoves(chess_board) {
 
-            let valid_moves = this.checkMoveValidity(chess_board, ["UP", "DOWN", "LEFT", "RIGHT"])
+            let valid_moves = this.checkMoveValidity(chess_board)
 
             return valid_moves
         }
@@ -200,7 +200,7 @@ class Bishop extends Piece{
         //method to get available moves for the pawn
         getAvailableMoves(chess_board) {
 
-            let valid_moves = this.checkMoveValidity(chess_board, ["UP", "DOWN", "LEFT", "RIGHT"])
+            let valid_moves = this.checkMoveValidity(chess_board)
 
             return valid_moves
         }
@@ -262,7 +262,7 @@ class Queen extends Piece{
         //method to get available moves for the pawn
         getAvailableMoves(chess_board) {
 
-            let valid_moves = this.checkMoveValidity(chess_board, ["UP", "DOWN", "LEFT", "RIGHT"])
+            let valid_moves = this.checkMoveValidity(chess_board)
 
             return valid_moves
         }
@@ -283,10 +283,51 @@ class King extends Piece{
                 null,  -30, -40, -40, -50, -50, -40, -40, -30, null,
                 null, null, null, null, null, null, null, null, null, null
             ]
+            this.moves = ['UP-LEFT', 'UP-RIGHT', 'DOWN-LEFT', 'DOWN-RIGHT', 'UP', 'DOWN', 'LEFT', 'RIGHT']
         }
+        //getting the valid moves for the King
+        checkMoveValidity(chess_board){
+            let valid_moves = []
+
+            //going through the possible moves and getting the valid ones
+            this.moves.forEach(move => {
+                switch(move){
+                    case "UP-LEFT":
+                        valid_moves.push({'UP-LEFT':getMoves.moveUpLeft(chess_board, this.tile_index, this.color, 'King')})
+                        break
+                    case "UP-RIGHT":
+                        valid_moves.push({'UP-RIGHT':getMoves.moveUpRight(chess_board, this.tile_index, this.color, 'King')})
+                        break
+                    case "DOWN-LEFT":
+                        valid_moves.push({'DOWN-LEFT':getMoves.moveDownLeft(chess_board, this.tile_index, this.color, 'King')})
+                        break
+                    case "DOWN-RIGHT":
+                        valid_moves.push({'DOWN-RIGHT':getMoves.moveDownRight(chess_board, this.tile_index, this.color, 'King')})
+                        break
+                    case "UP":
+                        valid_moves.push({'UP':getMoves.moveUp(chess_board, this.tile_index, this.color, 'King')})
+                        break
+                    case "DOWN":
+                        valid_moves.push({'DOWN':getMoves.moveDown(chess_board, this.tile_index, this.color, 'King')})
+                        break
+                    case "LEFT":
+                        valid_moves.push({'LEFT':getMoves.moveLeft(chess_board, this.tile_index, this.color, 'King')})
+                        break
+                    case "RIGHT":
+                        valid_moves.push({'RIGHT':getMoves.moveRight(chess_board, this.tile_index, this.color, 'King')})
+                        break
+                }
+            })
+            console.log(valid_moves, " VALID MOVES")
+            return valid_moves
+        }
+
         //method to get available moves for the pawn
-        getAvailableMoves(chess_board, piece) {
-            
+        getAvailableMoves(chess_board) {
+
+            let valid_moves = this.checkMoveValidity(chess_board)
+
+            return valid_moves
         }
     }
 
@@ -339,8 +380,8 @@ const knight_b_2 = new Knight('Knight',300, 'Black', 87)
 const bishop_b_1 = new Bishop('Bishop',300, 'Black', 45)
 const bishop_b_2 = new Bishop('Bishop',300, 'Black', 86)
 
-const queen_b = new Queen('Queen',900, 'Black', 84)
-const king_b = new King('King',10000, 'Black', 85)
+const queen_b = new Queen('Queen',900, 'Black', 35)
+const king_b = new King('King',10000, 'Black', 65)
 
 
 const border = new Border('Border')
@@ -352,9 +393,9 @@ const chess_board = [
     border, rook_w_1, knight_w_1, bishop_w_1, queen_w,   king_w,  bishop_w_2, knight_w_2,  rook_w_2, border,
     border, pawn_w_1,  pawn_w_2,   pawn_w_3,  pawn_w_4, pawn_w_5,  pawn_w_6,   pawn_w_7,   pawn_w_8, border,
     border,   null,      null,       null,      null,     null,      null,       null,       null,   border,
-    border,   null,      null,       null,      null,     rook_b_1,      null,       null,       null,   border,
     border,   null,      null,       null,      null,     null,      null,       null,       null,   border,
     border,   null,      null,       null,      null,     null,      null,       null,       null,   border,
+    border,   null,      null,       null,      null,     king_b,      null,       null,       null,   border,
     border, border,  border,   border,  border, border,  border,   border,   border, border,
     border, border, border, border, border,   border,  border, border,  border, border,
     border,  border,    border,     border,    border,   border,    border,     border,     border,  border
