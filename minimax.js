@@ -21,9 +21,7 @@ function minimax(depth,chess_board, maximizingPlayer){
 
         //get all black pieces for current board
         const black_pieces = getColoredPieces(chess_board).black_pieces;
-        // console.log(black_pieces,"__________ BLACK PIECES")
-
-
+        console.log(black_pieces,"__________ BLACK PIECES")
 
 
         let all_moves = []
@@ -34,9 +32,9 @@ function minimax(depth,chess_board, maximizingPlayer){
 
             //make the moves for each piece and return the best move based on best score
             const move_results = piece_moves.map(move =>{
-                // console.log('--- Making move ---',piece.tile_index, move)
+                console.log('--- Making move ---',piece.tile_index, move)
                 const score = evaluateBoard(piece, move, chess_board)
-                // console.log('--- Move score ---', score)
+                console.log('--- Move score ---', score)
 
                 // piece.moves.push({move, score})
 

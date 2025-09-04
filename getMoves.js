@@ -152,21 +152,17 @@ function moveRight (chess_board, tile_index, color, special_piece){ //move = pie
 }
 
 function knightMoves(chess_board, tile_index, color){
-    //if the color to the moving tile is not the target color, then its null
-    const move_up_left = chess_board[tile_index - 21]?.name != 'Border' && chess_board[tile_index - 21]?.color != color ? tile_index - 21 : undefined
-    const move_up_right = chess_board[tile_index - 19]?.name != 'Border' && chess_board[tile_index - 19]?.color != color ? tile_index - 19 : undefined
 
-    const move_left_up = chess_board[tile_index - 12]?.name != 'Border' && chess_board[tile_index - 12]?.color != color ? tile_index - 12 : undefined
-    const move_left_down = chess_board[tile_index + 8]?.name != 'Border' && chess_board[tile_index + 8]?.color != color ? tile_index  + 8 : undefined
+    const move_indices = [-21, -19, -12, +8, -8, +12, +19, +21]
+    const move_indices_names = ['LEFT-UP', 'LEFT-DOWN', 'UP-LEFT', 'UP-RIGHT', 'RIGHT-UP', 'RIGHT-DOWN', 'DOWN-LEFT', 'DOWN-RIGHT']
+    const valid_moves = []
 
-    const move_right_up = chess_board[tile_index - 8]?.name != 'Border' && chess_board[tile_index - 8]?.color != color ? tile_index - 8 : undefined
-    const move_right_down = chess_board[tile_index + 12]?.name != 'Border' && chess_board[tile_index + 12]?.color != color ? tile_index + 12 : undefined
-
-    const move_down_left = chess_board[tile_index + 19]?.name != 'Border' && chess_board[tile_index + 19]?.color != color ? tile_index + 19 : undefined
-    const move_down_right = chess_board[tile_index + 21]?.name != 'Border' && chess_board[tile_index + 21]?.color != color ? tile_index + 21 : undefined
-
-    const valid_moves = [{'UP-LEFT': move_up_left}, {'UP-RIGHT': move_up_right}, {'LEFT-UP': move_left_up}, {'LEFT-DOWN': move_left_down}, {'RIGHT-DOWN': move_right_down}, {'RIGHT-UP': move_right_up}, {'DOWN-LEFT' :move_down_left}, {'DOWN-RIGHT': move_down_right}]
-
+    for(let i = 0; i < move_indices.length; i++){
+        tile_index += move_indices[i]
+        if (chess_board[tile_index] == null || chess_board[tile_index]?.name !== 'Border' && chess_board[tile_index]?.color !== color){
+            valid_moves.push({[move_indices_names[i]]: tile_index})
+        }
+    }
     return valid_moves
 
 }
