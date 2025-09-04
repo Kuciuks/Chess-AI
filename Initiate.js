@@ -26,12 +26,14 @@ function initiateAI(){
         if(true == true){
 
             //acivate minimax and capture returned values
-            let [value1, value2] = minimax(configInstance.depth, before_move_board, true)
+            let [best_move, best_score] = minimax(configInstance.depth, before_move_board, true)
+
+            console.log(best_move, best_score)
 
             //using returned minimax values take a step
-            moveBestPiece(value1.from, value1.to);
+            moveBestPiece(best_move);
 
-            configInstance.checkedBoardCount = 0;
+
             
             //add a point - switch turn
             configInstance.toggle +=1;

@@ -26,7 +26,7 @@ function minimax(depth,chess_board, maximizingPlayer){
 
         let all_moves = []
         // go through black pieces
-        const black_pieces_moves_complete = black_pieces.map(piece => {
+        black_pieces.map(piece => {
 
             const piece_moves = piece.getAvailableMoves(chess_board);
             console.log(piece.name, piece_moves, ' PIECE AND MOVES _____')
@@ -43,11 +43,11 @@ function minimax(depth,chess_board, maximizingPlayer){
                     bestScore = score
                     bestMove = move
                 }
+                console.log(piece.tile_index,'))))))))))))))')
 
-                return {move, score}
+                return {move: move, score: score, tile_index: piece.tile_index}
             })
             all_moves.push(...move_results)
-
             console.log(move_results, ' MOVE RESULTS')
             return piece
         })
@@ -56,7 +56,7 @@ function minimax(depth,chess_board, maximizingPlayer){
 
 
 
-
+        console.log(all_moves,'ALL MOVES')
 
 
 
