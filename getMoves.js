@@ -97,7 +97,10 @@ function moveDown (chess_board, tile_index, color, special_piece){ //move = piec
     const valid_moves = []
     //directional move count - maximum possible moves in one direction = 7, 
     //if the moving piece is King or Pawn then they can only move 1 move in select directions
-    const directional_move_count = special_piece == 'King' || special_piece == 'Pawn' ? 1 : 7
+    //if its a special piece then it checks whether the piece has a special move active, if it does then sets the directional move count to 2
+    //else it means it its a king moving as special move is undefined, so sets to 1, if other pieces move sets to 7
+    const directional_move_count = special_piece == 'King' || special_piece == 'Pawn' ? special_move ? 2: 1 : 7
+    console.log(directional_move_count , special_move, special_piece)
 
     //down
     for (let k = 0; k < directional_move_count; k++){
@@ -146,6 +149,12 @@ function moveRight (chess_board, tile_index, color, special_piece){ //move = pie
         }
     }
     return valid_moves
+}
+
+function knightMoves(chess_board, tile_index, color){
+    valid_moves = []
+
+    const move_up_left = tile_index
 }
 
 
