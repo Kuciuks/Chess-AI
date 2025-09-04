@@ -152,10 +152,24 @@ function moveRight (chess_board, tile_index, color, special_piece){ //move = pie
 }
 
 function knightMoves(chess_board, tile_index, color){
-    valid_moves = []
+    //if the color to the moving tile is not the target color, then its null
+    const move_up_left = chess_board[tile_index - 21]?.name != 'Border' && chess_board[tile_index - 21]?.color != color ? tile_index - 21 : undefined
+    const move_up_right = chess_board[tile_index - 19]?.name != 'Border' && chess_board[tile_index - 19]?.color != color ? tile_index - 19 : undefined
 
-    const move_up_left = tile_index
+    const move_left_up = chess_board[tile_index - 12]?.name != 'Border' && chess_board[tile_index - 12]?.color != color ? tile_index - 12 : undefined
+    const move_left_down = chess_board[tile_index + 8]?.name != 'Border' && chess_board[tile_index + 8]?.color != color ? tile_index  + 8 : undefined
+
+    const move_right_up = chess_board[tile_index - 8]?.name != 'Border' && chess_board[tile_index - 8]?.color != color ? tile_index - 8 : undefined
+    const move_right_down = chess_board[tile_index + 12]?.name != 'Border' && chess_board[tile_index + 12]?.color != color ? tile_index + 12 : undefined
+
+    const move_down_left = chess_board[tile_index + 19]?.name != 'Border' && chess_board[tile_index + 19]?.color != color ? tile_index + 19 : undefined
+    const move_down_right = chess_board[tile_index + 21]?.name != 'Border' && chess_board[tile_index + 21]?.color != color ? tile_index + 21 : undefined
+
+    const valid_moves = [{'UP-LEFT': move_up_left}, {'UP-RIGHT': move_up_right}, {'LEFT-UP': move_left_up}, {'LEFT-DOWN': move_left_down}, {'RIGHT-DOWN': move_right_down}, {'RIGHT-UP': move_right_up}, {'DOWN-LEFT' :move_down_left}, {'DOWN-RIGHT': move_down_right}]
+
+    return valid_moves
+
 }
 
 
-export default {moveUpLeft, moveDownLeft, moveUpRight, moveDownRight, moveUp, moveDown, moveLeft, moveRight}
+export default {moveUpLeft, moveDownLeft, moveUpRight, moveDownRight, moveUp, moveDown, moveLeft, moveRight, knightMoves}
