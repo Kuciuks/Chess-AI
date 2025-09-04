@@ -153,14 +153,16 @@ function moveRight (chess_board, tile_index, color, special_piece){ //move = pie
 
 function knightMoves(chess_board, tile_index, color){
 
-    const move_indices = [-21, -19, -12, +8, -8, +12, +19, +21]
+    const move_indices = [-21, 2, 11, 20, 9, -2, -11, -20]
     const move_indices_names = ['LEFT-UP', 'LEFT-DOWN', 'UP-LEFT', 'UP-RIGHT', 'RIGHT-UP', 'RIGHT-DOWN', 'DOWN-LEFT', 'DOWN-RIGHT']
     const valid_moves = []
 
     for(let i = 0; i < move_indices.length; i++){
+        console.log(tile_index,'-----')
         tile_index += move_indices[i]
+        console.log(tile_index, move_indices[i])
         if (chess_board[tile_index] == null || chess_board[tile_index]?.name !== 'Border' && chess_board[tile_index]?.color !== color){
-            valid_moves.push({[move_indices_names[i]]: tile_index})
+            valid_moves.push(tile_index)
         }
     }
     return valid_moves
