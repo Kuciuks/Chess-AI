@@ -26,12 +26,12 @@ function initiateAI(){
         if(true == true){
 
             //acivate minimax and capture returned values
-            let [best_move, best_score] = minimax(configInstance.depth, before_move_board, true)
+            let [best_move, best_score, original_index] = minimax(configInstance.depth, before_move_board, true)
 
             console.log(best_move, best_score)
 
             //using returned minimax values take a step
-            moveBestPiece(best_move);
+            moveBestPiece(best_move, original_index);
 
 
             
