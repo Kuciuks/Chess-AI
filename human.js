@@ -5,6 +5,7 @@ import whoTurn from "./whoTurn.js"
 import uploadImages from "./uploadImages.js"
 import initiateAI from './Initiate.js'
 import showMoves from './showMoves.js';
+import moveBestPiece from './getBestMove.js'
 
 const configInstance = config.getInstance()
 
@@ -13,54 +14,44 @@ const configInstance = config.getInstance()
 //controller for the human player
 console.log('Human script')
 function human(chess_board){
-    //get all black pieces for current board
+
+    //get all white pieces for current board
     const white_pieces = getColoredPieces(chess_board).white_pieces;
     console.log(white_pieces,"__________ WHITE PIECES")
 
 
-    // go through black pieces
-    white_pieces.forEach(piece => {
-        if(!configInstance.selection && tile.innerText !== ""){
+    //capture all tiles and add an event listener to all
+    document.querySelectorAll(".tile").forEach(tile => {
+
+        //adds the event listener to each tile and executes code when triggered
+        tile.addEventListener("click", event => {
 
             //if selection is empty and tile text is full 
-            const piece_moves = piece.getAvailableMoves(chess_board);
-            console.log(piece.name, piece_moves, ' PIECE AND MOVES _____')
+            if(!configInstance.selection && chess_board[tile.id] !== "" && chess_board[tile.id]?.color !== "Black"){
+                const piece_moves = chess_board[tile.id].getAvailableMoves(chess_board)
+                configInstance.selection = tile.id
 
-            piece_moves.forEach(element => {
-                
-            })
-            //make the moves for each piece and return the best move based on best score
-            const score = evaluateBoard(piece, move, chess_board)
+                piece_moves.flat().forEach(move => {
+                    document.getElementById(move).style.backgroundColor = 'orange'
+                })
+            }
+            
+            //If selected is the same tile, unselect
+            else if (configInstance.selection === tile.id){
+                configInstance.selection = null
+                paintTiles()
+            }
 
-        }
+            if(tile.style.backgroundColor === 'orange'){
+                moveBestPiece(tile.id, configInstance.selection, chess_board)
+                paintTiles()
+            }
+        })
     })
+}
+
             
-    
-            
-    //             let chess_board = getBoard()
-    //             let a = evaluateBoard(chess_board)
-    //             console.log(a,"Starting score")
-    //             configInstance.selected_letter = (Array.from(tile.innerText)).shift()
-    
-    //             //update bg color
-    //             tile.style.backgroundColor = "orange";
-                
-    //             //update selection
-    //             configInstance.selection = tile;
-    
-    //             showMoves(configInstance.selection,"W")
-    //         }
-    
-                
-    
-    //         //If selected is the same tile, unselect
-    //         else if(configInstance.selection === tile){
-    //             //reset tile colors
-    //             paintTiles();
-    
-    //             //remove selection;
-    //             configInstance.selection = null;
-    //         }
+ 
     
     //         //MOVING
     //         //check if clicked on green without text
@@ -122,6 +113,5 @@ function human(chess_board){
     //     })
     // })
     
-}
 
 export default human
