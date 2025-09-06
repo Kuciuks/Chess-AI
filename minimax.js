@@ -26,7 +26,7 @@ function minimax(depth,chess_board, maximizingPlayer){
         let all_moves = []
 
         // go through black pieces
-        black_pieces.map(piece => {
+        black_pieces.forEach(piece => {
 
             const piece_moves = piece.getAvailableMoves(chess_board);
             console.log(piece.name, piece_moves, ' PIECE AND MOVES _____')

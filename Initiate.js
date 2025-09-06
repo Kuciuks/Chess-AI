@@ -31,7 +31,7 @@ function initiateAI(){
             console.log(best_move, best_score)
 
             //using returned minimax values take a step
-            moveBestPiece(best_move, original_index);
+            const after_move_board = moveBestPiece(best_move, original_index, before_move_board);
 
 
             
@@ -40,9 +40,7 @@ function initiateAI(){
         }
 
 
-        //upload images, repaint tiles, reset values
-        uploadImages()
-        paintTiles()
+
         configInstance.all_piece_moves = [];
         configInstance.black_pieces=[];
         configInstance.white_pieces = [];

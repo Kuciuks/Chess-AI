@@ -1,3 +1,5 @@
+import uploadImages from "./uploadImages.js";
+import paintTiles from "./paintTiles.js";
 import getMoves from "./getMoves.js";
 
 //declaring the base class with constructor properties
@@ -11,7 +13,6 @@ class Piece{
     }
 
 }
-
 
 
 //declaring the child classes that extend the base class Piece (capturing base class properties)
@@ -73,26 +74,6 @@ class Pawn extends Piece{
 
         //method to get available moves for the pawn
         getAvailableMoves(chess_board) {
-            // // console.log('\\\n',this.tile_index, "__________ ",this.name, this.color)
-            // const tile_index = this.tile_index
-
-            // if (this.color == "White") {
-            //     //moves for black pawn
-            //     const move_up = chess_board[tile_index + 10] == null ? tile_index + 10 : undefined
-            //     const move_diag_left = chess_board[tile_index + 11]?.color == 'Black' ? tile_index + 11 : undefined
-            //     const move_diag_right = chess_board[tile_index + 9]?.color == 'Black' ? tile_index + 9 : undefined
-            //     const move_two_ahead =  this.special_move && chess_board[tile_index + 20] == null ? tile_index + 20 : undefined
-
-            //     let valid_moves = this.checkMoveValidity(chess_board, [move_down, move_diag_left, move_diag_right, move_two_ahead])
-            //     // console.log(valid_moves)
-            //     return valid_moves
-            // }
-            // if (this.color == "Black") {
-            //     //moves for white pawn
-            //     const move_up = chess_board[tile_index - 10] == null ? tile_index - 10 : undefined
-            //     const move_diag_left = chess_board[tile_index - 11]?.color == 'White' ? tile_index - 11 : undefined
-            //     const move_diag_right = chess_board[tile_index - 9]?.color == 'White' ? tile_index - 9 : undefined
-            //     const move_two_ahead =  this.special_move && chess_board[tile_index - 20] == null ? tile_index - 20 : undefined
 
             let valid_moves = this.checkMoveValidity(chess_board, this.moves)
             console.log(valid_moves)
@@ -510,6 +491,9 @@ const config = (function() {
     let instance;
 
     function createInstance() {
+            //upload images, repaint tiles, reset values
+            uploadImages()
+            paintTiles()
         return {
             black_pieces: [],
             white_pieces: [],
