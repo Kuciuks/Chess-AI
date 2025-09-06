@@ -1,16 +1,11 @@
-import getBoard from './getBoard.js';
 import whoTurn from './whoTurn.js';
 import minimax from './minimax.js';
 import moveBestPiece from './getBestMove.js';
-import uploadImages from './uploadImages.js';
-import paintTiles from './paintTiles.js';
 import config from './config.js';
 import human from './human.js';
 const configInstance = config.getInstance()
 
-
-
-// console.log('[Initiate script]')
+console.log('[Initiate script]')
 
 //initiates the game process
 function initiateAI(){
@@ -20,10 +15,11 @@ function initiateAI(){
         let before_move_board = configInstance.chess_board;
 
         //capture which player's turn it is (WHITE / BLACK)
-        // let currentPLayer = whoTurn(configInstance.toggle);
+        let currentPLayer = whoTurn(configInstance.toggle);
 
+        let after_move_board = null
         //if the captured player is BLACK then activate the AI process
-        if(true == true){
+        if(!currentPLayer){
 
             //acivate minimax and capture returned values
             let [best_move, best_score, original_index] = minimax(configInstance.depth, before_move_board, true)
@@ -31,22 +27,18 @@ function initiateAI(){
             console.log(best_move, best_score)
 
             //using returned minimax values take a step
-            const after_move_board = moveBestPiece(best_move, original_index, before_move_board);
+            after_move_board = moveBestPiece(best_move, original_index, before_move_board);
+            console.log(after_move_board)
+            console.log(before_move_board)
 
-
-            
             //add a point - switch turn
             configInstance.toggle +=1;
         }
 
 
-
-        configInstance.all_piece_moves = [];
-        configInstance.black_pieces=[];
-        configInstance.white_pieces = [];
         
         document.addEventListener('DOMContentLoaded',event =>{
-            human()
+            human(after_move_board)
         })
     }
     catch(err){

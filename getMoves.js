@@ -93,7 +93,7 @@ function moveUp (chess_board, tile_index, color, special_piece, special_move){ /
     return valid_moves
 }
 
-function moveDown (chess_board, tile_index, color, special_piece){ //move = piece tile index; special_piece = king or pawn piece
+function moveDown (chess_board, tile_index, color, special_piece, special_move){ //move = piece tile index; special_piece = king or pawn piece
     const valid_moves = []
     //directional move count - maximum possible moves in one direction = 7, 
     //if the moving piece is King or Pawn then they can only move 1 move in select directions
