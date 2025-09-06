@@ -41,28 +41,28 @@ class Pawn extends Piece{
             this.moves.forEach(move => {
                 switch(move){
                     case "UP-LEFT":
-                        valid_moves.push({'UP-LEFT':getMoves.moveUpLeft(chess_board, this.tile_index, this.color, this.name)})
+                        valid_moves.push(getMoves.moveUpLeft(chess_board, this.tile_index, this.color, this.name))
                         break
                     case "UP-RIGHT":
-                        valid_moves.push({'UP-RIGHT':getMoves.moveUpRight(chess_board, this.tile_index, this.color, this.name)})
+                        valid_moves.push(getMoves.moveUpRight(chess_board, this.tile_index, this.color, this.name))
                         break
                     case "DOWN-LEFT":
-                        valid_moves.push({'DOWN-LEFT':getMoves.moveDownLeft(chess_board, this.tile_index, this.color, this.name)})
+                        valid_moves.push(getMoves.moveDownLeft(chess_board, this.tile_index, this.color, this.name))
                         break
                     case "DOWN-RIGHT":
-                        valid_moves.push({'DOWN-RIGHT':getMoves.moveDownRight(chess_board, this.tile_index, this.color, this.name)})
+                        valid_moves.push(getMoves.moveDownRight(chess_board, this.tile_index, this.color, this.name))
                         break
                     case "UP":
-                        valid_moves.push({'UP':getMoves.moveUp(chess_board, this.tile_index, this.color, this.name, this.special_move)})
+                        valid_moves.push(getMoves.moveUp(chess_board, this.tile_index, this.color, this.name, this.special_move))
                         break
                     case "DOWN":
-                        valid_moves.push({'DOWN':getMoves.moveDown(chess_board, this.tile_index, this.color, this.name, this.special_move)})
+                        valid_moves.push(getMoves.moveDown(chess_board, this.tile_index, this.color, this.name, this.special_move))
                         break
                     case "LEFT":
-                        valid_moves.push({'LEFT':getMoves.moveLeft(chess_board, this.tile_index, this.color, this.name)})
+                        valid_moves.push(getMoves.moveLeft(chess_board, this.tile_index, this.color, this.name))
                         break
                     case "RIGHT":
-                        valid_moves.push({'RIGHT':getMoves.moveRight(chess_board, this.tile_index, this.color, this.name)})
+                        valid_moves.push(getMoves.moveRight(chess_board, this.tile_index, this.color, this.name))
                         break
                 }
             })
@@ -131,16 +131,16 @@ class Rook extends Piece{
             this.moves.forEach(move => {
                 switch(move){
                     case "UP":
-                        valid_moves.push({'UP':getMoves.moveUp(chess_board, this.tile_index)})
+                        valid_moves.push(getMoves.moveUp(chess_board, this.tile_index))
                         break
                     case "DOWN":
-                        valid_moves.push({'DOWN':getMoves.moveDown(chess_board, this.tile_index)})
+                        valid_moves.push(getMoves.moveDown(chess_board, this.tile_index))
                         break
                     case "LEFT":
-                        valid_moves.push({'LEFT':getMoves.moveLeft(chess_board, this.tile_index)})
+                        valid_moves.push(getMoves.moveLeft(chess_board, this.tile_index))
                         break
                     case "RIGHT":
-                        valid_moves.push({'RIGHT':getMoves.moveRight(chess_board, this.tile_index)})
+                        valid_moves.push(getMoves.moveRight(chess_board, this.tile_index))
                         break
                 }
             })
@@ -172,9 +172,18 @@ class Knight extends Piece{
                 null, null, null, null, null, null, null, null, null, null
             ]
         }
+        //getting the valid moves for the Bishop
+        checkMoveValidity(chess_board){
+
+            const valid_moves = getMoves.knightMoves(chess_board, this.tile_index, this.color)
+
+            console.log(valid_moves, " VALID MOVES")
+            return valid_moves
+        }
         //method to get available moves for the pawn
         getAvailableMoves(chess_board, piece) {
-            
+            let valid_moves = this.checkMoveValidity(chess_board)
+            return valid_moves
         }
     }
 class Bishop extends Piece{
@@ -202,16 +211,16 @@ class Bishop extends Piece{
             this.moves.forEach(move => {
                 switch(move){
                     case "UP-LEFT":
-                        valid_moves.push({'UP-LEFT':getMoves.moveUpLeft(chess_board, this.tile_index)})
+                        valid_moves.push(getMoves.moveUpLeft(chess_board, this.tile_index))
                         break
                     case "UP-RIGHT":
-                        valid_moves.push({'UP-RIGHT':getMoves.moveUpRight(chess_board, this.tile_index)})
+                        valid_moves.push(getMoves.moveUpRight(chess_board, this.tile_index))
                         break
                     case "DOWN-LEFT":
-                        valid_moves.push({'DOWN-LEFT':getMoves.moveDownLeft(chess_board, this.tile_index)})
+                        valid_moves.push(getMoves.moveDownLeft(chess_board, this.tile_index))
                         break
                     case "DOWN-RIGHT":
-                        valid_moves.push({'DOWN-RIGHT':getMoves.moveDownRight(chess_board, this.tile_index)})
+                        valid_moves.push(getMoves.moveDownRight(chess_board, this.tile_index))
                         break
                 }
             })
@@ -252,28 +261,28 @@ class Queen extends Piece{
             this.moves.forEach(move => {
                 switch(move){
                     case "UP-LEFT":
-                        valid_moves.push({'UP-LEFT':getMoves.moveUpLeft(chess_board, this.tile_index)})
+                        valid_moves.push(getMoves.moveUpLeft(chess_board, this.tile_index))
                         break
                     case "UP-RIGHT":
-                        valid_moves.push({'UP-RIGHT':getMoves.moveUpRight(chess_board, this.tile_index)})
+                        valid_moves.push(getMoves.moveUpRight(chess_board, this.tile_index))
                         break
                     case "DOWN-LEFT":
-                        valid_moves.push({'DOWN-LEFT':getMoves.moveDownLeft(chess_board, this.tile_index)})
+                        valid_moves.push(getMoves.moveDownLeft(chess_board, this.tile_index))
                         break
                     case "DOWN-RIGHT":
-                        valid_moves.push({'DOWN-RIGHT':getMoves.moveDownRight(chess_board, this.tile_index)})
+                        valid_moves.push(getMoves.moveDownRight(chess_board, this.tile_index))
                         break
                     case "UP":
-                        valid_moves.push({'UP':getMoves.moveUp(chess_board, this.tile_index)})
+                        valid_moves.push(getMoves.moveUp(chess_board, this.tile_index))
                         break
                     case "DOWN":
-                        valid_moves.push({'DOWN':getMoves.moveDown(chess_board, this.tile_index)})
+                        valid_moves.push(getMoves.moveDown(chess_board, this.tile_index))
                         break
                     case "LEFT":
-                        valid_moves.push({'LEFT':getMoves.moveLeft(chess_board, this.tile_index)})
+                        valid_moves.push(getMoves.moveLeft(chess_board, this.tile_index))
                         break
                     case "RIGHT":
-                        valid_moves.push({'RIGHT':getMoves.moveRight(chess_board, this.tile_index)})
+                        valid_moves.push(getMoves.moveRight(chess_board, this.tile_index))
                         break
                 }
             })
@@ -315,28 +324,28 @@ class King extends Piece{
             this.moves.forEach(move => {
                 switch(move){
                     case "UP-LEFT":
-                        valid_moves.push({'UP-LEFT':getMoves.moveUpLeft(chess_board, this.tile_index, this.color, 'King')})
+                        valid_moves.push(getMoves.moveUpLeft(chess_board, this.tile_index, this.color, 'King'))
                         break
                     case "UP-RIGHT":
-                        valid_moves.push({'UP-RIGHT':getMoves.moveUpRight(chess_board, this.tile_index, this.color, 'King')})
+                        valid_moves.push(getMoves.moveUpRight(chess_board, this.tile_index, this.color, 'King'))
                         break
                     case "DOWN-LEFT":
-                        valid_moves.push({'DOWN-LEFT':getMoves.moveDownLeft(chess_board, this.tile_index, this.color, 'King')})
+                        valid_moves.push(getMoves.moveDownLeft(chess_board, this.tile_index, this.color, 'King'))
                         break
                     case "DOWN-RIGHT":
-                        valid_moves.push({'DOWN-RIGHT':getMoves.moveDownRight(chess_board, this.tile_index, this.color, 'King')})
+                        valid_moves.push(getMoves.moveDownRight(chess_board, this.tile_index, this.color, 'King'))
                         break
                     case "UP":
-                        valid_moves.push({'UP':getMoves.moveUp(chess_board, this.tile_index, this.color, 'King')})
+                        valid_moves.push(getMoves.moveUp(chess_board, this.tile_index, this.color, 'King'))
                         break
                     case "DOWN":
-                        valid_moves.push({'DOWN':getMoves.moveDown(chess_board, this.tile_index, this.color, 'King')})
+                        valid_moves.push(getMoves.moveDown(chess_board, this.tile_index, this.color, 'King'))
                         break
                     case "LEFT":
-                        valid_moves.push({'LEFT':getMoves.moveLeft(chess_board, this.tile_index, this.color, 'King')})
+                        valid_moves.push(getMoves.moveLeft(chess_board, this.tile_index, this.color, 'King'))
                         break
                     case "RIGHT":
-                        valid_moves.push({'RIGHT':getMoves.moveRight(chess_board, this.tile_index, this.color, 'King')})
+                        valid_moves.push(getMoves.moveRight(chess_board, this.tile_index, this.color, 'King'))
                         break
                 }
             })
@@ -396,10 +405,10 @@ const pawn_b_8 = new Pawn('Pawn',100, 'Black', 78, true)
 const rook_b_1 = new Rook('Rook',500, 'Black', 45)
 const rook_b_2 = new Rook('Rook',500, 'Black', 78)
 
-const knight_b_1 = new Knight('Knight',300, 'Black', 82)
+const knight_b_1 = new Knight('Knight',300, 'Black', 55)
 const knight_b_2 = new Knight('Knight',300, 'Black', 87)
 
-const bishop_b_1 = new Bishop('Bishop',300, 'Black', 45)
+const bishop_b_1 = new Bishop('Bishop',300, 'Black', 55)
 const bishop_b_2 = new Bishop('Bishop',300, 'Black', 86)
 
 const queen_b = new Queen('Queen',900, 'Black', 45)
@@ -414,10 +423,10 @@ const chess_board = [
     border,  border,    border,     border,    border,   border,    border,     border,    border,   border,
     border, rook_w_1, knight_w_1, bishop_w_1, queen_w,   king_w,  bishop_w_2, knight_w_2,  rook_w_2, border,
     border, pawn_w_1,  pawn_w_2,   pawn_w_3,  pawn_w_4, pawn_w_5,  pawn_w_6,   pawn_w_7,   pawn_w_8, border,
-    border,   null,      null,       null,      null,     pawn_b_1,      null,       null,       null,   border,
     border,   null,      null,       null,      null,     null,      null,       null,       null,   border,
     border,   null,      null,       null,      null,     null,      null,       null,       null,   border,
-    border,   null,      null,       null,      null,     king_b,      null,       null,       null,   border,
+    border,   null,      null,       null,      null,     knight_b_1,      null,       null,       null,   border,
+    border,   null,      null,       null,      null,     null,      null,       null,       null,   border,
     border, border,  border,   border,  border, border,  border,   border,   border, border,
     border, border, border, border, border,   border,  border, border,  border, border,
     border,  border,    border,     border,    border,   border,    border,     border,     border,  border
@@ -505,7 +514,7 @@ const config = (function() {
             black_pieces: [],
             white_pieces: [],
             all_piece_moves: [],
-            depth: 1,
+            depth: 2,
             alpha: -Infinity,
             beta: Infinity,
             checkedBoardCount: 0,

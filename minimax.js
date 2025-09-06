@@ -21,22 +21,19 @@ function minimax(depth,chess_board, maximizingPlayer){
 
         //get all black pieces for current board
         const black_pieces = getColoredPieces(chess_board).black_pieces;
-        // console.log(black_pieces,"__________ BLACK PIECES")
-
-
-
+        console.log(black_pieces,"__________ BLACK PIECES")
 
         let all_moves = []
+
         // go through black pieces
-        const black_pieces_moves_complete = black_pieces.map(piece => {
+        black_pieces.map(piece => {
+
             const piece_moves = piece.getAvailableMoves(chess_board);
             console.log(piece.name, piece_moves, ' PIECE AND MOVES _____')
 
             //make the moves for each piece and return the best move based on best score
             const move_results = piece_moves.map(move =>{
-                // console.log('--- Making move ---',piece.tile_index, move)
                 const score = evaluateBoard(piece, move, chess_board)
-                // console.log('--- Move score ---', score)
 
                 // piece.moves.push({move, score})
 
@@ -45,80 +42,15 @@ function minimax(depth,chess_board, maximizingPlayer){
                     bestMove = move
                 }
 
-                return {move, score}
+                return {move: move, score: score, tile_index: piece.tile_index}
             })
             all_moves.push(...move_results)
-
-            // console.log(move_results, ' MOVE RESULTS')
+            console.log(move_results, ' MOVE RESULTS')
             return piece
         })
-        // console.log(black_pieces_moves_complete, ' BLACK PIECES MOVES COMPLETE')
-        // console.log(all_moves, ' ALL MOVES _____', all_moves.length)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        // black_pieces.map(piece => {
-
-
-        //     //make moves for each piece and return the best move based on best score
-            
-
-
-
-            
-        //     // //take object and measure how many moves can it make
-            
-        //     //     //take object and measure how many moves can it make
-        //     //     for(let j = 0; j < moves[i].To.length; j++){
-    
-        //     //         // count++;
-        //     //         // console.log(count, " MOVE COUNT");  
-        //     //         //store current tile inner text
-        //     //         let tiletxt = document.getElementById(moves[i].To[j]).innerText;
-        //     //         // console.log(tiletxt, " TILE TXT")
-                    
-        //     //         configInstance.pieceNameMemAI.push({ "FROM": moves[i].From, "fromNAME": document.getElementById(moves[i].From).innerText, "TO": moves[i].To[j], "toNAME": document.getElementById(moves[i].To[j]).innerText, "PLAYER": maximizingPlayer});
-        //     //         // console.log(configInstance.pieceNameMemAI,'_________________-')
-                    
-        //     //         //declare board copy, move the object to each location  
-        //     //         let board = makeMove(moves[i].To[j], moves[i].From);
-                    
-        //     //         //get a score for the board
-        //     //         let score = minimax(depth - 1, board, false);
-                    
-        //     //         // console.log("Move: ", moves[i].From, moves[i].To[j], " and resulting score: ", score, " B");
-        //     //         //print score for black piece
-        //     //         // console.log("Score for black piece: ",score)
-
-        //     //         // console.log(score,"---- Black Score")
-        //     //         //check if score is greater than bestScore
-        //     //         if(score > bestScore){
-        //     //             bestScore = score;
-        //     //             bestMove = {"from": moves[i].From, "to": moves[i].To[j]}
-        //     //             // console.log(bestMove,' BEST MOVE LOG')
-        //     //             black_pieces = [];
-        //     //         }
-        //     //         configInstance.checkedBoardCount++;
-        //     //         configInstance.checkedBoardCount++;
-        //     //         //declare undone board
-        //     //         board = undoMove(maximizingPlayer)
-                    
-
-        // })
+        const original_index = all_moves[0].tile_index
         console.log(bestMove,bestScore,' _____BEST MOVE _____')
-        return [bestMove, bestScore]
+        return [bestMove, bestScore, original_index]
         
     }
     //if player turn
