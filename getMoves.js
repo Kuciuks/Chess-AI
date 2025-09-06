@@ -161,9 +161,13 @@ function knightMoves(chess_board, tile_index, color){
         console.log(tile_index,'-----')
         tile_index += move_indices[i]
         console.log(tile_index, move_indices[i])
-        if (chess_board[tile_index] == null || chess_board[tile_index]?.name !== 'Border' && chess_board[tile_index]?.color !== color){
-            valid_moves.push(tile_index)
+
+        if(tile_index >= 11){
+            if(chess_board[tile_index] == null || chess_board[tile_index]?.name !== 'Border' && chess_board[tile_index]?.color !== color){
+                valid_moves.push(tile_index)
+            }
         }
+
     }
     return valid_moves
 

@@ -32,6 +32,7 @@ function human(chess_board){
                 configInstance.selection = tile.id
 
                 piece_moves.flat().forEach(move => {
+                    console.log(move)
                     document.getElementById(move).style.backgroundColor = 'orange'
                 })
             }
