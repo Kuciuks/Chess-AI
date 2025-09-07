@@ -6,7 +6,6 @@ function uploadImages(){
             tile.innerHTML=`${tile.innerText} <img class="pic" src="Assets/${tile.innerText}.png">`;
             tile.style.cursor = "pointer";
         }
-        
     })
 }
 

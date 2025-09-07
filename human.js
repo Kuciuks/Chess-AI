@@ -1,117 +1,82 @@
-import config from "./config.js"
-import getBoard from "./getBoard.js"
-import evaluateBoard from "./evaluateBoard.js"
+import config, {getColoredPieces, evaluateBoard} from './config.js'
 import paintTiles from "./paintTiles.js"
-import whoTurn from "./whoTurn.js"
-import uploadImages from "./uploadImages.js"
-import initiateAI from './Initiate.js'
-import showMoves from './showMoves.js';
+import moveBestPiece from './getBestMove.js'
+import whoTurn from './whoTurn.js'
 
 const configInstance = config.getInstance()
 
+//add event listener to chess board parent file when the script is loaded
+const DOM_chess_table = document.querySelector('.chess-table')
+DOM_chess_table.addEventListener('click', event => {
+    console.log('human.js CALL 2')
+    //find the specific tile that was clicked on
+    const tile = event.target.closest('.tile');
+
+    //if the click was not on a tile, do nothing
+    if (!tile) {
+        console.log('human.js CALL 3')
+        return
+    }
+    if (configInstance.toggle % 2 !== 0){
+        console.log('player turn')
+        //if a tile was clicked, call the function that handles the game logic
+        handleTileClick(tile, configInstance.chess_board);
+    }
+    else if (configInstance.toggle % 2 == 0){
+        console.log('AI turn actually !!!')
+        return
+    }
+})
+
+
+function handleTileClick(tile, chess_board){
+    console.log(tile)
+    console.log(chess_board[tile.id])
+//if selection is empty and tile text is full 
+    if(!configInstance.selection && chess_board[tile.id] !== null && chess_board[tile.id].color !== "Black"){
+        console.log('human.js CALL 5')
+
+        const piece_moves = chess_board[tile.id].getAvailableMoves(chess_board)
+        configInstance.selection = tile.id
+
+        console.log(piece_moves, 'moves')
+
+        piece_moves.flat().forEach(move => {
+            console.log('human.js CALL 6', piece_moves)
+            console.log(move)
+            document.getElementById(move).style.backgroundColor = 'orange'
+        })
+    }
+    
+    //If selected is the same tile, unselect
+    else if (configInstance.selection === tile.id){
+        console.log('human.js CALL 7')
+        configInstance.selection = null
+        paintTiles()
+    }
+
+    if(tile.style.backgroundColor === 'orange'){
+        console.log('human.js CALL 80')
+
+        const chess_board_after_move = moveBestPiece(tile.id, configInstance.selection, chess_board)
+        console.log(chess_board_after_move[tile.id],'--------------------------------------')
+        configInstance.toggle += 1
+        configInstance.chess_board = chess_board_after_move
+        configInstance.selection = null
+
+        paintTiles()
+        whoTurn(configInstance.toggle ,chess_board_after_move)
+    }
+
+}
 
 //currenly the game can be player [human vs human] and [human vs AI]
 //controller for the human player
-// console.log('Human script')
-function human(){
-    // console.log('[Human script]')
 
-    //capture all tiles and add an event listener to all
-    document.querySelectorAll(".tile").forEach(tile => {
+function human(chess_board){
+    console.log('human.js CALL 1')
 
-        //adds the event listener to each tile and executes code when triggered
-        tile.addEventListener("click", event => {
-
-
-            
-    
-            //if selection is empty and tile text is full 
-            if(!configInstance.selection && tile.innerText !== ""){
-                let chess_board = getBoard()
-                let a = evaluateBoard(chess_board)
-                console.log(a,"Starting score")
-                configInstance.selected_letter = (Array.from(tile.innerText)).shift()
-    
-                //update bg color
-                tile.style.backgroundColor = "orange";
-                
-                //update selection
-                configInstance.selection = tile;
-    
-                showMoves(configInstance.selection,"W")
-            }
-    
-                
-    
-            //If selected is the same tile, unselect
-            else if(configInstance.selection === tile){
-                //reset tile colors
-                paintTiles();
-    
-                //remove selection;
-                configInstance.selection = null;
-            }
-    
-            //MOVING
-            //check if clicked on green without text
-            if(tile.style.backgroundColor == "green" && tile.innerText == ""){
-                
-                tile.innerText = configInstance.selection.innerText;
-    
-                //remove old tile txt
-                document.getElementById(configInstance.selection.id).innerText = "";
-                //set green tile txt to selected txt
-                
-                //update images
-                uploadImages();
-    
-                //remove selected item
-                configInstance.selection = null;
-    
-                //update tile coloring
-                paintTiles();
-                configInstance.toggle++
-    
-                //Initiate AI move
-                initiateAI()
-            }
-    
-            //check if clicked on green with text
-            if (tile.style.backgroundColor == "green" && tile.innerText !== ""){
-                
-                //get tiles first letter
-                let green_letter = (Array.from(tile.innerText)).shift();
-                
-                //check if valid
-                if(green_letter !== configInstance.selected_letter){
-                    //remove old tile txt
-                    document.getElementById(configInstance.selection.id).innerText = "";
-                    // console.log(green_letter,configInstance.selection)
-                    //set green tile txt to selected txt
-                    tile.innerText = configInstance.selection.innerText;
-                                         
-                    //update images
-                    uploadImages();
-    
-                    //remove selected item
-                    configInstance.selection = null;
-    
-                    //update tile coloring
-                    paintTiles();
-                    configInstance.toggle++;
-    
-                    //Initiate AI move
-                    initiateAI()
-                    
-                }
-                if(green_letter == configInstance.selected_letter){
-                    // console.log("ILLEGAL")
-                    
-                }
-            }
-        })
-    })
-    
 }
+
 
 export default human

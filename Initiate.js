@@ -1,58 +1,47 @@
-import getBoard from './getBoard.js';
 import whoTurn from './whoTurn.js';
 import minimax from './minimax.js';
 import moveBestPiece from './getBestMove.js';
-import uploadImages from './uploadImages.js';
-import paintTiles from './paintTiles.js';
 import config from './config.js';
-import human from './human.js';
 const configInstance = config.getInstance()
-
-
-
-// console.log('[Initiate script]')
-
 //initiates the game process
-function initiateAI(){
-    try{
+function initiateAI(chess_board, currentPlayer){
+    console.log('[Initiate script]')
 
-        //store a copy of the main board before making the move
-        let before_move_board = configInstance.chess_board;
+    //store a copy of the main board before making the move
+    let before_move_board = chess_board;
 
-        //capture which player's turn it is (WHITE / BLACK)
-        // let currentPLayer = whoTurn(configInstance.toggle);
-
-        //if the captured player is BLACK then activate the AI process
-        if(true == true){
-
-            //acivate minimax and capture returned values
-            let [value1, value2] = minimax(configInstance.depth, before_move_board, true)
-
-            //using returned minimax values take a step
-            moveBestPiece(value1.from, value1.to);
-
-            configInstance.checkedBoardCount = 0;
-            
-            //add a point - switch turn
-            configInstance.toggle +=1;
-        }
-
-
-        //upload images, repaint tiles, reset values
-        uploadImages()
-        paintTiles()
-        configInstance.all_piece_moves = [];
-        configInstance.black_pieces=[];
-        configInstance.white_pieces = [];
-        
-        document.addEventListener('DOMContentLoaded',event =>{
-            human()
-        })
-    }
-    catch(err){
-        console.log(err)
-    }
     
+    console.log(currentPlayer,'------------------------------------------CURRENT PLAYER')
+
+    let after_move_board = []
+    //if the captured player is BLACK then activate the AI process
+    if(!currentPlayer){
+        console.log('Switching to AI')
+
+        //acivate minimax and capture returned values
+        let [best_move, best_score, original_index] = minimax(configInstance.depth, before_move_board, true)
+
+        // console.log(best_move, best_score)
+
+        //using returned minimax values take a step
+        after_move_board = moveBestPiece(best_move, original_index, before_move_board)
+
+        //add a point - switch turn
+        configInstance.toggle +=1
+        configInstance.chess_board = after_move_board
+        
+        console.log('Switching to human AI SIDE')
+        whoTurn(configInstance.toggle, after_move_board)
+        return
+    }
+    else if(currentPlayer){
+        configInstance.toggle +=1
+        console.log('Switching to human - humans turn, some error occured')
+        whoTurn(configInstance.toggle, chess_board)
+        return
+    }
+
+    console.log('do nothing')
 }
-initiateAI()
+
 export default initiateAI

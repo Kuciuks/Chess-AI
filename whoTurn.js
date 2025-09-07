@@ -1,6 +1,11 @@
+import human from "./human.js";
+import initiateAI from "./Initiate.js";
+
+
+
 //checks who turn, return true of black turn, false if white
-function whoTurn(toggle){
-    // console.log('[whoTurn CALL]')
+function whoTurn(toggle, chess_board){
+    console.log('[whoTurn CALL]')
 
     //Using a global variable's instance to store turn controling value
     //The value is an (int) is it's cases are:
@@ -10,18 +15,19 @@ function whoTurn(toggle){
 
     // if current player is EVEN(white piece)
     if(toggle % 2 !== 0){
+        console.log("Player's Turn!")
 
-        document.getElementById("h").innerText = "whites turn";
-        // console.log("\n*\n[***********WHITE TURN***********]\n*\n");
-        return false;
+        document.getElementById("h").innerText = "black's turn";
+        human(chess_board)
     }
         
     // if current player is ODD(black piece)
     else if(toggle % 2 == 0){
+        console.log("AI's Turn!")
 
         // Update text
-        document.getElementById("h").innerText = "black's turn";
-        return true
+        document.getElementById("h").innerText = "white's turn";
+        initiateAI(chess_board, false)
     }
 }
 export default whoTurn
