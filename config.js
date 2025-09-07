@@ -105,21 +105,20 @@ class Rook extends Piece{
         //getting the valid moves for the rook
         checkMoveValidity(chess_board){
             let valid_moves = []
-
             //going through the possible moves and getting the valid ones
             this.moves.forEach(move => {
                 switch(move){
                     case "UP":
-                        valid_moves.push(getMoves.moveUp(chess_board, this.tile_index,  this.color, this.name))
+                        valid_moves.push(getMoves.moveUp(chess_board, this.tile_index,  this.color))
                         break
                     case "DOWN":
-                        valid_moves.push(getMoves.moveDown(chess_board, this.tile_index, this.color, this.name))
+                        valid_moves.push(getMoves.moveDown(chess_board, this.tile_index, this.color))
                         break
                     case "LEFT":
-                        valid_moves.push(getMoves.moveLeft(chess_board, this.tile_index))
+                        valid_moves.push(getMoves.moveLeft(chess_board, this.tile_index, this.color))
                         break
                     case "RIGHT":
-                        valid_moves.push(getMoves.moveRight(chess_board, this.tile_index))
+                        valid_moves.push(getMoves.moveRight(chess_board, this.tile_index, this.color))
                         break
                 }
             })

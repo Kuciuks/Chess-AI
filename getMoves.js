@@ -17,7 +17,7 @@ function moveUpLeft (chess_board, tile_index, color, special_piece, enemy_color)
         //up left
         for (let j = 0; j < directional_move_count; j++){
             tile_index -= 11 
-            if (chess_board[tile_index]?.name !== "Border") {
+            if (chess_board[tile_index]?.name !== "Border" && chess_board[tile_index]?.color != color) {
                 if(chess_board[tile_index] == null){
                     valid_moves.push(tile_index)
                     // console.log(valid_moves,'FROM BISHOP INTERNAL VALIDATION - normal move')
@@ -27,7 +27,7 @@ function moveUpLeft (chess_board, tile_index, color, special_piece, enemy_color)
                     break
                 }
             } 
-            else {
+            else{
                 break
             }
         }
@@ -51,7 +51,7 @@ function moveDownLeft (chess_board, tile_index, color, special_piece, enemy_colo
         //down left
         for (let k = 0; k < directional_move_count; k++){
             tile_index += 9
-            if (chess_board[tile_index]?.name !== "Border") {
+            if (chess_board[tile_index]?.name !== "Border"&& chess_board[tile_index]?.color != color) {
                 if(chess_board[tile_index] == null){
                     valid_moves.push(tile_index)
                     // console.log(valid_moves,'FROM BISHOP INTERNAL VALIDATION - normal move')
@@ -83,7 +83,7 @@ function moveUpRight (chess_board, tile_index, color, special_piece, enemy_color
         //up right
         for (let l = 0; l < directional_move_count; l++){
             tile_index -= 9
-            if (chess_board[tile_index]?.name !== "Border") {
+            if (chess_board[tile_index]?.name !== "Border"&& chess_board[tile_index]?.color != color) {
                 if(chess_board[tile_index] == null){
                     valid_moves.push(tile_index)
                     // console.log(valid_moves,'FROM BISHOP INTERNAL VALIDATION - normal move')
@@ -115,7 +115,7 @@ function moveDownRight (chess_board, tile_index, color, special_piece, enemy_col
         //down right
         for (let m = 0; m < directional_move_count; m++){
             tile_index += 11
-            if (chess_board[tile_index]?.name !== "Border") {
+            if (chess_board[tile_index]?.name !== "Border"&& chess_board[tile_index]?.color != color) {
                 if(chess_board[tile_index] == null){
                     valid_moves.push(tile_index)
                     // console.log(valid_moves,'FROM BISHOP INTERNAL VALIDATION - normal move')
@@ -142,12 +142,33 @@ function moveUp (chess_board, tile_index, color, special_piece, special_move){ /
     const directional_move_count = special_piece == 'King' || special_piece == 'Pawn' ? special_move ? 2: 1 : 7
     // console.log(directional_move_count , special_move, special_piece)
     //up
+        
+
+
     for (let j = 0; j < directional_move_count; j++){
         tile_index -= 10 
-        if (chess_board[tile_index] == null || chess_board[tile_index]?.name !== "Border" && chess_board[tile_index]?.color !== color && chess_board[tile_index+10]?.color !== chess_board[tile_index]?.color) {
+        if(chess_board[tile_index]?.color == color || tile_index < 10){
+            return valid_moves
+
+        }
+        else if(special_piece == 'Pawn' && chess_board[tile_index]?.name !== "Border" && chess_board[tile_index] == null){
             valid_moves.push(tile_index)
-        } else {
-            break
+            if(special_move && chess_board[tile_index-10] == null){
+                valid_moves.push(tile_index-10)
+            }
+            return valid_moves
+        }
+        else if (special_piece == undefined && chess_board[tile_index]?.name !== "Border" || special_move == 'King' && chess_board[tile_index]?.name !== "Border") {
+            if(chess_board[tile_index] == null && tile_index > 10){
+                console.log(chess_board[tile_index])
+                valid_moves.push(tile_index)
+            }
+            else if (chess_board[tile_index]?.color != color && tile_index > 10){
+                valid_moves.push(tile_index)
+
+                return valid_moves
+
+            }
         }
     }
     return valid_moves
@@ -163,17 +184,32 @@ function moveDown (chess_board, tile_index, color, special_piece, special_move){
     // console.log(directional_move_count , special_move, special_piece)
 
     //down
-    for (let k = 0; k < directional_move_count; k++){
+    for (let j = 0; j < directional_move_count; j++){
         tile_index += 10 
-        if (chess_board[tile_index] == null || chess_board[tile_index]?.name !== "Border" && chess_board[tile_index]?.color !== color && chess_board[tile_index-10]?.color !== chess_board[tile_index]?.color) {
-            valid_moves.push(tile_index)
+        if(chess_board[tile_index]?.color == color || tile_index > 89){
+            return valid_moves
+
         }
-        else {
-            break
+        else if(special_piece == 'Pawn' && chess_board[tile_index]?.name !== "Border" && chess_board[tile_index] == null){
+            valid_moves.push(tile_index)
+            if(special_move && chess_board[tile_index+10] == null){
+                valid_moves.push(tile_index+10)
+            }
+            return valid_moves
+        }
+        else if (special_piece == undefined && chess_board[tile_index]?.name !== "Border" || special_move == 'King' && chess_board[tile_index]?.name !== "Border") {
+            if(chess_board[tile_index] == null && tile_index < 89){
+                console.log(chess_board[tile_index])
+                valid_moves.push(tile_index)
+            }
+            else if (chess_board[tile_index]?.color != color && tile_index < 89){
+                valid_moves.push(tile_index)
+
+                return valid_moves
+
+            }
         }
     }
-    console.log(valid_moves,'INSIDE DOWN __________)#@)_#@)_#)_#@_#_--')
-
     return valid_moves
 }
 
@@ -184,15 +220,22 @@ function moveLeft (chess_board, tile_index, color, special_piece){ //move = piec
     const directional_move_count = special_piece == 'King' ? 1 : 7
 
     //left
-    for (let l = 0; l < directional_move_count; l++){
+
+    for (let j = 0; j < directional_move_count; j++){
         tile_index -= 1 
-        if (chess_board[tile_index] == null || chess_board[tile_index]?.name !== "Border" && chess_board[tile_index]?.color !== color) {
+        if(chess_board[tile_index]?.color == color || chess_board[tile_index]?.name == 'Border' || tile_index < 10){
+            return valid_moves
+        }
+        else if(chess_board[tile_index] == null){
+            console.log(chess_board[tile_index])
             valid_moves.push(tile_index)
-        } else {
-            break
+        }
+        else if (chess_board[tile_index]?.color != color){
+            valid_moves.push(tile_index)
+            return valid_moves
+
         }
     }
-    console.log(valid_moves,' INSIDE THE MOVE LEFT FN')
     return valid_moves
 }
 
@@ -203,12 +246,20 @@ function moveRight (chess_board, tile_index, color, special_piece){ //move = pie
     const directional_move_count = special_piece == 'King' ? 1 : 7
 
     //right
-    for (let m = 0; m < directional_move_count; m++){
+
+    for (let j = 0; j < directional_move_count; j++){
         tile_index += 1 
-        if (chess_board[tile_index] == null || chess_board[tile_index]?.name !== "Border" && chess_board[tile_index]?.color !== color) {
+        if(chess_board[tile_index]?.color == color || chess_board[tile_index]?.name == 'Border' || tile_index > 89){
+            return valid_moves
+        }
+        else if(chess_board[tile_index] == null){
+            console.log(chess_board[tile_index])
             valid_moves.push(tile_index)
-        } else {
-            break
+        }
+        else if (chess_board[tile_index]?.color != color){
+            valid_moves.push(tile_index)
+            return valid_moves
+
         }
     }
     return valid_moves
