@@ -17,10 +17,17 @@ function moveUpLeft (chess_board, tile_index, color, special_piece, enemy_color)
         //up left
         for (let j = 0; j < directional_move_count; j++){
             tile_index -= 11 
-            console.log(chess_board[tile_index+11]?.color != color,chess_board[tile_index+11]?.color,color)
-            if (chess_board[tile_index] == null || chess_board[tile_index]?.name !== "Border" && chess_board[tile_index+11]?.color != color) { // changed from !== 'White' to !== chess_board[tile_index]?.color so that it checks whether the next tile_index up left is the same color as the previous tile_index's color, this way l dont need to hardcode 'White' or 'Black'
-                valid_moves.push(tile_index)
-            } else {
+            if (chess_board[tile_index]?.name !== "Border") {
+                if(chess_board[tile_index] == null){
+                    valid_moves.push(tile_index)
+                    // console.log(valid_moves,'FROM BISHOP INTERNAL VALIDATION - normal move')
+                }
+                else if (chess_board[tile_index]?.color != color){
+                    valid_moves.push(tile_index)
+                    break
+                }
+            } 
+            else {
                 break
             }
         }
@@ -35,16 +42,24 @@ function moveDownLeft (chess_board, tile_index, color, special_piece, enemy_colo
     //if the moving piece is King or Pawn then they can only move 1 move in select directions
     const directional_move_count = special_piece == 'King' || special_piece == 'Pawn' ? 1 : 7
 
-    if(special_piece == 'Pawn' && chess_board[tile_index]?.name !== "Border" && chess_board[tile_index]?.color != color){
-        console.log('valid move')
-        valid_moves.push(tile_index)
-    }
+
+    if(special_piece == 'Pawn' && chess_board[tile_index+9]?.name !== "Border" && chess_board[tile_index+9]?.color != color && chess_board[tile_index+9] != null){
+            valid_moves.push(tile_index+9)
+        }
+
     else if (special_piece == 'King' || special_piece == undefined){
         //down left
         for (let k = 0; k < directional_move_count; k++){
             tile_index += 9
-            if (chess_board[tile_index] == null || chess_board[tile_index]?.name !== "Border" && chess_board[tile_index-9]?.color != color) {
-                valid_moves.push(tile_index)
+            if (chess_board[tile_index]?.name !== "Border") {
+                if(chess_board[tile_index] == null){
+                    valid_moves.push(tile_index)
+                    // console.log(valid_moves,'FROM BISHOP INTERNAL VALIDATION - normal move')
+                }
+                else if (chess_board[tile_index]?.color != color){
+                    valid_moves.push(tile_index)
+                    break
+                }
             }
             else {
                 break
@@ -60,17 +75,25 @@ function moveUpRight (chess_board, tile_index, color, special_piece, enemy_color
     //if the moving piece is King or Pawn then they can only move 1 move in select directions
     const directional_move_count = special_piece == 'King' || special_piece == 'Pawn' ? 1 : 7
 
-    if(special_piece == 'Pawn' && chess_board[tile_index]?.name !== "Border" && chess_board[tile_index]?.color != color){
-        console.log('valid move')
-        valid_moves.push(tile_index)
-    }
+    if(special_piece == 'Pawn' && chess_board[tile_index-9]?.name !== "Border" && chess_board[tile_index-9]?.color != color && chess_board[tile_index-9] != null){
+            valid_moves.push(tile_index-9)
+        }
+
     else if (special_piece == 'King' || special_piece == undefined){
         //up right
         for (let l = 0; l < directional_move_count; l++){
             tile_index -= 9
-            if (chess_board[tile_index] == null || chess_board[tile_index]?.name !== "Border" && chess_board[tile_index+9]?.color != color) {
-                valid_moves.push(tile_index)
-            } else {
+            if (chess_board[tile_index]?.name !== "Border") {
+                if(chess_board[tile_index] == null){
+                    valid_moves.push(tile_index)
+                    // console.log(valid_moves,'FROM BISHOP INTERNAL VALIDATION - normal move')
+                }
+                else if (chess_board[tile_index]?.color != color){
+                    valid_moves.push(tile_index)
+                    break
+                }
+            } 
+            else {
                 break
             }
         }
@@ -84,17 +107,25 @@ function moveDownRight (chess_board, tile_index, color, special_piece, enemy_col
     //if the moving piece is King or Pawn then they can only move 1 move in select directions
     const directional_move_count = special_piece == 'King' || special_piece == 'Pawn' ? 1 : 7
 
-    if(special_piece == 'Pawn' && chess_board[tile_index]?.name !== "Border" && chess_board[tile_index]?.color != color){
-        console.log('valid move')
-        valid_moves.push(tile_index)
-    }
+    if(special_piece == 'Pawn' && chess_board[tile_index+11]?.name !== "Border" && chess_board[tile_index+11]?.color != color && chess_board[tile_index+11] != null){
+            valid_moves.push(tile_index+11)
+        }
+
     else if (special_piece == 'King' || special_piece == undefined){
         //down right
         for (let m = 0; m < directional_move_count; m++){
             tile_index += 11
-            if (chess_board[tile_index] == null || chess_board[tile_index]?.name !== "Border" && chess_board[tile_index-11]?.color != color) {
-                valid_moves.push(tile_index)
-            } else {
+            if (chess_board[tile_index]?.name !== "Border") {
+                if(chess_board[tile_index] == null){
+                    valid_moves.push(tile_index)
+                    // console.log(valid_moves,'FROM BISHOP INTERNAL VALIDATION - normal move')
+                }
+                else if (chess_board[tile_index]?.color != color){
+                    valid_moves.push(tile_index)
+                    break
+                }
+            } 
+            else {
                 break
             }
         }

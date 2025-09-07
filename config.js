@@ -262,7 +262,7 @@ class Queen extends Piece{
                         valid_moves.push(getMoves.moveDown(chess_board, this.tile_index, this.color))
                         break
                     case "LEFT":
-                        let shit = valid_moves.push(getMoves.moveLeft(chess_board, this.tile_index, this.color))
+                        valid_moves.push(getMoves.moveLeft(chess_board, this.tile_index, this.color))
                         break
                     case "RIGHT":
                         valid_moves.push(getMoves.moveRight(chess_board, this.tile_index, this.color))
