@@ -4,6 +4,7 @@ import config, {getColoredPieces, evaluateBoard} from './config.js'
 // import makeMove from './makeMove.js'
 // import { getBlackPiece, getWhitePiece } from './getPieces.js'
 
+console.log('minimax.js CALL')
 
 //minimax returns best score and best move for black pieces
 function minimax(depth,chess_board, maximizingPlayer){
@@ -22,14 +23,14 @@ function minimax(depth,chess_board, maximizingPlayer){
 
         //get all black pieces for current board
         const black_pieces = getColoredPieces(chess_board).black_pieces;
-        console.log(black_pieces,"__________ BLACK PIECES")
+        // console.log(black_pieces,"__________ BLACK PIECES")
 
 
         // go through black pieces
         black_pieces.forEach(piece => {
 
             const piece_moves = piece.getAvailableMoves(chess_board);
-            console.log(piece.name, piece_moves, ' PIECE AND MOVES _____')
+            // console.log(piece.name, piece_moves, ' PIECE AND MOVES _____')
 
             //make the moves for each piece and return the best move based on best score
             piece_moves.forEach(move =>{
@@ -42,7 +43,7 @@ function minimax(depth,chess_board, maximizingPlayer){
                 }
             })
         })
-        console.log(bestMove,bestScore,' _____BEST MOVE _____')
+        // console.log(bestMove,bestScore,' _____BEST MOVE _____')
         return [bestMove, bestScore, piece_index]
         
     }

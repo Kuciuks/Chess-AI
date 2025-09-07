@@ -31,27 +31,29 @@ class Pawn extends Piece{
                 null,    0,   0,   0,   0,   0,   0,   0,   0, null,
                 null, null, null, null, null, null, null, null, null, null
             ]
-            this.moves = this.color == 'Black' ? ['UP', 'UP-LEFT', 'UP-RIGHT'] : ['DOWN', 'DOWN-LEFT', 'DOWN-RIGHT']
+            this.moves = {W:['UP', 'UP-LEFT', 'UP-RIGHT'], B:['DOWN', 'DOWN-LEFT', 'DOWN-RIGHT']}
             this.valid_moves = []
         }
 
-        checkMoveValidity(chess_board, moves){
+        checkMoveValidity(chess_board){
             let valid_moves = []
-            console.log(moves)
+
+            let enemy_color = this.color == 'White' ? "Black" : this.color == "Black" ? "White" : null
+            console.log(enemy_color)
             //going through the possible moves and getting the valid ones
-            this.moves.forEach(move => {
+            this.moves[this.color[0]].forEach(move => {
                 switch(move){
                     case "UP-LEFT":
-                        valid_moves.push(getMoves.moveUpLeft(chess_board, this.tile_index, this.color, this.name))
+                        valid_moves.push(getMoves.moveUpLeft(chess_board, this.tile_index, this.color, this.name, enemy_color))
                         break
                     case "UP-RIGHT":
-                        valid_moves.push(getMoves.moveUpRight(chess_board, this.tile_index, this.color, this.name))
+                        valid_moves.push(getMoves.moveUpRight(chess_board, this.tile_index, this.color, this.name, enemy_color))
                         break
                     case "DOWN-LEFT":
-                        valid_moves.push(getMoves.moveDownLeft(chess_board, this.tile_index, this.color, this.name))
+                        valid_moves.push(getMoves.moveDownLeft(chess_board, this.tile_index, this.color, this.name, enemy_color))
                         break
                     case "DOWN-RIGHT":
-                        valid_moves.push(getMoves.moveDownRight(chess_board, this.tile_index, this.color, this.name))
+                        valid_moves.push(getMoves.moveDownRight(chess_board, this.tile_index, this.color, this.name, enemy_color))
                         break
                     case "UP":
                         valid_moves.push(getMoves.moveUp(chess_board, this.tile_index, this.color, this.name, this.special_move))
@@ -59,15 +61,9 @@ class Pawn extends Piece{
                     case "DOWN":
                         valid_moves.push(getMoves.moveDown(chess_board, this.tile_index, this.color, this.name, this.special_move))
                         break
-                    case "LEFT":
-                        valid_moves.push(getMoves.moveLeft(chess_board, this.tile_index, this.color, this.name))
-                        break
-                    case "RIGHT":
-                        valid_moves.push(getMoves.moveRight(chess_board, this.tile_index, this.color, this.name))
-                        break
                 }
             })
-            console.log(valid_moves, " VALID MOVES")
+            // console.log(valid_moves, " VALID MOVES")
             return valid_moves
         }
 
@@ -75,7 +71,7 @@ class Pawn extends Piece{
         //method to get available moves for the pawn
         getAvailableMoves(chess_board) {
 
-            let valid_moves = this.checkMoveValidity(chess_board, this.moves)
+            let valid_moves = this.checkMoveValidity(chess_board)
             // console.log(valid_moves)
             this.valid_moves = valid_moves
             return valid_moves
@@ -127,7 +123,7 @@ class Rook extends Piece{
                         break
                 }
             })
-            console.log(valid_moves, " VALID MOVES")
+            // console.log(valid_moves, " VALID MOVES")
             return valid_moves
         }
 
@@ -161,7 +157,7 @@ class Knight extends Piece{
 
             const valid_moves = getMoves.knightMoves(chess_board, this.tile_index, this.color)
 
-            console.log(valid_moves, " VALID MOVES")
+            // console.log(valid_moves, " VALID MOVES")
             return valid_moves
         }
         //method to get available moves for the pawn
@@ -197,20 +193,20 @@ class Bishop extends Piece{
             this.moves.forEach(move => {
                 switch(move){
                     case "UP-LEFT":
-                        valid_moves.push(getMoves.moveUpLeft(chess_board, this.tile_index))
+                        valid_moves.push(getMoves.moveUpLeft(chess_board, this.tile_index, this.color))
                         break
                     case "UP-RIGHT":
-                        valid_moves.push(getMoves.moveUpRight(chess_board, this.tile_index))
+                        valid_moves.push(getMoves.moveUpRight(chess_board, this.tile_index, this.color))
                         break
                     case "DOWN-LEFT":
-                        valid_moves.push(getMoves.moveDownLeft(chess_board, this.tile_index))
+                        valid_moves.push(getMoves.moveDownLeft(chess_board, this.tile_index, this.color))
                         break
                     case "DOWN-RIGHT":
-                        valid_moves.push(getMoves.moveDownRight(chess_board, this.tile_index))
+                        valid_moves.push(getMoves.moveDownRight(chess_board, this.tile_index, this.color))
                         break
                 }
             })
-            console.log(valid_moves, " VALID MOVES")
+            // console.log(valid_moves, " VALID MOVES")
             return valid_moves
         }
 
@@ -248,28 +244,28 @@ class Queen extends Piece{
             this.moves.forEach(move => {
                 switch(move){
                     case "UP-LEFT":
-                        valid_moves.push(getMoves.moveUpLeft(chess_board, this.tile_index))
+                        valid_moves.push(getMoves.moveUpLeft(chess_board, this.tile_index, this.color))
                         break
                     case "UP-RIGHT":
-                        valid_moves.push(getMoves.moveUpRight(chess_board, this.tile_index))
+                        valid_moves.push(getMoves.moveUpRight(chess_board, this.tile_index, this.color))
                         break
                     case "DOWN-LEFT":
-                        valid_moves.push(getMoves.moveDownLeft(chess_board, this.tile_index))
+                        valid_moves.push(getMoves.moveDownLeft(chess_board, this.tile_index, this.color))
                         break
                     case "DOWN-RIGHT":
-                        valid_moves.push(getMoves.moveDownRight(chess_board, this.tile_index))
+                        valid_moves.push(getMoves.moveDownRight(chess_board, this.tile_index, this.color))
                         break
                     case "UP":
-                        valid_moves.push(getMoves.moveUp(chess_board, this.tile_index))
+                        valid_moves.push(getMoves.moveUp(chess_board, this.tile_index, this.color))
                         break
                     case "DOWN":
-                        valid_moves.push(getMoves.moveDown(chess_board, this.tile_index))
+                        valid_moves.push(getMoves.moveDown(chess_board, this.tile_index, this.color))
                         break
                     case "LEFT":
-                        valid_moves.push(getMoves.moveLeft(chess_board, this.tile_index))
+                        let shit = valid_moves.push(getMoves.moveLeft(chess_board, this.tile_index, this.color))
                         break
                     case "RIGHT":
-                        valid_moves.push(getMoves.moveRight(chess_board, this.tile_index))
+                        valid_moves.push(getMoves.moveRight(chess_board, this.tile_index, this.color))
                         break
                 }
             })
@@ -337,7 +333,7 @@ class King extends Piece{
                         break
                 }
             })
-            console.log(valid_moves, " VALID MOVES")
+            // console.log(valid_moves, " VALID MOVES")
             
             return valid_moves
         }
@@ -358,50 +354,50 @@ class Border {
 }
 
 //initializing the pieces with their respective classes and colors (WHITE PIECES)
-const pawn_w_1 = new Pawn('Pawn',100, 'White', 21, true)
-const pawn_w_2 = new Pawn('Pawn',100, 'White', 22, true)
-const pawn_w_3 = new Pawn('Pawn',100, 'White', 23, true)
-const pawn_w_4 = new Pawn('Pawn',100, 'White', 24, true)
-const pawn_w_5 = new Pawn('Pawn',100, 'White', 25, true)
-const pawn_w_6 = new Pawn('Pawn',100, 'White', 26, true)
-const pawn_w_7 = new Pawn('Pawn',100, 'White', 27, true)
-const pawn_w_8 = new Pawn('Pawn',100, 'White', 28, true)
+const pawn_w_1 = new Pawn('Pawn',100, 'White', 71, true)
+const pawn_w_2 = new Pawn('Pawn',100, 'White', 72, true)
+const pawn_w_3 = new Pawn('Pawn',100, 'White', 73, true)
+const pawn_w_4 = new Pawn('Pawn',100, 'White', 74, true)
+const pawn_w_5 = new Pawn('Pawn',100, 'White', 75, true)
+const pawn_w_6 = new Pawn('Pawn',100, 'White', 76, true)
+const pawn_w_7 = new Pawn('Pawn',100, 'White', 77, true)
+const pawn_w_8 = new Pawn('Pawn',100, 'White', 78, true)
 
-const rook_w_1 = new Rook('Rook',500, 'White', 11)
-const rook_w_2 = new Rook('Rook',500, 'White', 18)
+const rook_w_1 = new Rook('Rook',500, 'White', 81)
+const rook_w_2 = new Rook('Rook',500, 'White', 88)
 
-const knight_w_1 = new Knight('Knight',300, 'White', 12)
-const knight_w_2 = new Knight('Knight',300, 'White', 17)
+const knight_w_1 = new Knight('Knight',300, 'White', 82)
+const knight_w_2 = new Knight('Knight',300, 'White', 87)
 
-const bishop_w_1 = new Bishop('Bishop',300, 'White', 13)
-const bishop_w_2 = new Bishop('Bishop',300, 'White', 16)
+const bishop_w_1 = new Bishop('Bishop',300, 'White', 83)
+const bishop_w_2 = new Bishop('Bishop',300, 'White', 86)
 
-const queen_w = new Queen('Queen',900, 'White', 14)
-const king_w = new King('King',10000, 'White', 15)
+const queen_w = new Queen('Queen',900, 'White', 84)
+const king_w = new King('King',10000, 'White', 85)
 
 
 
 //initializing the pieces with their respective classes and colors (BLACK PIECES)
-const pawn_b_1 = new Pawn('Pawn',100, 'Black', 71, true)
-const pawn_b_2 = new Pawn('Pawn',100, 'Black', 72, true)
-const pawn_b_3 = new Pawn('Pawn',100, 'Black', 73, true)
-const pawn_b_4 = new Pawn('Pawn',100, 'Black', 74, true)
-const pawn_b_5 = new Pawn('Pawn',100, 'Black', 75, true)
-const pawn_b_6 = new Pawn('Pawn',100, 'Black', 76, true)
-const pawn_b_7 = new Pawn('Pawn',100, 'Black', 77, true)
-const pawn_b_8 = new Pawn('Pawn',100, 'Black', 78, true)
+const pawn_b_1 = new Pawn('Pawn',100, 'Black', 21, true)
+const pawn_b_2 = new Pawn('Pawn',100, 'Black', 22, true)
+const pawn_b_3 = new Pawn('Pawn',100, 'Black', 23, true)
+const pawn_b_4 = new Pawn('Pawn',100, 'Black', 24, true)
+const pawn_b_5 = new Pawn('Pawn',100, 'Black', 25, true)
+const pawn_b_6 = new Pawn('Pawn',100, 'Black', 26, true)
+const pawn_b_7 = new Pawn('Pawn',100, 'Black', 27, true)
+const pawn_b_8 = new Pawn('Pawn',100, 'Black', 28, true)
 
-const rook_b_1 = new Rook('Rook',500, 'Black', 81)
-const rook_b_2 = new Rook('Rook',500, 'Black', 88)
+const rook_b_1 = new Rook('Rook',500, 'Black', 11)
+const rook_b_2 = new Rook('Rook',500, 'Black', 18)
 
-const knight_b_1 = new Knight('Knight',300, 'Black', 82)
-const knight_b_2 = new Knight('Knight',300, 'Black', 87)
+const knight_b_1 = new Knight('Knight',300, 'Black', 12)
+const knight_b_2 = new Knight('Knight',300, 'Black', 17)
 
-const bishop_b_1 = new Bishop('Bishop',300, 'Black', 83)
-const bishop_b_2 = new Bishop('Bishop',300, 'Black', 86)
+const bishop_b_1 = new Bishop('Bishop',300, 'Black', 13)
+const bishop_b_2 = new Bishop('Bishop',300, 'Black', 16)
 
-const queen_b = new Queen('Queen',900, 'Black', 84)
-const king_b = new King('King',10000, 'Black', 85)
+const queen_b = new Queen('Queen',900, 'Black', 14)
+const king_b = new King('King',10000, 'Black', 15)
 
 
 const border = new Border('Border')
@@ -410,14 +406,14 @@ const border = new Border('Border')
 //storing starting chess board state with initialized pieces, list of items from 1 to 64
 const chess_board = [
     border,  border,    border,     border,    border,   border,    border,     border,    border,   border,
-    border, rook_w_1, knight_w_1, bishop_w_1, queen_w,   king_w,  bishop_w_2, knight_w_2,  rook_w_2, border,
-    border, pawn_w_1,  pawn_w_2,   pawn_w_3,  pawn_w_4, pawn_w_5,  pawn_w_6,   pawn_w_7,   pawn_w_8, border,
-    border,   null,      null,       null,      null,     null,      null,       null,       null,   border,
-    border,   null,      null,       null,      null,     null,      null,       null,       null,   border,
-    border,   null,      null,       null,      null,     null,      null,       null,       null,   border,
-    border,   null,      null,       null,      null,     null,      null,       null,       null,   border,
-    border, pawn_b_1,  pawn_b_2,   pawn_b_3,  pawn_b_4, pawn_b_5,  pawn_b_6,   pawn_b_7,   pawn_b_8, border,
     border, rook_b_1, knight_b_1, bishop_b_1, queen_b,   king_b,  bishop_b_2, knight_b_2,  rook_b_2, border,
+    border, pawn_b_1,  pawn_b_2,   pawn_b_3,  pawn_b_4, pawn_b_5,  pawn_b_6,   pawn_b_7,   pawn_b_8, border,
+    border,   null,      null,       null,      null,     null,      null,       null,       null,   border,
+    border,   null,      null,       null,      null,     null,      null,       null,       null,   border,
+    border,   null,      null,       null,      null,     null,      null,       null,       null,   border,
+    border,   null,      null,       null,      null,     null,      null,       null,       null,   border,
+    border, pawn_w_1,  pawn_w_2,   pawn_w_3,  pawn_w_4, pawn_w_5,  pawn_w_6,   pawn_w_7,   pawn_w_8, border,
+    border, rook_w_1, knight_w_1, bishop_w_1, queen_w,   king_w,  bishop_w_2, knight_w_2,  rook_w_2, border,
     border,  border,    border,     border,    border,   border,    border,     border,     border,  border
 ]
 
