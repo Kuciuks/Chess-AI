@@ -158,8 +158,12 @@ function moveUp (chess_board, tile_index, color, special_piece, special_move){ /
             }
             return valid_moves
         }
-        else if (special_piece == undefined && chess_board[tile_index]?.name !== "Border" || special_move == 'King' && chess_board[tile_index]?.name !== "Border") {
-            if(chess_board[tile_index] == null && tile_index > 10){
+        else if(special_move == 'King' && chess_board[tile_index]?.name !== "Border" && chess_board[tile_index] == null){
+            valid_moves.push(tile_index)
+            return valid_moves
+        }
+        else if (special_piece == undefined && chess_board[tile_index]?.name !== "Border") {
+            if(chess_board[tile_index] == null && tile_index > 10){// NEED TO FIX FOR KING
                 console.log(chess_board[tile_index])
                 valid_moves.push(tile_index)
             }
@@ -197,7 +201,11 @@ function moveDown (chess_board, tile_index, color, special_piece, special_move){
             }
             return valid_moves
         }
-        else if (special_piece == undefined && chess_board[tile_index]?.name !== "Border" || special_move == 'King' && chess_board[tile_index]?.name !== "Border") {
+        else if(special_move == 'King' && chess_board[tile_index]?.name !== "Border" && chess_board[tile_index] == null){
+            valid_moves.push(tile_index)
+            return valid_moves
+        }
+        else if (special_piece == undefined && chess_board[tile_index]?.name !== "Border") {
             if(chess_board[tile_index] == null && tile_index < 89){
                 console.log(chess_board[tile_index])
                 valid_moves.push(tile_index)
