@@ -143,9 +143,11 @@ function moveUp (chess_board, tile_index, color, special_piece, special_move){ /
     // console.log(directional_move_count , special_move, special_piece)
     //up
     console.log('Step - 1')
-    if(special_piece == 'Pawn' && chess_board[tile_index-10]?.name !== "Border" && chess_board[tile_index-10] == null){
-        console.log('Step - 2')
-        valid_moves.push(tile_index-10)
+    if(special_piece == 'Pawn' && chess_board[tile_index-10]?.name !== "Border"){
+        if(chess_board[tile_index-10] == null){
+            valid_moves.push(tile_index-10)
+            console.log('Step - 2')
+        }
         if(special_move && chess_board[tile_index-20] == null){
             console.log('Step - 3')
             valid_moves.push(tile_index-20)
@@ -170,7 +172,7 @@ function moveUp (chess_board, tile_index, color, special_piece, special_move){ /
 
             }
             else if (special_piece == undefined && chess_board[tile_index]?.name !== "Border") {
-                if(chess_board[tile_index] == null && tile_index > 10){// NEED TO FIX FOR KING
+                if(chess_board[tile_index] == null && tile_index > 10){
                     console.log(chess_board[tile_index])
                     valid_moves.push(tile_index)
                 }
@@ -197,15 +199,17 @@ function moveDown (chess_board, tile_index, color, special_piece, special_move){
     const directional_move_count = special_piece == 'King' || special_piece == 'Pawn' ? special_move ? 2: 1 : 7
     // console.log(directional_move_count , special_move, special_piece)
 
-
-    if(special_piece == 'Pawn' && chess_board[tile_index+10]?.name !== "Border" && chess_board[tile_index+10] == null){
-        valid_moves.push(tile_index)
-        if(special_move && chess_board[tile_index+20] == null){
+    if(special_piece == 'Pawn' && chess_board[tile_index+10]?.name !== "Border"){
+        if(chess_board[tile_index+10] == null){
+            valid_moves.push(tile_index+10)
+            console.log('Step - 2')
+        }
+        if(special_piece && chess_board[tile_index+20] == null){
             valid_moves.push(tile_index+20)
         }
         return valid_moves
     }
-    else if(special_piece == 'King' && chess_board[tile_index+10]?.name !== "Border"  || special_move == 'King' && chess_board[tile_index+10] == null){
+    else if(special_piece == 'King' && chess_board[tile_index+10]?.name !== "Border" && chess_board[tile_index+10] == null){
         valid_moves.push(tile_index+10)
         return valid_moves
     }

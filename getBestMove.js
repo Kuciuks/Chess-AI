@@ -14,6 +14,7 @@ function moveBestPiece(move, original_index, chess_board){
     //moving the piece on the DOM board
     //uploading images to dom
     moved_piece.innerHTML=`${original_piece_name}<img class="pic" src="Assets/${original_piece_name}.png">`;
+    moved_piece.classList.add(`${chess_board[original_index].color[0]}`)
     moved_piece.classList.add(`${original_piece_name}`)
     moved_piece.style.cursor = 'pointer'
 
@@ -22,7 +23,6 @@ function moveBestPiece(move, original_index, chess_board){
     //moving piece on ARRAY board - internal
     chess_board[move] = chess_board[original_index]
     chess_board[move].tile_index = parseInt(move)
-
     chess_board[original_index] = null
     
 
