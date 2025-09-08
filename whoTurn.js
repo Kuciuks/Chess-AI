@@ -20,14 +20,14 @@ function whoTurn(toggle, chess_board){
         console.log('[_____________________________________________________]')
         console.log('[_____________________________________________________]')
 
-        document.getElementById("h").innerText = "black's turn";
+        document.getElementById("h").innerText = "white's turn";
     }
         
     // if current player is ODD(black piece)
     else if(toggle % 2 == 0){
 
         // Update text
-        document.getElementById("h").innerText = "white's turn";
+        document.getElementById("h").innerText = "black's turn";
 
         console.log('[_____________________________________________________]')
         console.log('[_____________________________________________________]')

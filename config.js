@@ -376,30 +376,29 @@ const king_w = new King('King',10000, 'White', 85)
 
 
 //initializing the pieces with their respective classes and colors (BLACK PIECES)
-const pawn_b_1 = new Pawn('Pawn',100, 'Black', 21, true)
-const pawn_b_2 = new Pawn('Pawn',100, 'Black', 22, true)
-const pawn_b_3 = new Pawn('Pawn',100, 'Black', 23, true)
-const pawn_b_4 = new Pawn('Pawn',100, 'Black', 24, true)
-const pawn_b_5 = new Pawn('Pawn',100, 'Black', 25, true)
-const pawn_b_6 = new Pawn('Pawn',100, 'Black', 26, true)
-const pawn_b_7 = new Pawn('Pawn',100, 'Black', 27, true)
-const pawn_b_8 = new Pawn('Pawn',100, 'Black', 28, true)
+const pawn_b_1 = new Pawn('Pawn',-100, 'Black', 21, true)
+const pawn_b_2 = new Pawn('Pawn',-100, 'Black', 22, true)
+const pawn_b_3 = new Pawn('Pawn',-100, 'Black', 23, true)
+const pawn_b_4 = new Pawn('Pawn',-100, 'Black', 24, true)
+const pawn_b_5 = new Pawn('Pawn',-100, 'Black', 25, true)
+const pawn_b_6 = new Pawn('Pawn',-100, 'Black', 26, true)
+const pawn_b_7 = new Pawn('Pawn',-100, 'Black', 27, true)
+const pawn_b_8 = new Pawn('Pawn',-100, 'Black', 28, true)
 
-const rook_b_1 = new Rook('Rook',500, 'Black', 11)
-const rook_b_2 = new Rook('Rook',500, 'Black', 18)
+const rook_b_1 = new Rook('Rook',-500, 'Black', 11)
+const rook_b_2 = new Rook('Rook',-500, 'Black', 18)
 
-const knight_b_1 = new Knight('Knight',300, 'Black', 12)
-const knight_b_2 = new Knight('Knight',300, 'Black', 17)
+const knight_b_1 = new Knight('Knight',-300, 'Black', 12)
+const knight_b_2 = new Knight('Knight',-300, 'Black', 17)
 
-const bishop_b_1 = new Bishop('Bishop',300, 'Black', 13)
-const bishop_b_2 = new Bishop('Bishop',300, 'Black', 16)
+const bishop_b_1 = new Bishop('Bishop',-300, 'Black', 13)
+const bishop_b_2 = new Bishop('Bishop',-300, 'Black', 16)
 
-const queen_b = new Queen('Queen',900, 'Black', 14)
-const king_b = new King('King',10000, 'Black', 15)
+const queen_b = new Queen('Queen',-900, 'Black', 14)
+const king_b = new King('King',-10000, 'Black', 15)
 
 
 const border = new Border('Border')
-
 
 //storing starting chess board state with initialized pieces, list of items from 1 to 64
 const chess_board = [
@@ -417,17 +416,20 @@ const chess_board = [
 
 
 
-export function evaluateBoard(piece, move,chess_board){
-    let score = piece.pawnScore[move]
+export function evaluateBoard(chess_board){
+    let board_cost = 0
 
-    if (chess_board[move] != null) {
-        score += chess_board[move]?.value
+    for(const tile in chess_board){
+        // console.log('EVALUATE BOARD _____________________',typeof(chess_board[tile]),chess_board[tile])
+        if (chess_board[tile] !== null && chess_board[tile]?.name !== 'Border'){
+            board_cost += chess_board[tile].value + chess_board[tile].pawnScore[tile]
+            // console.log('[BOARD COST] - ', board_cost)
+        }
+
     }
-
-    // let old_index = piece.tile_index
-    // console.log(`Piece ${piece.name, piece.color} moved from ${old_index} to ${move} with score changing from ${piece.pawnScore[old_index]} to ${score}`)
-
-    return score
+    console.log(' __________________________________[EVLAUATE BOARD] __________________________________')
+    console.log(' __________________________________                 __________________________________')
+    return board_cost
 }
 
 

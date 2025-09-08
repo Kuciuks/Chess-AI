@@ -1,6 +1,6 @@
 import config, {getColoredPieces, evaluateBoard} from './config.js'
 import paintTiles from "./paintTiles.js"
-import moveBestPiece from './getBestMove.js'
+import getBestMove from './getBestMove.js'
 import whoTurn from './whoTurn.js'
 
 const configInstance = config.getInstance()
@@ -34,7 +34,7 @@ function handleTileClick(tile, chess_board){
         const piece_moves = chess_board[tile.id].getAvailableMoves(chess_board)
         configInstance.selection = tile.id
 
-        console.log(`[MOVE RETRIEVAL] - these are the current moves for your selection (also highlighted in orange) - ${piece_moves}`)
+        console.log(`[MOVE RETRIEVAL] - these are the current moves for your selection (also highlighted in orange) - ${piece_moves}`, chess_board[tile.id],tile.id)
 
         piece_moves.flat().forEach(move => {
             document.getElementById(move).style.backgroundColor = 'orange'
@@ -50,7 +50,7 @@ function handleTileClick(tile, chess_board){
 
     if(tile.style.backgroundColor === 'orange'){
 
-        const chess_board_after_move = moveBestPiece(tile.id, configInstance.selection, chess_board)
+        const chess_board_after_move = getBestMove.moveBestPiece(tile.id, configInstance.selection, chess_board)
         configInstance.toggle += 1
         configInstance.chess_board = chess_board_after_move
         configInstance.selection = null

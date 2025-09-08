@@ -312,7 +312,7 @@ function knightMoves(chess_board, tile_index, color){
         }
 
     }
-    // console.log(valid_moves, 'valid moves')
+    console.log(valid_moves, 'valid moves')
     return valid_moves
 
 }
