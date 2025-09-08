@@ -22,7 +22,7 @@ function minimax(depth,chess_board, maximizingPlayer){
     if(maximizingPlayer){
 
         //declare the best score, move
-        let bestScore = -Infinity;
+        let bestScore = Infinity;
         let bestMove = null;
         let piece_index = 0
 
@@ -45,15 +45,13 @@ function minimax(depth,chess_board, maximizingPlayer){
             //make the moves for each piece and return the best move based on best score
             piece_moves.flat().forEach(move =>{
 
-                const cost = evaluateBoard(chess_board)
-
                 const [chess_board_after_move, removed_piece] = getBestMove.movePiece(move,original_index,chess_board)
 
                 const minimax_results = minimax(depth-1, chess_board_after_move, false)
 
-                getBestMove.undoMovePiece(piece.tile_index,original_index,chess_board_after_move, removed_piece)
+                getBestMove.undoMovePiece(move,original_index,chess_board_after_move, removed_piece)
 
-                if (minimax_results[1] < cost){
+                if (minimax_results[1] < bestScore){
                     bestScore = minimax_results[1]
                     bestMove = move
                     piece_index = piece.tile_index
@@ -65,7 +63,7 @@ function minimax(depth,chess_board, maximizingPlayer){
     else if(!maximizingPlayer){
         
         //declare the best score, move
-        let bestScore = Infinity;
+        let bestScore = -Infinity;
         let bestMove = null;
         let piece_index = 0
 
@@ -89,15 +87,13 @@ function minimax(depth,chess_board, maximizingPlayer){
             //make the moves for each piece and return the best move based on best score
             piece_moves.flat().forEach(move =>{
 
-                const cost = evaluateBoard(chess_board)
-
                 const [chess_board_after_move, removed_piece] = getBestMove.movePiece(move,original_index,chess_board)
 
                 const minimax_results = minimax(depth-1, chess_board_after_move, false)
 
-                getBestMove.undoMovePiece(piece.tile_index,original_index,chess_board_after_move, removed_piece)
+                getBestMove.undoMovePiece(move,original_index,chess_board_after_move, removed_piece)
 
-                if (minimax_results[1] > cost){
+                if (minimax_results[1] > bestScore){
                     bestScore = minimax_results[1]
                     bestMove = move
                     piece_index = piece.tile_index
