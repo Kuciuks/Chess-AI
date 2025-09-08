@@ -39,7 +39,6 @@ class Pawn extends Piece{
             let valid_moves = []
 
             let enemy_color = this.color == 'White' ? "Black" : this.color == "Black" ? "White" : null
-            console.log(enemy_color)
             //going through the possible moves and getting the valid ones
             this.moves[this.color[0]].forEach(move => {
                 switch(move){
@@ -268,7 +267,7 @@ class Queen extends Piece{
                         break
                 }
             })
-            console.log(valid_moves, " VALID MOVES")
+            // console.log(valid_moves, " VALID MOVES")
             return valid_moves
         }
 
@@ -424,8 +423,6 @@ export function evaluateBoard(piece, move,chess_board){
     if (chess_board[move] != null) {
         score += chess_board[move]?.value
     }
-    //get score value from a piece score matrix for a specific tile index
-    
 
     // let old_index = piece.tile_index
     // console.log(`Piece ${piece.name, piece.color} moved from ${old_index} to ${move} with score changing from ${piece.pawnScore[old_index]} to ${score}`)

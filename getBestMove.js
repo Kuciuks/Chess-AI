@@ -1,9 +1,9 @@
-console.log('getBestMove.js CALL')
 //makes a move from - to, with the best move from minimax
 function moveBestPiece(move, original_index, chess_board){
 
     let moved_piece = document.getElementById(move)
     let original_piece = document.getElementById(original_index)
+    console.log(`[MADE A MOVE] - you made a move with  ${original_piece.innerText} at ${original_piece.id} to ${moved_piece?.innerText} at ${moved_piece.id}`)
 
     let original_piece_name = original_piece.innerText
     original_piece.innerText = ""

@@ -1,9 +1,9 @@
-console.log('getMoves.js CALL')
+// console.log('getMoves.js CALL')
 
 
 function moveUpLeft (chess_board, tile_index, color, special_piece, enemy_color){ //move = piece tile index; special_piece = king or pawn piece; special_piece = king or pawn piece; special_piece = king or pawn piece
     const valid_moves = []
-    console.log(special_piece,'---------------------------------------------------------------------')
+    // console.log(special_piece,'---------------------------------------------------------------------')
     //directional move count - maximum possible moves in one direction = 7, 
     //if the moving piece is King or Pawn then they can only move 1 move in select directions
     const directional_move_count = special_piece == 'King' || special_piece == 'Pawn' ? 1 : 7
@@ -142,30 +142,30 @@ function moveUp (chess_board, tile_index, color, special_piece, special_move){ /
     const directional_move_count = special_piece == 'King' || special_piece == 'Pawn' ? special_move ? 2: 1 : 7
     // console.log(directional_move_count , special_move, special_piece)
     //up
-    console.log('Step - 1')
+    // console.log('Step - 1')
     if(special_piece == 'Pawn' && chess_board[tile_index-10]?.name !== "Border"){
         if(chess_board[tile_index-10] == null){
             valid_moves.push(tile_index-10)
-            console.log('Step - 2')
+            // console.log('Step - 2')
         }
         if(special_move && chess_board[tile_index-20] == null){
-            console.log('Step - 3')
+            // console.log('Step - 3')
             valid_moves.push(tile_index-20)
         }
         return valid_moves
     }
     else if(special_piece == 'King' && chess_board[tile_index-10]?.name !== "Border" && chess_board[tile_index-10] == null){
         valid_moves.push(tile_index-10)
-        console.log('Step - 4')
+        // console.log('Step - 4')
 
 
         return valid_moves
     }
 
     else if (special_piece == undefined){
-        console.log('Step - 5')
+        // console.log('Step - 5')
         for (let j = 0; j < directional_move_count; j++){
-            console.log('Step - 6', special_piece)
+            // console.log('Step - 6', special_piece)
             tile_index -= 10 
             if(chess_board[tile_index]?.color == color || tile_index < 10){
                 return valid_moves
@@ -173,7 +173,7 @@ function moveUp (chess_board, tile_index, color, special_piece, special_move){ /
             }
             else if (special_piece == undefined && chess_board[tile_index]?.name !== "Border") {
                 if(chess_board[tile_index] == null && tile_index > 10){
-                    console.log(chess_board[tile_index])
+                    // console.log(chess_board[tile_index])
                     valid_moves.push(tile_index)
                 }
                 else if (chess_board[tile_index]?.color != color && tile_index > 10){
@@ -202,7 +202,7 @@ function moveDown (chess_board, tile_index, color, special_piece, special_move){
     if(special_piece == 'Pawn' && chess_board[tile_index+10]?.name !== "Border"){
         if(chess_board[tile_index+10] == null){
             valid_moves.push(tile_index+10)
-            console.log('Step - 2')
+            // console.log('Step - 2')
         }
         if(special_piece && chess_board[tile_index+20] == null){
             valid_moves.push(tile_index+20)
@@ -224,7 +224,7 @@ function moveDown (chess_board, tile_index, color, special_piece, special_move){
             }
             else if (special_piece == undefined && chess_board[tile_index]?.name !== "Border") {
                 if(chess_board[tile_index] == null && tile_index < 89){
-                    console.log(chess_board[tile_index])
+                    // console.log(chess_board[tile_index])
                     valid_moves.push(tile_index)
                 }
                 else if (chess_board[tile_index]?.color != color && tile_index < 89){
@@ -256,7 +256,7 @@ function moveLeft (chess_board, tile_index, color, special_piece){ //move = piec
             return valid_moves
         }
         else if(chess_board[tile_index] == null){
-            console.log(chess_board[tile_index])
+            // console.log(chess_board[tile_index])
             valid_moves.push(tile_index)
         }
         else if (chess_board[tile_index]?.color != color){
@@ -282,7 +282,7 @@ function moveRight (chess_board, tile_index, color, special_piece){ //move = pie
             return valid_moves
         }
         else if(chess_board[tile_index] == null){
-            console.log(chess_board[tile_index])
+            // console.log(chess_board[tile_index])
             valid_moves.push(tile_index)
         }
         else if (chess_board[tile_index]?.color != color){
@@ -303,7 +303,7 @@ function knightMoves(chess_board, tile_index, color){
         // console.log(tile_index,'-----')
         tile_index = tile_index + move_indices[i]
 
-        console.log(tile_index, move_indices[i])
+        // console.log(tile_index, move_indices[i])
 
         if(tile_index > 10 && tile_index < 89){
             if(chess_board[tile_index] == null || chess_board[tile_index]?.name !== 'Border' && chess_board[tile_index]?.color !== color){
@@ -312,7 +312,7 @@ function knightMoves(chess_board, tile_index, color){
         }
 
     }
-    console.log(valid_moves, 'valid moves')
+    // console.log(valid_moves, 'valid moves')
     return valid_moves
 
 }
