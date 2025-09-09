@@ -12,7 +12,7 @@ function initiateAI(chess_board){
     //if the captured player is BLACK then activate the AI process
 
         //acivate minimax and capture returned values
-        let [best_move, best_score, original_index] = minimax(configInstance.depth, before_move_board, true)
+        let [best_move, best_score, original_index] = minimax(configInstance.depth, before_move_board, true, -Infinity, Infinity)
 
         console.log(best_move, best_score, original_index,'+++++++++++++++++++++++++++++++++++')
 

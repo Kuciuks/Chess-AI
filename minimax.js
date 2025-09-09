@@ -11,9 +11,9 @@ function minimax(depth,chess_board, maximizingPlayer){
 
     if(depth == 0){
         let board_score = evaluateBoard(chess_board)
-        console.log(board_score)
-        console.log(' __________________________________                 __________________________________')
-        console.log(' __________________________________                 __________________________________')
+        // console.log(board_score)
+        // console.log(' __________________________________                 __________________________________')
+        // console.log(' __________________________________                 __________________________________')
 
         return [null,board_score,null]
     }
@@ -35,12 +35,13 @@ function minimax(depth,chess_board, maximizingPlayer){
             const original_index = piece.tile_index
 
 
-            console.log('\n\n')
-            console.log('\n\n')
-            console.log(`[NEW PIECE MOVING - ${piece.name}]`)
+            // console.log('\n\n')
+            // console.log('\n\n')
+            // console.log(`[NEW PIECE MOVING - ${piece.name}]`)
 
 
             const piece_moves = piece.getAvailableMoves(chess_board);
+            console.log(piece_moves)
 
             //make the moves for each piece and return the best move based on best score
             piece_moves.flat().forEach(move =>{
@@ -77,9 +78,9 @@ function minimax(depth,chess_board, maximizingPlayer){
             const original_index = piece.tile_index
 
 
-            console.log('\n\n')
-            console.log('\n\n')
-            console.log(`[NEW PIECE MOVING - ${piece.name}]`)
+            // console.log('\n\n')
+            // console.log('\n\n')
+            // console.log(`[NEW PIECE MOVING - ${piece.name}]`)
 
 
             const piece_moves = piece.getAvailableMoves(chess_board);
@@ -89,7 +90,7 @@ function minimax(depth,chess_board, maximizingPlayer){
 
                 const [chess_board_after_move, removed_piece] = getBestMove.movePiece(move,original_index,chess_board)
 
-                const minimax_results = minimax(depth-1, chess_board_after_move, false)
+                const minimax_results = minimax(depth-1, chess_board_after_move, true)
 
                 getBestMove.undoMovePiece(move,original_index,chess_board_after_move, removed_piece)
 

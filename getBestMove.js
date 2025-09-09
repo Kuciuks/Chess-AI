@@ -5,18 +5,18 @@ function moveBestPiece(move, original_index, chess_board){
     let original_piece = document.getElementById(original_index)
     // console.log(`[MADE A MOVE] - you made a move with  ${original_piece.innerText} at ${original_piece.id} to ${moved_piece?.innerText} at ${moved_piece.id}`)
 
-    console.log(move, original_index,'-------------')
+    // console.log(move, original_index,'-------------')
 
     //moving piece on ARRAY board - internal
     if(chess_board[move] == null){
-        console.log('[MOVING TO NULL FINAL]',move, original_index)
+        // console.log('[MOVING TO NULL FINAL]',move, original_index)
         chess_board[move] = chess_board[original_index]
 
         chess_board[move].tile_index = parseInt(move)
         chess_board[original_index] = null
     }
     else if (chess_board[move] != null){
-        console.log('[MOVING TO NON NULL FINAL]',move, original_index)
+        // console.log('[MOVING TO NON NULL FINAL]',move, original_index)
 
         chess_board[move] = chess_board[original_index]
         chess_board[original_index] = null
@@ -27,11 +27,11 @@ function moveBestPiece(move, original_index, chess_board){
 
     }
 
-    console.log('____________________________________________________')
-    console.log('____________________________________________________')
-    console.log(chess_board[move],chess_board[original_index])
-    console.log('____________________________________________________')
-    console.log('____________________________________________________')
+    // console.log('____________________________________________________')
+    // console.log('____________________________________________________')
+    // console.log(chess_board[move],chess_board[original_index])
+    // console.log('____________________________________________________')
+    // console.log('____________________________________________________')
     
     original_piece.classList.remove(`${original_piece.innerText[0]}`)
     original_piece.classList.remove(`${original_piece.innerText}`)
@@ -56,44 +56,54 @@ function moveBestPiece(move, original_index, chess_board){
 
 
 function movePiece(move, original_index, chess_board){
-    const chess_board_copy = chess_board
-    console.log(chess_board[move])
+    const original_piece = chess_board[original_index]
+    if(chess_board[original_index].name == "Pawn"){
+        if(chess_board[original_index].special_tile == move){
+            chess_board[original_index].special_tile = 0
+            chess_board[original_index].special_move = false        }
+    }
+
     //moving piece on ARRAY board - internal
-    if (chess_board_copy[move] != null && chess_board_copy[move].name != 'Border'){
+    if (chess_board[move] != null && chess_board[move].name != 'Border'){
         const removed_piece = chess_board[move]
+
+        chess_board[move] = original_piece
+        chess_board[move].tile_index = parseInt(move)
+        chess_board[original_index] = null
         
-        chess_board_copy[move] = chess_board_copy[original_index]
-        chess_board_copy[move].tile_index = parseInt(move)
-        
-        console.log('[MOVING TO NOT NULL]',move, original_index)
-        console.log('REMOVED PIECE', removed_piece,'--------------------')
-        
-        return [chess_board_copy, removed_piece]
+        return [chess_board, removed_piece]
     }
     else if (chess_board[move] == null){
-        console.log('[MOVING TO NULL] from ', original_index,' to ',move)
-        chess_board_copy[move] = chess_board_copy[original_index]
-        chess_board_copy[move].tile_index = parseInt(move)
-        chess_board_copy[original_index] = null
-        return [chess_board_copy, null]
+
+        chess_board[move] = original_piece
+        chess_board[move].tile_index = parseInt(move)
+        chess_board[original_index] = null
+
+        return [chess_board, null]
     }
 }
 
 function undoMovePiece(move, original_index, chess_board, removed_piece){
-    const chess_board_copy = chess_board
-    console.log('[UNDO MOVE 1] - from ', move,' to ',original_index)
-    if(removed_piece != null){
-        chess_board_copy[original_index] = chess_board_copy[move]
-        chess_board_copy[original_index].tile_index = parseInt(original_index)
-        chess_board_copy[move] = removed_piece
+    const original_piece = chess_board[move]
+
+    if(chess_board[move].name == "Pawn"){
+        if(chess_board[move].special_tile == move){
+            chess_board[original_index].special_tile = 0
+            chess_board[original_index].special_move = true        
+        }
     }
-    else if(chess_board[original_index] == null){
-        chess_board_copy[original_index] = chess_board_copy[move]
-        chess_board_copy[original_index].tile_index = parseInt(original_index)
-        chess_board_copy[move] = null
 
-        return chess_board_copy
-
+    if(removed_piece == null){
+        chess_board[original_index] = original_piece
+        chess_board[original_index].tile_index = parseInt(original_index)
+        chess_board[move] = null
+        return chess_board
+    }
+    else if (removed_piece != null){
+        chess_board[original_index] = original_piece
+        chess_board[original_index].tile_index = parseInt(original_index)
+        chess_board[move] = removed_piece
+        return chess_board
     }
 
 }

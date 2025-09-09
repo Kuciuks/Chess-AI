@@ -19,13 +19,14 @@ class Pawn extends Piece{
         constructor(name, value, color, tile_index, special_move){
             super(name, value, color, tile_index)
             this.special_move = special_move
+            this.special_tile = 0
             this.pawnScore= [
                 null, null, null, null, null, null, null, null, null, null,
                 null,    0,   0,   0,   0,   0,   0,   0,   0, null,
-                null,   10,  10,  10,  10,  10,  10,  10,  10, null,
-                null,    5,   5,   5,   5,  50,   5,   5,   5, null,
-                null,    0,   0,   0,   0,  50,   0,   0,   0, null,
-                null,   -5,  -5,  -5, 500,  -5, -10,   0,  -5, null,
+                null,   10,  10,  10,  10,  0,  0,  10,  10, null,
+                null,    5,   5,   5,   5,  15,   5,   5,   5, null,
+                null,    0,   0,   0,   0,  0,   0,   0,   0, null,
+                null,   -5,  -5,  -5, -5,  -5, -10,   0,  -5, null,
                 null,  -10, -10, -10, -10,   0,   0, -10, -10, null,
                 null,  -15, -15, -15, -15, -15, -15, -15, -15, null,
                 null,    0,   0,   0,   0,   0,   0,   0,   0, null,
@@ -427,8 +428,7 @@ export function evaluateBoard(chess_board){
         }
 
     }
-    console.log(' __________________________________[EVLAUATE BOARD] __________________________________')
-    console.log(' __________________________________                 __________________________________')
+    console.log(' __________________________________[EVLAUATE BOARD] - ',board_cost,' __________________________________')
     return board_cost
 }
 
