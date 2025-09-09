@@ -2,10 +2,10 @@
 Chess board
 */
 .chess-table > ul{
-    width: 500px;
-    height: 500px;
+    width: 95vw;
+    height: auto;
     padding: 0px;
-
+    aspect-ratio: 1 / 1;
     list-style-type: none;
 
     display: grid;
@@ -26,11 +26,19 @@ Chess board
     display: grid;
     grid-template-columns: auto auto auto auto auto auto auto auto;
 }
-
+.tile{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
 .pic{
     position: absolute;
+    width: 12%;
+    height: 12%;
+    object-fit: contain;
 }
+
 
 .main-frame{
     width: 100%;
