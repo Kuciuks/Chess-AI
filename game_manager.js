@@ -40,7 +40,7 @@ const DOM_chess_table = document.querySelector('.chess-table')
 function processChessBoardInteract(event){
     //find the specific tile that was clicked on
     const tile = event.target.closest('.tile');
-
+    event.preventDefault();
     //if the click was not on a tile, do nothing
     if (!tile) {
         return
