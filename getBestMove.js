@@ -2,10 +2,13 @@
 function moveBestPiece(move, original_index, chess_board){    
     let moved_piece = document.getElementById(move)
     let original_piece = document.getElementById(original_index)
+
+
     const isSpecial = (chess_board[original_index]?.special_tile == move) //if true then it means the pawn is making a special move
-    if(chess_board[original_index].name == 'Pawn' && isSpecial){
+    if(isSpecial || !isSpecial){
         chess_board[original_index].special_move = false
     }
+
     //moving piece on ARRAY board - internal
     if(chess_board[move] == null){
         // console.log('[MOVING TO NULL FINAL]',move, original_index)
@@ -60,7 +63,7 @@ function movePiece(move, original_index, chess_board){
     if(chess_board[move]){
         chess_board[move].tile_index = parseInt(move)
 
-        if(chess_board[move].name == 'Pawn' && isSpecial){
+        if(isSpecial || !isSpecial){
             chess_board[move].special_move = false
         }
     }
@@ -78,7 +81,7 @@ function undoMovePiece(move, original_index, chess_board, removed_piece){
     if(chess_board[original_index]){
         chess_board[original_index].tile_index = parseInt(original_index)
         
-        if(chess_board[original_index].name == 'Pawn' && isSpecial){
+        if(isSpecial){
             chess_board[original_index].special_move = true
         }
     }
