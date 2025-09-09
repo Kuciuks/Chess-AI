@@ -20,6 +20,7 @@ class Pawn extends Piece{
             super(name, value, color, tile_index)
             this.special_move = special_move
             this.special_tile = 0
+            this.starting_position = 0
             this.pawnScore= [
                 null, null, null, null, null, null, null, null, null, null,
                 null,    0,   0,   0,   0,   0,   0,   0,   0, null,
@@ -422,7 +423,7 @@ export function invertBoard(chess_board){
     const black_pieces = all_pieces.black_pieces
     console.log(white_pieces,black_pieces,'________________________________________')
     for(const white_piece of white_pieces){
-        
+
         
     }
 }

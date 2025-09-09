@@ -154,6 +154,7 @@ function moveUp (chess_board, tile_index, color, special_piece, special_move){ /
             valid_moves.push(tile_index-20)
 
             chess_board[tile_index].special_tile = tile_index-20
+            chess_board[tile_index].starting_position = tile_index
 
         }
         return valid_moves
@@ -210,6 +211,9 @@ function moveDown (chess_board, tile_index, color, special_piece, special_move){
         }
         if(special_piece && chess_board[tile_index+20] == null){
             valid_moves.push(tile_index+20)
+            chess_board[tile_index].special_tile = tile_index+20
+            chess_board[tile_index].starting_position = tile_index
+
         }
         return valid_moves
     }

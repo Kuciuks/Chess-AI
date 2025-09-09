@@ -74,6 +74,7 @@ function movePiece(move, original_index, chess_board){
 function undoMovePiece(move, original_index, chess_board, removed_piece){
     const original_piece = chess_board[move]
     const isSpecial = (original_piece?.special_tile == move) //if true then it means the pawn was making a special move
+    const isFirstMove = (original_piece?.starting_position == original_index)
 
     chess_board[original_index] = original_piece
     chess_board[move] = removed_piece
@@ -81,7 +82,7 @@ function undoMovePiece(move, original_index, chess_board, removed_piece){
     if(chess_board[original_index]){
         chess_board[original_index].tile_index = parseInt(original_index)
         
-        if(isSpecial){
+        if(isSpecial || isFirstMove){
             chess_board[original_index].special_move = true
         }
     }
