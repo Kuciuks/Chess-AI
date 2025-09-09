@@ -1,5 +1,6 @@
 import config from './config.js'
 import handleTileClick from './human.js'
+import whoTurn from './whoTurn.js'
 
 const configInstance = config.getInstance()
 
@@ -36,7 +37,7 @@ DOM_game_details.addEventListener('click',event =>{
 
 //add event listener to chess board parent file when the script is loaded
 const DOM_chess_table = document.querySelector('.chess-table')
-DOM_chess_table.addEventListener('click', event => {
+function processChessBoardInteract(event){
     //find the specific tile that was clicked on
     const tile = event.target.closest('.tile');
 
@@ -52,8 +53,9 @@ DOM_chess_table.addEventListener('click', event => {
         console.log('AI turn actually !!!')
         return
     }
-})
-
+}
+DOM_chess_table.addEventListener('click', processChessBoardInteract)
+DOM_chess_table.addEventListener('touched', processChessBoardInteract)
 
 
 

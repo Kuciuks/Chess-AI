@@ -37,4 +37,8 @@ function whoTurn(toggle, chess_board){
         initiateAI(chess_board)
     }
 }
+
+
+
+
 export default whoTurn
