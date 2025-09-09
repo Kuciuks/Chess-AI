@@ -34,8 +34,6 @@
                     <li class="tile B-Pawn B-t B" id="27">B-Pawn</li>
                     <li class="tile B-Pawn W-t B" id="28">B-Pawn</li>
                 </div>
-    
-    
                 <div class="chess-div" id="row-3">
                     <li class="tile W-t" id="31"></li>
                     <li class="tile B-t" id="32"></li>
@@ -76,7 +74,6 @@
                     <li class="tile B-t" id="67"></li>
                     <li class="tile W-t" id="68"></li>
                 </div>
-    
                 <div class="chess-div" id="row-7">
                     <li class="tile W-Pawn W-t W" id="71">W-Pawn</li>
                     <li class="tile W-Pawn B-t W" id="72">W-Pawn</li>
@@ -98,6 +95,27 @@
                     <li class="tile W-Rook W-t W" id="88">W-Rook</li>
                 </div>  
             </ul>
+        </div>
+        <div class="chess-stats">
+            <div class="difficulty-select">
+                <label for="difficulty">Difficulty:</label>
+                <select id="difficulty">
+                    <option value="1">Easy - (Depth 1)</option>
+                    <option value="2" selected>Normal - (Depth 2)</option>
+                    <option value="3">Hard - (Depth 3)</option>
+                    <option value="4">Very Hard - (Depth 4)</option>
+                </select>
+            </div>
+            <div class="player-color-select">
+                <label for="player-color">Play as:</label>
+                <select class="player-color">
+                    <option value="1">Black</option>
+                    <option value="2" selected>White</option>
+                </select>
+            </div>
+            <div class="board-score">
+                <span>0</span>
+            </div>
         </div>
     </div>
     <script type="module" src="whoTurn.js"></script>

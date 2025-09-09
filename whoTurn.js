@@ -1,6 +1,6 @@
 import "./human.js";
 import initiateAI from "./Initiate.js";
-
+import './game_manager.js'
 
 
 //checks who turn, return true of black turn, false if white

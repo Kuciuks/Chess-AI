@@ -2,8 +2,8 @@
 Chess board
 */
 .chess-table > ul{
-    width: 500px;
-    height: 500px;
+    min-width: 500px;
+    min-height: 500px;
     padding: 0px;
 
     list-style-type: none;
@@ -17,6 +17,7 @@ Chess board
     justify-content: center;
     background-color: aqua;
     z-index: 1;
+    width: 100%;
 }
 
 .chess-div{
@@ -29,8 +30,6 @@ Chess board
 
 .pic{
     position: absolute;
-    padding: 15px 0px 0px 17px;
-    scale: 1.2;
 }
 
 .main-frame{
@@ -45,4 +44,12 @@ Chess board
     display: flex;
     justify-content: center;
     background-color: bisque;
+}
+
+
+.chess-stats{
+    
+    width: 70%;
+    height: 30%;
+    background-color: orangered;
 }
