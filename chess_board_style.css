@@ -2,8 +2,8 @@
 Chess board
 */
 .chess-table > ul{
-    width: 800px;
-    height: 800px;
+    width: 500px;
+    height: 500px;
     padding: 0px;
 
     list-style-type: none;

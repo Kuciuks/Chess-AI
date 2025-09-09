@@ -467,7 +467,7 @@ const config = (function() {
             black_pieces: [],
             white_pieces: [],
             all_piece_moves: [],
-            depth: 3,
+            depth: 4,
             alpha: -Infinity,
             beta: Infinity,
             checkedBoardCount: 0,
