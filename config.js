@@ -415,6 +415,17 @@ const chess_board = [
     border,  border,    border,     border,    border,   border,    border,     border,     border,  border
 ]
 
+export function invertBoard(chess_board){
+    const all_pieces = getColoredPieces(chess_board)
+
+    const white_pieces = all_pieces.white_pieces
+    const black_pieces = all_pieces.black_pieces
+    console.log(white_pieces,black_pieces,'________________________________________')
+    for(const white_piece of white_pieces){
+        
+        
+    }
+}
 
 
 export function evaluateBoard(chess_board){
@@ -463,6 +474,7 @@ const config = (function() {
             //upload images, repaint tiles, reset values
             uploadImages()
             paintTiles()
+            invertBoard(chess_board)
         return {
             black_pieces: [],
             white_pieces: [],
