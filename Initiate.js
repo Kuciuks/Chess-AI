@@ -7,23 +7,18 @@ const configInstance = config.getInstance()
 function initiateAI(chess_board){
     console.log('[AI INITIATED]')
 
-    //store a copy of the main board before making the move
-    let before_move_board = chess_board;
-    //if the captured player is BLACK then activate the AI process
+    //acivate minimax and capture returned values
+    let [best_move, best_score, original_index] = minimax(configInstance.depth, chess_board, true, -Infinity, Infinity)
 
-        //acivate minimax and capture returned values
-        let [best_move, best_score, original_index] = minimax(configInstance.depth, before_move_board, true, -Infinity, Infinity)
+    console.log(`[AI MOVED] - took a move to take [${chess_board[best_move]?.name ? chess_board[best_move].name:'EMPTY'}] with a ${chess_board[original_index].name};  with a board score ${best_score}`)
+    console.log(`[AI MOVED] - Moved piece from ${original_index} to ${best_move}`)
+    //using returned minimax values take a step
+    getBestMove.moveBestPiece(best_move, original_index, chess_board)
 
-        console.log(best_move, best_score, original_index,'+++++++++++++++++++++++++++++++++++')
+    //add a point - switch turn
+    configInstance.toggle +=1
 
-        //using returned minimax values take a step
-        let after_move_board = getBestMove.moveBestPiece(best_move, original_index, before_move_board)
-
-        //add a point - switch turn
-        configInstance.toggle +=1
-        configInstance.chess_board = after_move_board
-        
-        whoTurn(configInstance.toggle, after_move_board)
+    whoTurn(configInstance.toggle, chess_board)
 }
 
 export default initiateAI
