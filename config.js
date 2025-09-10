@@ -421,7 +421,7 @@ export function invertBoard(chess_board){
 
     const white_pieces = all_pieces.white_pieces
     const black_pieces = all_pieces.black_pieces
-    console.log(white_pieces,black_pieces,'________________________________________')
+    // console.log(white_pieces,black_pieces,'________________________________________')
     for(const white_piece of white_pieces){
 
         
@@ -440,7 +440,7 @@ export function evaluateBoard(chess_board){
         }
 
     }
-    console.log(' __________________________________[EVLAUATE BOARD] - ',board_cost,' __________________________________')
+    // console.log(' __________________________________[EVLAUATE BOARD] - ',board_cost,' __________________________________')
     return board_cost
 }
 
@@ -450,6 +450,7 @@ export function getColoredPieces(chess_board){
     let black_pieces = []
     let white_pieces = []
     //mapping through the board to separate pieces based on color
+    console.log(chess_board)
     chess_board.forEach(piece =>{
         //asign tile number to the piece on which the piece is located
         if (piece != null && piece != border) {

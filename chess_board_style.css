@@ -37,9 +37,9 @@ Chess board
     width: 12%;
     height: 12%;
     object-fit: contain;
+    transition: transform 0.4s ease-out;
     
 }
-
 
 .main-frame{
     width: 100%;

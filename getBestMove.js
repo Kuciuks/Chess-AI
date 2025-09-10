@@ -1,16 +1,49 @@
+
+function makeAnimations(move_to_piece,original_piece){
+    console.log(move_to_piece,'0000000000000000000000000000000000000',original_piece)
+    if(move_to_piece){
+        const move_to_pic = move_to_piece.querySelector('.pic')
+    }
+    const original_pic = original_piece.querySelector('.pic')
+    
+    const move_to_pos = move_to_piece.getBoundingClientRect()
+    const original_pos = original_piece.getBoundingClientRect()
+
+    const move_to_top = move_to_pos.top
+    const move_to_left = move_to_pos.left
+
+    const original_top = original_pos.top
+    const original_left = original_pos.left
+
+    console.log(move_to_top, move_to_left,'---------------------', original_top, original_left)
+
+    const deltaY = move_to_top - original_top
+    const deltaX = move_to_left - original_left
+
+    // const deltaX = (move_to_top != original_top) ? move_to_top != original_top : original_top
+    // const deltaY = (move_to_left != original_left) ? move_to_left != original_left : original_left
+    original_pic.style.transform = `translate(${deltaX}px, ${deltaY}px)`
+    // original_pic.style.opacity = 0
+    // original_pic.style.transform = `translate(${original_left}px, ${original_top}px)`
+}
+
+
 //makes a move from - to, with the best move from minimax
-function moveBestPiece(move, original_index, chess_board){    
+async function moveBestPiece(move, original_index, chess_board){    
+    
     let moved_piece = document.getElementById(move)
     let original_piece = document.getElementById(original_index)
-
+    makeAnimations(moved_piece,original_piece)
+    await new Promise (resolve =>{setTimeout(resolve,400)})
 
     const isSpecial = (chess_board[original_index]?.special_tile == move) //if true then it means the pawn is making a special move
     if(isSpecial || !isSpecial){
         chess_board[original_index].special_move = false
     }
-
     //moving piece on ARRAY board - internal
     if(chess_board[move] == null){
+
+
         // console.log('[MOVING TO NULL FINAL]',move, original_index)
         chess_board[move] = chess_board[original_index]
 
@@ -19,6 +52,7 @@ function moveBestPiece(move, original_index, chess_board){
     }
     else if (chess_board[move] != null){
         // console.log('[MOVING TO NON NULL FINAL]',move, original_index)
+
 
         chess_board[move] = chess_board[original_index]
         chess_board[original_index] = null

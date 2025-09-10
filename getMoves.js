@@ -148,7 +148,7 @@ function moveUp (chess_board, tile_index, color, special_piece, special_move){ /
             valid_moves.push(tile_index-10)
             // console.log('Step - 2')
         }
-        console.log(special_move,'SPECIALMOVE___________________________________________________')
+        // console.log(special_move,'SPECIALMOVE___________________________________________________')
         if(special_move && chess_board[tile_index-20] == null){
             // console.log('Step - 3')
             valid_moves.push(tile_index-20)

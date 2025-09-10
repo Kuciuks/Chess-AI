@@ -6,7 +6,7 @@ import whoTurn from './whoTurn.js'
 
 
 
-function handleTileClick(tile, chess_board,configInstance){
+async function handleTileClick(tile, chess_board,configInstance){
     console.log(`[SELECTION] - currently selected piece ${tile.innerText} at ${tile.id}`)
     //if selection is empty and tile text is full 
     if(!configInstance.selection && chess_board[tile.id] !== null && chess_board[tile.id].color !== "Black"){
@@ -30,13 +30,13 @@ function handleTileClick(tile, chess_board,configInstance){
 
     if(tile.style.backgroundColor === 'orange'){
 
-        const chess_board_after_move = getBestMove.moveBestPiece(tile.id, configInstance.selection, chess_board)
+        await getBestMove.moveBestPiece(tile.id, configInstance.selection, chess_board)
         configInstance.toggle += 1
-        configInstance.chess_board = chess_board_after_move
+        configInstance.chess_board = chess_board
         configInstance.selection = null
 
         paintTiles()
-        whoTurn(configInstance.toggle ,chess_board_after_move)
+        whoTurn(configInstance.toggle ,chess_board)
     }
 
 }
