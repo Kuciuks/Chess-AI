@@ -1,6 +1,5 @@
 
 function makeAnimations(move_to_piece,original_piece){
-    console.log(move_to_piece,'0000000000000000000000000000000000000',original_piece)
     if(move_to_piece){
         const move_to_pic = move_to_piece.querySelector('.pic')
     }

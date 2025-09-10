@@ -9,7 +9,7 @@ import whoTurn from './whoTurn.js'
 async function handleTileClick(tile, chess_board,configInstance){
     console.log(`[SELECTION] - currently selected piece ${tile.innerText} at ${tile.id}`)
     //if selection is empty and tile text is full 
-    if(!configInstance.selection && chess_board[tile.id] !== null && chess_board[tile.id].color !== "Black"){
+    if(!configInstance.selection && chess_board[tile.id] !== null && chess_board[tile.id].color !== configInstance.enemy_color){
 
         const piece_moves = chess_board[tile.id].getAvailableMoves(chess_board)
         configInstance.selection = tile.id

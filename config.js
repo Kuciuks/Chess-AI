@@ -416,16 +416,54 @@ const chess_board = [
     border,  border,    border,     border,    border,   border,    border,     border,     border,  border
 ]
 
-export function invertBoard(chess_board){
+export function invertBoard(chess_board, configInstance){
+
     const all_pieces = getColoredPieces(chess_board)
 
     const white_pieces = all_pieces.white_pieces
     const black_pieces = all_pieces.black_pieces
-    // console.log(white_pieces,black_pieces,'________________________________________')
-    for(const white_piece of white_pieces){
 
-        
+    // configInstance.enemy_color = (black_pieces[0].color == configInstance.enemy_color) ? white_pieces[0].color: black_pieces[0].color
+    // console.log(configInstance.enemy_color)
+
+    const DOM_white_pieces = document.querySelectorAll('.W')
+    const DOM_black_pieces = document.querySelectorAll('.B')
+    chess_board.reverse()
+
+    for (let i = 0; i< white_pieces.length; i++){
+
+        const [tile_W, type_piece_W, tile_color_W, piece_color_W] = DOM_white_pieces[i].classList
+        const [tile_B, type_piece_B, tile_color_B, piece_color_B] = DOM_black_pieces[(black_pieces.length - 1) - i].classList
+
+        console.log(DOM_white_pieces[i],'_______')
+        console.log(DOM_black_pieces[(black_pieces.length - 1) - i],'////////////')
+
+        // console.log(type_piece_W,type_piece_B)
+        // console.log(piece_color_W,piece_color_B)
+
+        // document.getElementById(`${DOM_white_pieces[i].id}`).classList.remove(type_piece_W,piece_color_W)
+        DOM_white_pieces[i].classList.remove(type_piece_W,piece_color_W)
+        DOM_white_pieces[i].classList.remove(type_piece_B,piece_color_B)
+        DOM_white_pieces[i].classList.add(type_piece_B,piece_color_B)
+        DOM_white_pieces[i].innerText = ''
+        DOM_white_pieces[i].innerText = type_piece_B
+
+
+        DOM_black_pieces[i].classList.remove(type_piece_B,piece_color_B)
+        DOM_black_pieces[i].classList.remove(type_piece_W,piece_color_W)
+        DOM_black_pieces[i].classList.add(type_piece_W,piece_color_W)
+        DOM_black_pieces[i].innerText = ''
+        DOM_black_pieces[i].innerText = type_piece_W
+
+
+        chess_board[white_pieces[i].tile_index].tile_index = white_pieces[i].tile_index
+        chess_board[black_pieces[i].tile_index].tile_index = black_pieces[i].tile_index
+
     }
+
+    console.log(chess_board)
+
+    return chess_board
 }
 
 
@@ -450,7 +488,6 @@ export function getColoredPieces(chess_board){
     let black_pieces = []
     let white_pieces = []
     //mapping through the board to separate pieces based on color
-    console.log(chess_board)
     chess_board.forEach(piece =>{
         //asign tile number to the piece on which the piece is located
         if (piece != null && piece != border) {
@@ -476,7 +513,6 @@ const config = (function() {
             //upload images, repaint tiles, reset values
             uploadImages()
             paintTiles()
-            invertBoard(chess_board)
         return {
             black_pieces: [],
             white_pieces: [],
@@ -495,7 +531,8 @@ const config = (function() {
             selected_letter: "",
             white_move_set: new Set(),
             blacks_move_set: new Set(),
-            chess_board: chess_board
+            chess_board: chess_board,
+            enemy_color: "Black"
         }
     }
 

@@ -2,7 +2,7 @@
 Chess board
 */
 .chess-table > ul{
-    width: 95vw;
+    width: 65vw;
     height: auto;
     padding: 0px;
     aspect-ratio: 1 / 1;
@@ -10,6 +10,11 @@ Chess board
 
     display: grid;
     grid-template-columns: auto;
+}
+@media (max-width: 900px){
+    .chess-table > ul{
+        width: 95vw;
+    }
 }
 
 .chess-table{
