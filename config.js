@@ -416,54 +416,64 @@ const chess_board = [
     border,  border,    border,     border,    border,   border,    border,     border,     border,  border
 ]
 
-export function invertBoard(chess_board, configInstance){
-
-    const all_pieces = getColoredPieces(chess_board)
-
-    const white_pieces = all_pieces.white_pieces
-    const black_pieces = all_pieces.black_pieces
-
-    // configInstance.enemy_color = (black_pieces[0].color == configInstance.enemy_color) ? white_pieces[0].color: black_pieces[0].color
-    // console.log(configInstance.enemy_color)
-
-    const DOM_white_pieces = document.querySelectorAll('.W')
-    const DOM_black_pieces = document.querySelectorAll('.B')
-    chess_board.reverse()
-
-    for (let i = 0; i< white_pieces.length; i++){
-
-        const [tile_W, type_piece_W, tile_color_W, piece_color_W] = DOM_white_pieces[i].classList
-        const [tile_B, type_piece_B, tile_color_B, piece_color_B] = DOM_black_pieces[(black_pieces.length - 1) - i].classList
-
-        console.log(DOM_white_pieces[i],'_______')
-        console.log(DOM_black_pieces[(black_pieces.length - 1) - i],'////////////')
-
-        // console.log(type_piece_W,type_piece_B)
-        // console.log(piece_color_W,piece_color_B)
-
-        // document.getElementById(`${DOM_white_pieces[i].id}`).classList.remove(type_piece_W,piece_color_W)
-        DOM_white_pieces[i].classList.remove(type_piece_W,piece_color_W)
-        DOM_white_pieces[i].classList.remove(type_piece_B,piece_color_B)
-        DOM_white_pieces[i].classList.add(type_piece_B,piece_color_B)
-        DOM_white_pieces[i].innerText = ''
-        DOM_white_pieces[i].innerText = type_piece_B
+const OG_chess_board = [
+    border,  border,    border,     border,    border,   border,    border,     border,    border,   border,
+    border, rook_b_1, knight_b_1, bishop_b_1, queen_b,   king_b,  bishop_b_2, knight_b_2,  rook_b_2, border,
+    border, pawn_b_1,  pawn_b_2,   pawn_b_3,  pawn_b_4, pawn_b_5,  pawn_b_6,   pawn_b_7,   pawn_b_8, border,
+    border,   null,      null,       null,      null,     null,      null,       null,       null,   border,
+    border,   null,      null,       null,      null,     null,      null,       null,       null,   border,
+    border,   null,      null,       null,      null,     null,      null,       null,       null,   border,
+    border,   null,      null,       null,      null,     null,      null,       null,       null,   border,
+    border, pawn_w_1,  pawn_w_2,   pawn_w_3,  pawn_w_4, pawn_w_5,  pawn_w_6,   pawn_w_7,   pawn_w_8, border,
+    border, rook_w_1, knight_w_1, bishop_w_1, queen_w,   king_w,  bishop_w_2, knight_w_2,  rook_w_2, border,
+    border,  border,    border,     border,    border,   border,    border,     border,     border,  border
+]
 
 
-        DOM_black_pieces[i].classList.remove(type_piece_B,piece_color_B)
-        DOM_black_pieces[i].classList.remove(type_piece_W,piece_color_W)
-        DOM_black_pieces[i].classList.add(type_piece_W,piece_color_W)
-        DOM_black_pieces[i].innerText = ''
-        DOM_black_pieces[i].innerText = type_piece_W
 
 
-        chess_board[white_pieces[i].tile_index].tile_index = white_pieces[i].tile_index
-        chess_board[black_pieces[i].tile_index].tile_index = black_pieces[i].tile_index
+const all_pieces = getColoredPieces(OG_chess_board)
 
+const white_pieces = all_pieces.white_pieces
+const black_pieces = all_pieces.black_pieces
+
+const DOM_white_pieces = document.querySelectorAll('.W')
+const DOM_black_pieces = document.querySelectorAll('.B')
+
+
+export function invertBoard(configInstance){
+
+    OG_chess_board.reverse()
+    if(configInstance.enemy_color == 'Black'){
+
+        let list = []
+        configInstance.enemy = false
+
+        for (let i = 0; i< white_pieces.length; i++){
+
+            configInstance.enemy_color = 'White'
+            list.push([DOM_white_pieces[i],DOM_black_pieces[i]])
+
+            const white_piece_text = DOM_white_pieces[i].innerText
+            const black_piece_text = DOM_black_pieces[(black_pieces.length-1)-i].innerText
+
+            const white_piece_index = OG_chess_board[DOM_white_pieces[i].id].tile_index
+            const black_piece_index = OG_chess_board[DOM_black_pieces[(black_pieces.length-1)-i].id].tile_index    
+
+            DOM_white_pieces[i].classList.add('B', black_piece_text)
+            DOM_white_pieces[i].classList.remove('W', white_piece_text)
+            DOM_white_pieces[i].innerText = black_piece_text
+
+            DOM_black_pieces[(black_pieces.length-1)-i].classList.add('W',white_piece_text)
+            DOM_black_pieces[(black_pieces.length-1)-i].classList.remove('B',black_piece_text)
+            DOM_black_pieces[(black_pieces.length-1)-i].innerText = white_piece_text
+
+            OG_chess_board[white_piece_index].tile_index = white_piece_index
+            OG_chess_board[black_piece_index].tile_index = black_piece_index
+        }
+        console.log(list)
     }
-
-    console.log(chess_board)
-
-    return chess_board
+    return OG_chess_board
 }
 
 
@@ -471,14 +481,10 @@ export function evaluateBoard(chess_board){
     let board_cost = 0
 
     for(const tile in chess_board){
-        // console.log('EVALUATE BOARD _____________________',typeof(chess_board[tile]),chess_board[tile])
         if (chess_board[tile] !== null && chess_board[tile]?.name !== 'Border'){
             board_cost += chess_board[tile].value + chess_board[tile].pawnScore[tile]
-            // console.log('[BOARD COST] - ', board_cost)
         }
-
     }
-    // console.log(' __________________________________[EVLAUATE BOARD] - ',board_cost,' __________________________________')
     return board_cost
 }
 
@@ -526,13 +532,14 @@ const config = (function() {
             count: 0,
             moveCount: 0,
             moveStorage: [],
-            toggle: 1,
+            toggle: 0,
             selection: null,
             selected_letter: "",
             white_move_set: new Set(),
             blacks_move_set: new Set(),
             chess_board: chess_board,
-            enemy_color: "Black"
+            enemy_color: "Black",
+            enemy: true,
         }
     }
 

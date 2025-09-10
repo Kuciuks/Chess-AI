@@ -1,5 +1,5 @@
 
-function makeAnimations(move_to_piece,original_piece){
+async function makeAnimations(move_to_piece,original_piece){
     if(move_to_piece){
         const move_to_pic = move_to_piece.querySelector('.pic')
     }
@@ -24,6 +24,8 @@ function makeAnimations(move_to_piece,original_piece){
     original_pic.style.transform = `translate(${deltaX}px, ${deltaY}px)`
     // original_pic.style.opacity = 0
     // original_pic.style.transform = `translate(${original_left}px, ${original_top}px)`
+    
+    await new Promise (resolve =>{setTimeout(resolve,400)})
 }
 
 
@@ -32,11 +34,12 @@ async function moveBestPiece(move, original_index, chess_board){
     
     let moved_piece = document.getElementById(move)
     let original_piece = document.getElementById(original_index)
-    makeAnimations(moved_piece,original_piece)
-    await new Promise (resolve =>{setTimeout(resolve,400)})
 
-    const isSpecial = (chess_board[original_index]?.special_tile == move) //if true then it means the pawn is making a special move
-    if(isSpecial || !isSpecial){
+    //waits until the makeAnimations method is done running
+    await makeAnimations(moved_piece,original_piece)
+
+
+    if(chess_board[original_index]?.name == 'Pawn'){
         chess_board[original_index].special_move = false
     }
     //moving piece on ARRAY board - internal
@@ -52,21 +55,17 @@ async function moveBestPiece(move, original_index, chess_board){
     else if (chess_board[move] != null){
         // console.log('[MOVING TO NON NULL FINAL]',move, original_index)
 
-
+        chess_board[move].tile_index = parseInt(move)
         chess_board[move] = chess_board[original_index]
         chess_board[original_index] = null
-        chess_board[move].tile_index = parseInt(move)
 
         moved_piece.classList.remove(`${moved_piece.innerText}`)
         moved_piece.classList.remove(`${moved_piece.innerText[0]}`)
 
     }
-    
     original_piece.classList.remove(`${original_piece.innerText[0]}`)
     original_piece.classList.remove(`${original_piece.innerText}`)
     original_piece.style.cursor = ''
-
-
 
 
     //moving the piece on the DOM board
@@ -77,7 +76,7 @@ async function moveBestPiece(move, original_index, chess_board){
     moved_piece.classList.add(`${moved_piece.innerText}`)
     moved_piece.classList.add(`${moved_piece.innerText[0]}`)
     moved_piece.style.cursor = 'pointer'
-
+    console.log('end of best move piece')
 
     return chess_board
 }

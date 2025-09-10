@@ -157,6 +157,7 @@ function moveUp (chess_board, tile_index, color, special_piece, special_move){ /
             chess_board[tile_index].starting_position = tile_index
 
         }
+        // console.log(valid_moves)
         return valid_moves
     }
     else if(special_piece == 'King' && chess_board[tile_index-10]?.name !== "Border" && chess_board[tile_index-10] == null){
