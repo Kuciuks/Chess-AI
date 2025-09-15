@@ -11,7 +11,7 @@ function minimax(depth,chess_board, maximizingPlayer, alpha, beta){
     }
 
     //if AI turn
-    if(maximizingPlayer){
+    if(!maximizingPlayer){
 
         //declare the best score, move
         let bestScore = Infinity;
@@ -21,13 +21,11 @@ function minimax(depth,chess_board, maximizingPlayer, alpha, beta){
 
         //get all black pieces for current board
         const black_pieces = getColoredPieces(chess_board).black_pieces;
-
         // go through black pieces
         for(let piece of black_pieces){
             const original_index = piece.tile_index
 
             const piece_moves = piece.getAvailableMoves(chess_board);
-
             //make the moves for each piece and return the best move based on best score
             for(let move of piece_moves.flat()){
 
@@ -50,7 +48,7 @@ function minimax(depth,chess_board, maximizingPlayer, alpha, beta){
         }         
         return [bestMove, bestScore, piece_index]
     }
-    else if(!maximizingPlayer){
+    else if(maximizingPlayer){
         
         //declare the best score, move
         let bestScore = -Infinity;
@@ -64,7 +62,6 @@ function minimax(depth,chess_board, maximizingPlayer, alpha, beta){
         // go through white pieces
         for(let piece of white_pieces){
             const original_index = piece.tile_index
-
             const piece_moves = piece.getAvailableMoves(chess_board);
 
             //make the moves for each piece and return the best move based on best score

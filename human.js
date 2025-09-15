@@ -36,7 +36,7 @@ async function handleTileClick(tile, chess_board,configInstance){
         configInstance.selection = null
 
         paintTiles()
-        whoTurn(configInstance.toggle ,chess_board)
+        whoTurn(configInstance.toggle ,chess_board,configInstance.enemy_color)
     }
 
 }

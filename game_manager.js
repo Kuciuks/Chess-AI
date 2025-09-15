@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded',initGame)
 //initialising call
 function initGame(event){
     console.log('dom loaded')
-    whoTurn(configInstance.toggle, configInstance.chess_board)
+    whoTurn(configInstance.toggle, configInstance.chess_board,configInstance.enemy_color)
 }
 
 function manageChessStats(event){
@@ -45,9 +45,10 @@ function manageChessStats(event){
         }
     }
     if (click_event.className == 'player-color-select'){
-        console.log(click_event.value)
-        invertBoard(configInstance)
-        uploadImages()
+        
+        let updated_chess_board = invertBoard(configInstance)
+        uploadImages(updated_chess_board)
+        whoTurn(configInstance.toggle, updated_chess_board,configInstance.enemy_color)
     }
     if (click_event.className == 'board-score'){
 
@@ -62,7 +63,7 @@ function processChessBoardInteract(event){
     const tile = event.target.closest('.tile');
     event.preventDefault();
 
-    const turn_state = whoTurn(configInstance.toggle, configInstance.chess_board)
+    const turn_state = whoTurn(configInstance.toggle, configInstance.chess_board,configInstance.enemy_color)
 
     //if the click was not on a tile, do nothing
     if (!tile) {

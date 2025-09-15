@@ -148,7 +148,7 @@ function moveUp (chess_board, tile_index, color, special_piece, special_move){ /
             valid_moves.push(tile_index-10)
             // console.log('Step - 2')
         }
-        // console.log(special_move,'SPECIALMOVE___________________________________________________')
+
         if(special_move && chess_board[tile_index-20] == null){
             // console.log('Step - 3')
             valid_moves.push(tile_index-20)
@@ -209,12 +209,12 @@ function moveDown (chess_board, tile_index, color, special_piece, special_move){
         if(chess_board[tile_index+10] == null){
             valid_moves.push(tile_index+10)
             // console.log('Step - 2')
+
         }
-        if(special_piece && chess_board[tile_index+20] == null){
+        if(special_move && chess_board[tile_index+20] == null){
             valid_moves.push(tile_index+20)
             chess_board[tile_index].special_tile = tile_index+20
             chess_board[tile_index].starting_position = tile_index
-
         }
         return valid_moves
     }

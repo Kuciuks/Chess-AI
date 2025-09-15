@@ -14,7 +14,7 @@ async function makeAnimations(move_to_piece,original_piece){
     const original_top = original_pos.top
     const original_left = original_pos.left
 
-    console.log(move_to_top, move_to_left,'---------------------', original_top, original_left)
+    // console.log(move_to_top, move_to_left,'---------------------', original_top, original_left)
 
     const deltaY = move_to_top - original_top
     const deltaX = move_to_left - original_left
@@ -54,9 +54,8 @@ async function moveBestPiece(move, original_index, chess_board){
     }
     else if (chess_board[move] != null){
         // console.log('[MOVING TO NON NULL FINAL]',move, original_index)
-
-        chess_board[move].tile_index = parseInt(move)
         chess_board[move] = chess_board[original_index]
+        chess_board[move].tile_index = parseInt(move)
         chess_board[original_index] = null
 
         moved_piece.classList.remove(`${moved_piece.innerText}`)
@@ -86,7 +85,6 @@ async function moveBestPiece(move, original_index, chess_board){
 function movePiece(move, original_index, chess_board){
     const original_piece = chess_board[original_index]
     const removed_piece = chess_board[move]
-    const isSpecial = (original_piece?.special_tile == move) //if true then it means the pawn is making a special move
 
 
     chess_board[move] = original_piece
@@ -95,9 +93,7 @@ function movePiece(move, original_index, chess_board){
     if(chess_board[move]){
         chess_board[move].tile_index = parseInt(move)
 
-        if(isSpecial || !isSpecial){
-            chess_board[move].special_move = false
-        }
+        chess_board[move].special_move = false
     }
     
     return [chess_board, removed_piece]
