@@ -44,13 +44,14 @@ function moveDownLeft (chess_board, tile_index, color, special_piece, enemy_colo
 
 
     if(special_piece == 'Pawn' && chess_board[tile_index+9]?.name !== "Border" && chess_board[tile_index+9]?.color != color && chess_board[tile_index+9] != null){
-            valid_moves.push(tile_index+9)
-        }
+        valid_moves.push(tile_index+9)
+    }
 
     else if (special_piece == 'King' || special_piece == undefined){
         //down left
         for (let k = 0; k < directional_move_count; k++){
             tile_index += 9
+
             if (chess_board[tile_index]?.name !== "Border"&& chess_board[tile_index]?.color != color) {
                 if(chess_board[tile_index] == null){
                     valid_moves.push(tile_index)

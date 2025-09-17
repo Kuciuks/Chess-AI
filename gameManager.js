@@ -1,4 +1,5 @@
-import config,{invertBoard, getColoredPieces} from './config.js'
+import { og_chess_board, og_inverted_chess_board } from './board_presets.js'
+import config,{getColoredPieces} from './config.js'
 import handleTileClick from './human.js'
 import initiateAI from './Initiate.js'
 import uploadImages from './uploadImages.js'
@@ -26,11 +27,18 @@ DOM_chess_table.addEventListener('touched', processChessBoardInteract)
 document.addEventListener('DOMContentLoaded',initGame)
 
 
+
+
+
 //initialising call
 function initGame(event){
     console.log('dom loaded')
-    whoTurn(configInstance.toggle, configInstance.chess_board,configInstance.enemy_color)
+    // whoTurn(configInstance.toggle, configInstance.chess_board,configInstance.enemy_color)
+    configInstance.clone_board = structuredClone(configInstance.active_board)
 }
+
+
+
 
 function manageChessStats(event){
     const click_event = event.target
@@ -44,11 +52,16 @@ function manageChessStats(event){
             configInstance.depth = selected_difficulty
         }
     }
-    if (click_event.className == 'player-color-select'){
-        
-        let updated_chess_board = invertBoard(configInstance)
-        uploadImages(updated_chess_board)
-        whoTurn(configInstance.toggle, updated_chess_board,configInstance.enemy_color)
+    if (click_event.className == 'player-color'){
+        if(click_event.value == 2){
+            // console.log(configInstance.chess_board)
+            configInstance.active_board = configInstance.chess_board
+            uploadImages(configInstance.active_board)
+        }
+        else if (click_event.value == 1){
+            configInstance.active_board = configInstance.inverted_chess_board
+            uploadImages(configInstance.active_board)
+        }
     }
     if (click_event.className == 'board-score'){
 
@@ -63,7 +76,7 @@ function processChessBoardInteract(event){
     const tile = event.target.closest('.tile');
     event.preventDefault();
 
-    const turn_state = whoTurn(configInstance.toggle, configInstance.chess_board,configInstance.enemy_color)
+    const turn_state = whoTurn(configInstance.toggle, configInstance.clone_board ,configInstance.enemy_color)
 
     //if the click was not on a tile, do nothing
     if (!tile) {
@@ -72,7 +85,7 @@ function processChessBoardInteract(event){
 
     //if true then its human turn
     if(turn_state){
-        handleTileClick(tile,configInstance.chess_board, configInstance)
+        handleTileClick(tile,configInstance.clone_board, configInstance)
     }
 }
 

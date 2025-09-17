@@ -1,11 +1,11 @@
 import "./human.js";
 import initiateAI from "./Initiate.js";
-import './game_manager.js'
+import './gameManager.js'
 
 
 //checks who turn, return true of black turn, false if white
 function whoTurn(toggle, chess_board, enemy_color){
-
+    
     //Using a global variable's instance to store turn controling value
     //The value is an (int) is it's cases are:
         // When the toggle value is ODD (i.e., 3 % 2 = 1), dividing by 2 yields non-integer results, leading to uneven splits.
@@ -18,9 +18,7 @@ function whoTurn(toggle, chess_board, enemy_color){
         }
 
         document.getElementById("h").innerText = "white's turn";
-        console.log('[_____________________________________________________]')
-        console.log("                [HUMAN TURN TO PLAY]")
-        console.log('[_____________________________________________________]')
+        console.log("[                HUMAN TURN TO PLAY                  ]")
 
         return true
     }
@@ -28,9 +26,7 @@ function whoTurn(toggle, chess_board, enemy_color){
     // if current player is ODD(black piece)
     else if(toggle % 2 == 0){
         document.getElementById("h").innerText = "black's turn";
-        console.log('[_____________________________________________________]')
-        console.log('[                  AI TURN TO PLAY]')
-        console.log('[_____________________________________________________]')
+        console.log('[                  AI TURN TO PLAY                   ]')
         if (enemy_color == "Black"){
 
             initiateAI(chess_board, false)
