@@ -1,19 +1,21 @@
+import { getColoredPieces } from "./config.js"
+
 //uploads images to tiles based on inner text
 function uploadImages(chess_board){
-    console.log(chess_board)
-    const all_tiles = document.querySelectorAll(".tile")
+    const white_pieces = getColoredPieces(chess_board).white_pieces
+    const black_pieces = getColoredPieces(chess_board).black_pieces
+
     
     //matching object board tile details to DOM elements
-    for(let i = 0; i < all_tiles.length; i++){
-        if(chess_board[all_tiles[i].id] && all_tiles[i].innerText != ''){
-            console.log(chess_board[all_tiles[i].id])
-            all_tiles[i].innerHTML=`${chess_board[all_tiles[i].id].DOM_name} <img class="pic" src="Assets/${chess_board[all_tiles[i].id].DOM_name}.png">`
-            all_tiles[i].style.cursor = "pointer"
-            // if(chess_board[all_tiles[i].id])
-            // console.log(all_tiles[i],'-------------- uploading images for tile', all_tiles[i].DOM_name)
+    for(const piece in chess_board){
+
+        if(chess_board[piece] && chess_board[piece].name != 'Border'){
+
+            document.getElementById(chess_board[piece].tile_index).innerHTML=`${chess_board[piece].DOM_name} <img class="pic" src="Assets/${chess_board[piece].DOM_name}.png">`
+            document.getElementById(chess_board[piece].tile_index).style.cursor = "pointer"
         }
-        else{
-            all_tiles[i].innerText = ''
+        else if (chess_board[piece] == null){
+            document.getElementById(piece). innerHTML = ''
         }
     }
     

@@ -48,7 +48,7 @@ const config = (function() {
         return {
             checkedBoardCount: 0,
             toggle: 1,
-            depth: 1,
+            depth: 2,
             selection: null,
             selected_letter: "",
             chess_board: og_chess_board,
