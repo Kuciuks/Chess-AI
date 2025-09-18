@@ -1,6 +1,7 @@
 import paintTiles from "./paintTiles.js"
 import getBestMove from './getBestMove.js'
 import whoTurn from './whoTurn.js'
+import { King } from "./piece_class.js"
 
 
 
@@ -36,7 +37,7 @@ async function handleTileClick(tile, chess_board,configInstance){
         await getBestMove.moveBestPiece(tile.id, configInstance.selection, chess_board)
         configInstance.toggle += 1
         configInstance.selection = null
-        
+
         paintTiles()
         whoTurn(configInstance.toggle ,chess_board,configInstance.enemy_color)
     }
