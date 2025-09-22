@@ -1,8 +1,7 @@
 import paintTiles from "./paintTiles.js"
 import getBestMove from './getBestMove.js'
 import whoTurn from './whoTurn.js'
-import { King } from "./piece_class.js"
-import config from "./config.js"
+import gameLogic from "./gameLogic.js"
 
 
 

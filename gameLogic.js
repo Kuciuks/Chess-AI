@@ -42,8 +42,8 @@ function isKingChecked(chess_board, color){
     }
 
     //get all pieces of opposite color
-    const opponentColor = color == 'Black' ? 'Black': 'White'
-    const opponentPieces = getColoredPieces(chess_board)[opponentColor == 'Black' ? 'black_pieces' : 'white_pieces']
+    const opponentColor = color == 'Black' ? 'White': 'Black'
+    const opponentPieces = getColoredPieces(chess_board)[opponentColor == 'Black' ? 'white_pieces' : 'black_pieces']
 
     const opponentMoves = []
     for ( const piece of opponentPieces){
@@ -63,9 +63,11 @@ function isKingChecked(chess_board, color){
 function isKingMated(chess_board, color){
     if(isKingChecked(chess_board,color) && validifyMoves(chess_board,color).length == 0){
         //the king is in checkmate and has no place to move
+        console.log('THE KING IS IN CHECK MATE')
         return true
     }
     //there are still legal moves to be made
+    console.log('THERE ARE STILL AVAIALBLE MOVES')
     return false
 }
 
