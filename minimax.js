@@ -1,11 +1,12 @@
 import config, {getColoredPieces, evaluateBoard} from './config.js'
 import getBestMove from './getBestMove.js'
+import gameLogic from './gameLogic.js'
 
 
 //minimax returns best score and best move Sfor black pieces
 function minimax(depth,chess_board, maximizingPlayer, alpha, beta, active_board){
 
-    if(depth == 0){
+    if(depth == 0 || gameLogic.isKingMated(chess_board,'Black')){
         let board_score = evaluateBoard(chess_board)
         return [null,board_score,null]
     }

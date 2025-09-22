@@ -11,6 +11,8 @@ function whoTurn(toggle, chess_board, enemy_color){
         // When the toggle value is ODD (i.e., 3 % 2 = 1), dividing by 2 yields non-integer results, leading to uneven splits.
         // When the toggle value is EVEN (i.e., 4 % 2 = 0), dividing by 2 yields integer results, leading to even splits.
 
+        
+    console.log(enemy_color)
     // if current player is EVEN(white piece)
     if(toggle % 2 !== 0){
         if (enemy_color == "White"){

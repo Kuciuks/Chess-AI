@@ -33,6 +33,8 @@ document.addEventListener('DOMContentLoaded',initGame)
 function initGame(event){
     console.log('dom loaded')
     configInstance.active_board = makeDeepCopy(normal_chess_board) // initial state for when the game starts
+    console.log(configInstance.enemy_color)
+    whoTurn(configInstance.toggle, configInstance.active_board, configInstance.enemy_color)
 }
 
 
@@ -53,11 +55,15 @@ function manageChessStats(event){
     if (click_event.className == 'player-color'){
         if(click_event.value == 2){
             configInstance.active_board = makeDeepCopy(normal_chess_board)
+            configInstance.enemy_color = 'Black'
             uploadImages(configInstance.active_board)
+            whoTurn(configInstance.toggle+1, configInstance.active_board, configInstance.enemy_color)
         }
         else if (click_event.value == 1){
             configInstance.active_board = makeDeepCopy(inverted_chess_board)
+            configInstance.enemy_color = 'White'
             uploadImages(configInstance.active_board)
+            whoTurn(configInstance.toggle+1, configInstance.active_board, configInstance.enemy_color)
         }
     }
     if (click_event.className == 'board-score'){
@@ -68,7 +74,7 @@ function manageChessStats(event){
 
 
 
-function makeDeepCopy(chess_board){
+export function makeDeepCopy(chess_board){
     let deep_copy = chess_board.map(piece =>{
         if(!piece){
             return null
@@ -91,7 +97,7 @@ function makeDeepCopy(chess_board){
         return newPiece
 
     })
-    console.log(deep_copy)
+    return deep_copy
 }
 
 
@@ -114,3 +120,4 @@ function processChessBoardInteract(event){
     }
 }
 
+export default {makeDeepCopy}

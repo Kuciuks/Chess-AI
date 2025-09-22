@@ -36,7 +36,7 @@ export class Pawn extends Piece{
 
         checkMoveValidity(chess_board){
             let valid_moves = []
-
+            console.log(this.color,'-----------------------------------------')
             let enemy_color = this.color == 'White' ? "Black" : this.color == "Black" ? "White" : null
             //going through the possible moves and getting the valid ones
             this.moves[this.color[0]].forEach(move => {

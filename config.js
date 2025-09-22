@@ -54,7 +54,6 @@ const config = (function() {
             normal_chess_board: normal_chess_board,
             inverted_chess_board: inverted_chess_board,
             active_board : null,
-            clone_board: undefined,
             enemy_color: "Black",
             enemy: true,
         }
