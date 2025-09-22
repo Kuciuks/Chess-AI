@@ -1,6 +1,6 @@
 import uploadImages from "./uploadImages.js";
 import paintTiles from "./paintTiles.js";
-import { og_chess_board, og_inverted_chess_board } from "./board_presets.js";
+import { normal_chess_board, inverted_chess_board } from "./board_presets.js";
 
 
 export function evaluateBoard(chess_board){
@@ -43,7 +43,7 @@ const config = (function() {
 
     function createInstance() {
             //upload images, repaint tiles, reset values
-            uploadImages(og_chess_board)
+            uploadImages(normal_chess_board)
             paintTiles()
         return {
             checkedBoardCount: 0,
@@ -51,9 +51,9 @@ const config = (function() {
             depth: 2,
             selection: null,
             selected_letter: "",
-            chess_board: og_chess_board,
-            inverted_chess_board: og_inverted_chess_board,
-            active_board : og_chess_board,
+            normal_chess_board: normal_chess_board,
+            inverted_chess_board: inverted_chess_board,
+            active_board : null,
             clone_board: undefined,
             enemy_color: "Black",
             enemy: true,

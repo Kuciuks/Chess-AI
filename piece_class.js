@@ -2,19 +2,20 @@ import getMoves from "./getMoves.js"
 
 //declaring the base class with constructor properties
 class Piece{
-    constructor(name, value, color, tile_index){
+    constructor(name, value, color, tile_index, DOM_name){
         this.name = name
         this.value = value
         this.color = color
         this.tile_index = tile_index
+        this.DOM_name = DOM_name
     }
 
 }
 
 //declaring the child classes that extend the base class Piece (capturing base class properties)
 export class Pawn extends Piece{
-        constructor(name, value, color, tile_index, special_move, DOM_name){
-            super(name, value, color, tile_index)
+        constructor(name, value, color, tile_index, DOM_name, special_move){
+            super(name, value, color, tile_index, DOM_name)
             this.special_move = special_move
             this.special_tile = 0
             this.starting_position = 0
@@ -31,8 +32,6 @@ export class Pawn extends Piece{
                 null, null, null, null, null, null, null, null, null, null
                 ]
             this.moves = {W:['UP', 'UP-LEFT', 'UP-RIGHT'], B:['DOWN', 'DOWN-LEFT', 'DOWN-RIGHT']}
-            this.valid_moves = []
-            this.DOM_name = DOM_name
         }
 
         checkMoveValidity(chess_board){
@@ -76,7 +75,7 @@ export class Pawn extends Piece{
     }
 export class Rook extends Piece{
         constructor(name, value, color, tile_index, DOM_name){ //add special_move later on
-            super(name, value, color, tile_index)
+            super(name, value, color, tile_index, DOM_name)
             // this.special_move = special_move
             this.pawnScore= [
                 null, null, null, null, null, null, null, null, null, null,
@@ -91,8 +90,8 @@ export class Rook extends Piece{
                 null, null, null, null, null, null, null, null, null, null
             ]
             this.moves = ['UP', 'DOWN', 'LEFT', 'RIGHT']
-            this.valid_moves = []
-            this.DOM_name = DOM_name
+            
+            
         }
 
         //getting the valid moves for the rook
@@ -129,7 +128,7 @@ export class Rook extends Piece{
     }
 export class Knight extends Piece{
         constructor(name, value, color, tile_index, DOM_name){
-            super(name, value, color, tile_index)
+            super(name, value, color, tile_index, DOM_name)
             this.pawnScore= [
                 null, null, null, null, null, null, null, null, null, null,
                 null, -50, -40, -30, -30, -30, -30, -40, -50, null,
@@ -142,8 +141,8 @@ export class Knight extends Piece{
                 null,   0,   0,   0,   0,   0,   0,   0,   0, null,
                 null, null, null, null, null, null, null, null, null, null
             ]
-            this.valid_moves = []
-            this.DOM_name = DOM_name
+            
+            
         }
         //getting the valid moves for the Bishop
         checkMoveValidity(chess_board){
@@ -162,7 +161,7 @@ export class Knight extends Piece{
     }
 export class Bishop extends Piece{
         constructor(name, value, color, tile_index, DOM_name){
-            super(name, value, color, tile_index)
+            super(name, value, color, tile_index, DOM_name)
             this.pawnScore= [
                 null, null, null, null, null, null, null, null, null, null,
                 null, -20, -10, -10, -10, -10, -10, -10, -20, null,
@@ -176,8 +175,8 @@ export class Bishop extends Piece{
                 null, null, null, null, null, null, null, null, null, null
             ]
             this.moves = ['UP-LEFT', 'UP-RIGHT', 'DOWN-LEFT', 'DOWN-RIGHT']
-            this.valid_moves = []
-            this.DOM_name = DOM_name
+            
+            
         }
         //getting the valid moves for the Bishop
         checkMoveValidity(chess_board){
@@ -214,7 +213,7 @@ export class Bishop extends Piece{
     }
 export class Queen extends Piece{
         constructor(name, value, color, tile_index, DOM_name){
-            super(name, value, color, tile_index)
+            super(name, value, color, tile_index, DOM_name)
             this.pawnScore= [
                 null, null, null, null, null, null, null, null, null, null,
                 null, -20, -10, -10,  -5,  -5, -10, -10, -20, null,
@@ -228,8 +227,8 @@ export class Queen extends Piece{
                 null, null, null, null, null, null, null, null, null, null
             ]
             this.moves = ['UP-LEFT', 'UP-RIGHT', 'DOWN-LEFT', 'DOWN-RIGHT', 'UP', 'DOWN', 'LEFT', 'RIGHT']
-            this.valid_moves = []
-            this.DOM_name = DOM_name
+            
+            
         }
         //getting the valid moves for the Queen
         checkMoveValidity(chess_board){
@@ -278,7 +277,7 @@ export class Queen extends Piece{
     }
 export class King extends Piece{
         constructor(name, value, color, tile_index, DOM_name){ //add special_move later on
-            super(name, value, color, tile_index)
+            super(name, value, color, tile_index, DOM_name)
             // this.special_move = special_move
             this.pawnScore= [
                 null, null, null, null, null, null, null, null, null, null,
@@ -293,8 +292,8 @@ export class King extends Piece{
                 null, null, null, null, null, null, null, null, null, null
             ]
             this.moves = ['UP-LEFT', 'UP-RIGHT', 'DOWN-LEFT', 'DOWN-RIGHT', 'UP', 'DOWN', 'LEFT', 'RIGHT']
-            this.valid_moves = []
-            this.DOM_name = DOM_name
+            
+            
         }
         //getting the valid moves for the King
         checkMoveValidity(chess_board){

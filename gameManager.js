@@ -1,9 +1,8 @@
-import { og_chess_board, og_inverted_chess_board } from './board_presets.js'
-import config,{getColoredPieces} from './config.js'
+import config from './config.js'
 import handleTileClick from './human.js'
-import initiateAI from './Initiate.js'
 import uploadImages from './uploadImages.js'
 import whoTurn from './whoTurn.js'
+import { normal_chess_board, inverted_chess_board } from "./board_presets.js";
 
 const configInstance = config.getInstance()
 
@@ -33,8 +32,7 @@ document.addEventListener('DOMContentLoaded',initGame)
 //initialising call
 function initGame(event){
     console.log('dom loaded')
-    // whoTurn(configInstance.toggle, configInstance.chess_board,configInstance.enemy_color)
-    configInstance.clone_board = structuredClone(configInstance.active_board)
+    configInstance.active_board = makeDeepCopy(normal_chess_board) // initial state for when the game starts
 }
 
 
@@ -54,12 +52,11 @@ function manageChessStats(event){
     }
     if (click_event.className == 'player-color'){
         if(click_event.value == 2){
-            // console.log(configInstance.chess_board)
-            configInstance.active_board = configInstance.chess_board
+            configInstance.active_board = makeDeepCopy(normal_chess_board)
             uploadImages(configInstance.active_board)
         }
         else if (click_event.value == 1){
-            configInstance.active_board = configInstance.inverted_chess_board
+            configInstance.active_board = makeDeepCopy(inverted_chess_board)
             uploadImages(configInstance.active_board)
         }
     }
@@ -71,12 +68,40 @@ function manageChessStats(event){
 
 
 
+function makeDeepCopy(chess_board){
+    let deep_copy = chess_board.map(piece =>{
+        if(!piece){
+            return null
+        }
+        else if(piece.name === 'Border'){
+            const Border = new piece.constructor(
+                piece.name
+            )
+            return Border
+        }
+
+        const newPiece = new piece.constructor(
+            piece.name,
+            piece.value,
+            piece.color,
+            piece.tile_index,
+            piece.DOM_name,
+            piece.special_move = piece.name == "Pawn" ? true: undefined
+        )
+        return newPiece
+
+    })
+    console.log(deep_copy)
+}
+
+
+
 //add event listener to chess board parent file when the script is loaded
 function processChessBoardInteract(event){
     const tile = event.target.closest('.tile');
     event.preventDefault();
 
-    const turn_state = whoTurn(configInstance.toggle, configInstance.clone_board ,configInstance.enemy_color)
+    const turn_state = whoTurn(configInstance.toggle, configInstance.active_board ,configInstance.enemy_color)
 
     //if the click was not on a tile, do nothing
     if (!tile) {
@@ -85,7 +110,7 @@ function processChessBoardInteract(event){
 
     //if true then its human turn
     if(turn_state){
-        handleTileClick(tile,configInstance.clone_board, configInstance)
+        handleTileClick(tile,configInstance.active_board, configInstance)
     }
 }
 
