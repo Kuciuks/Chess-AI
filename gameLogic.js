@@ -15,7 +15,7 @@ function validifyMoves(chess_board, color){
         for(const move of pseudo_legal_moves){
 
             const deep_board_copy = gameManager.makeDeepCopy(chess_board)
-            const new_board = getBestMove.movePiece(move, piece.tile_index, deep_board_copy)
+            const [new_board,_] = getBestMove.movePiece(move, piece.tile_index, deep_board_copy)
 
 
             //check if the move that has been made is legal and does not expose own king to enemy attacks
