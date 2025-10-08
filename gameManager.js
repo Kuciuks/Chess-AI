@@ -31,9 +31,9 @@ document.addEventListener('DOMContentLoaded',initGame)
 
 //initialising call
 function initGame(event){
-    console.log('dom loaded')
+    // console.log('dom loaded')
     configInstance.active_board = makeDeepCopy(normal_chess_board) // initial state for when the game starts
-    console.log(configInstance.enemy_color)
+    // console.log(configInstance.enemy_color)
     whoTurn(configInstance.toggle, configInstance.active_board, configInstance.enemy_color)
 }
 
@@ -68,7 +68,7 @@ function manageChessStats(event){
     }
     if (click_event.className == 'board-score'){
 
-        console.log('selected board score')
+        // console.log('selected board score')
     }
 }
 
@@ -92,7 +92,7 @@ export function makeDeepCopy(chess_board){
             piece.color,
             piece.tile_index,
             piece.DOM_name,
-            piece.special_move = piece.name == "Pawn" ? true: undefined
+            piece.special_move
         )
         return newPiece
 

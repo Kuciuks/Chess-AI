@@ -19,7 +19,9 @@ async function handleTileClick(tile, chess_board,configInstance){
 
         console.log(`[MOVE RETRIEVAL] - these are the current moves for your selection (highlighted in orange) - ${piece_moves}`, chess_board[tile.id],tile.id)
 
-        piece_moves.flat().forEach(move => {
+        const valid_moves = gameLogic.validifyHumanPieceMoves(chess_board[tile.id],piece_moves.flat(), chess_board)
+
+        valid_moves.flat().forEach(move => {
             document.getElementById(move).style.backgroundColor = 'orange'
         })
     }

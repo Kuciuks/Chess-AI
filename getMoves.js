@@ -153,8 +153,8 @@ function moveUp (chess_board, tile_index, color, special_piece, special_move){ /
                 valid_moves.push(tile_index-20)
                 // console.log(chess_board[tile_index], tile_index, chess_board)
 
-                chess_board[tile_index].special_tile = tile_index-20
-                chess_board[tile_index].starting_position = tile_index
+                // chess_board[tile_index].special_tile = tile_index-20
+                // chess_board[tile_index].starting_position = tile_index
 
             }
         }
@@ -216,10 +216,10 @@ function moveDown (chess_board, tile_index, color, special_piece, special_move){
         }
         if(special_move && chess_board[tile_index+20] == null){
             valid_moves.push(tile_index+20)
-            chess_board[tile_index].special_tile = tile_index+20
-            chess_board[tile_index].starting_position = tile_index
+            // chess_board[tile_index].special_tile = tile_index+20
+            // chess_board[tile_index].starting_position = tile_index
         }
-        console.log('ENEMY PAWN MOVING', valid_moves)
+        // console.log('ENEMY PAWN MOVING', valid_moves)
         return valid_moves
     }
     else if(special_piece == 'King' && chess_board[tile_index+10]?.name !== "Border" && chess_board[tile_index+10] == null){

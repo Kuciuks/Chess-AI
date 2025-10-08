@@ -30,7 +30,7 @@ function validifyMoves(chess_board, color){
 }
 
 //check if own king's position is being attacked by any of the enemy's pieces
-function isKingChecked(chess_board, color){
+function isKingChecked(chess_board, color, checkingPlayerKing = false){
     let own_king_index = -1
 
     //find the position of own king on the board
@@ -43,15 +43,21 @@ function isKingChecked(chess_board, color){
 
     //get all pieces of opposite color
     const opponentColor = color == 'Black' ? 'White': 'Black'
-    const opponentPieces = getColoredPieces(chess_board)[opponentColor == 'Black' ? 'white_pieces' : 'black_pieces']
+    
+    const opponentPieces = getColoredPieces(chess_board)[opponentColor == 'Black' ? 'black_pieces' : 'white_pieces']
+
+
+    console.log(opponentColor, opponentPieces)
 
     const opponentMoves = []
     for ( const piece of opponentPieces){
-        opponentMoves.push(piece.getAvailableMoves(chess_board).flat())
+        const moves = piece.getAvailableMoves(chess_board).flat()
+        for (const move of moves){
+            opponentMoves.push(move)
+        }
     }
-
-    //if the king index is within the opposing player's piece moves then the king is check
-    if(opponentMoves.includes(own_king_index)){
+   
+    if(opponentMoves.includes(parseInt(own_king_index))){
         return true
     }
 
@@ -71,4 +77,22 @@ function isKingMated(chess_board, color){
     return false
 }
 
-export default {validifyMoves, isKingChecked, isKingMated}
+
+//validify moves for human selected piece
+function validifyHumanPieceMoves(piece, pseudo_legal_moves, chess_board){
+    const legal_moves = []
+    const piece_color = piece.color
+
+    for(const move of pseudo_legal_moves){
+        const deep_board_copy = gameManager.makeDeepCopy(chess_board)
+        const [new_board,_] = getBestMove.movePiece(move, piece.tile_index, deep_board_copy)
+
+        if(!isKingChecked(new_board,piece_color)){
+            legal_moves.push(move)
+        }
+    }
+    return legal_moves
+
+}
+
+export default {validifyMoves, isKingChecked, isKingMated, validifyHumanPieceMoves}

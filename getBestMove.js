@@ -1,3 +1,4 @@
+import gameManager from "./gameManager.js"
 
 async function makeAnimations(move_to_piece,original_piece){
     if(move_to_piece){
@@ -82,7 +83,8 @@ async function moveBestPiece(move, original_index, chess_board){
 
 
 
-function movePiece(move, original_index, chess_board){
+function movePiece(move, original_index, board){
+    const chess_board = gameManager.makeDeepCopy(board)
     const original_piece = chess_board[original_index]
     const removed_piece = chess_board[move]
 
@@ -90,10 +92,18 @@ function movePiece(move, original_index, chess_board){
     chess_board[move] = original_piece
     chess_board[original_index] = null
 
+    const isSpecialPawnMove = original_piece?.name == 'Pawn' && original_piece?.special_move == true && Math.abs(move-original_index) == 20
+
+    
     if(chess_board[move]){
         chess_board[move].tile_index = parseInt(move)
 
         chess_board[move].special_move = false
+
+        if(isSpecialPawnMove){
+            chess_board[move].special_tile = move
+            chess_board[move].starting_position = original_index
+        }
     }
     
     return [chess_board, removed_piece]

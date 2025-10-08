@@ -12,7 +12,7 @@ function whoTurn(toggle, chess_board, enemy_color){
         // When the toggle value is EVEN (i.e., 4 % 2 = 0), dividing by 2 yields integer results, leading to even splits.
 
         
-    console.log(enemy_color)
+    // console.log(enemy_color)
     // if current player is EVEN(white piece)
     if(toggle % 2 !== 0){
         if (enemy_color == "White"){
@@ -20,7 +20,7 @@ function whoTurn(toggle, chess_board, enemy_color){
         }
 
         document.getElementById("h").innerText = "white's turn";
-        console.log("[                HUMAN TURN TO PLAY                  ]")
+        // console.log("[                HUMAN TURN TO PLAY                  ]")
 
         return true
     }
@@ -28,7 +28,7 @@ function whoTurn(toggle, chess_board, enemy_color){
     // if current player is ODD(black piece)
     else if(toggle % 2 == 0){
         document.getElementById("h").innerText = "black's turn";
-        console.log('[                  AI TURN TO PLAY                   ]')
+        // console.log('[                  AI TURN TO PLAY                   ]')
         if (enemy_color == "Black"){
 
             initiateAI(chess_board, false)
